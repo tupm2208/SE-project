@@ -1,0 +1,46 @@
+<body>
+    <h1 class="title-agile text-center"></h1>
+    <div class="content-w3ls">
+        <div class="content-top-agile">
+            <h2>sign in</h2>
+        </div>
+        <div class="content-bottom">
+            <form action="#" method="post">
+                <div class="field-group">
+                    <span class="fa fa-user" aria-hidden="true"></span>
+                    <div class="wthree-field">
+                        <input [(ngModel)]="username" name="text1" id="text1" type="text" value="" placeholder="username" required>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <span class="fa fa-lock" aria-hidden="true"></span>
+                    <div class="wthree-field">
+                        <input [(ngModel)]="password" name="password" id="password" type="Password" placeholder="password" required>
+                    </div>
+                </div>
+                <ul class="list-login">
+                    <li class="switch-agileits">
+                        <label class="switch">
+                            <input type="checkbox" [(ngModel)]="isRemember" name="remember">
+                            <span class="slider round"></span>
+                            keep me signed in
+                        </label>
+                    </li>
+                    <li>
+                        <a routerLink="regist" style="color: navy;" class="text-right">Create New Account</a>
+                    </li>
+                    <li class="clearfix"></li>
+                </ul>
+                <div class="wthree-field">
+                    <input (click)="submit()" id="saveForm" name="saveForm" type="submit" value="sign in" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="copyright text-center">
+        <p style="opacity: 0">
+             © 2018 Switch Login Form. All rights reserved | Design by 
+            <!-- <a href="http://w3layouts.com">W3layouts</a> -->
+        </p>
+    </div>
+</body>
