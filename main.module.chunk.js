@@ -1,6 +1,6 @@
 webpackJsonp(["main.module"],{
 
-/***/ "../../../../../src/app/main/about/about.component.css":
+/***/ "../../../../../src/app/main/edit-post/edit-post.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -18,19 +18,26 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/main/about/about.component.html":
+/***/ "../../../../../src/app/main/edit-post/edit-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <!-- Page Header -->\r\n  <header class=\"masthead\" style=\"background-image: url('./../assets/img/about-bg.jpg')\">\r\n    <div class=\"overlay\"></div>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <div class=\"page-heading\">\r\n            <h1>About Me</h1>\r\n            <span class=\"subheading\">This is what I do.</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n\r\n  <!-- Main Content -->\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>\r\n        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>\r\n        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <hr>"
+module.exports = "<header *ngIf=\"display\" class=\"masthead\" style=\"background-image: url('./../assets/img/about-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"page-heading\">\r\n          <!-- <h1>About Me</h1>  -->\r\n            <div class=\"form-group\">\r\n            <label for=\"sel1\">Select category:</label>\r\n            <select class=\"form-control\" id=\"sel1\" [(ngModel)]=\"registData.categoryID\">\r\n              <option *ngFor=\"let item of categoryList\" [value]=\"item.ID\">{{item.category}}</option>\r\n            </select>\r\n          </div>\r\n          <input type=\"text\" [(ngModel)]=\"registData.title\" style=\"font-size: 3em; width: 100%\" placeholder=\"Enter Title\">\r\n          <span class=\"subheading\">{{registData.title}}.</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<div class=\"container\">\r\n  <div id=\"display\" style=\"position: absolute;\r\n    display: block;\r\n    height: 10px!important;\r\n    overflow: overlay;\">\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"display\" class=\"container\">\r\n    <editor [(ngModel)]=\"dataModel\" (ngModelChange)=\"change()\" [init]=\"init\" apiKey=\"npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7\"></editor>  \r\n    <button class=\"btn btn-primary\" (click)=\"post()\">submit</button>\r\n</div>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/main/about/about.component.ts":
+/***/ "../../../../../src/app/main/edit-post/edit-post.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditPostComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_api_category_service__ = __webpack_require__("../../../../../src/app/core/api/category.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_api_post_service__ = __webpack_require__("../../../../../src/app/core/api/post.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_api_image_service__ = __webpack_require__("../../../../../src/app/core/api/image.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_dialog_dialog_service__ = __webpack_require__("../../../../../src/app/core/dialog/dialog.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__core_api_login_service__ = __webpack_require__("../../../../../src/app/core/api/login.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41,81 +48,187 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var AboutComponent = /** @class */ (function () {
-    function AboutComponent() {
+
+
+
+
+
+
+
+var EditPostComponent = /** @class */ (function () {
+    function EditPostComponent(categoryService, postService, imageService, loading, dialog, loginService, router, route) {
+        this.categoryService = categoryService;
+        this.postService = postService;
+        this.imageService = imageService;
+        this.loading = loading;
+        this.dialog = dialog;
+        this.loginService = loginService;
+        this.router = router;
+        this.route = route;
+        this.display = false;
+        this.registData = {};
+        this.categoryList = [];
+        this.init = {
+            selector: 'textarea',
+            height: 500,
+            theme: 'modern',
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools',
+                'image code',
+            ],
+            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar2: 'print preview media | forecolor backcolor emoticons',
+            image_advtab: true,
+            // enable title field in the Image dialog
+            image_title: true,
+            // enable automatic uploads of images represented by blob or data URIs
+            automatic_uploads: true,
+            plugin_preview_width: 650,
+            // add custom filepicker only to Image dialog
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+                console.log("this: ", this);
+                input.onchange = function (e) {
+                    console.log("this.file: ", cb, value, meta);
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+                        // call the callback and populate the Title field with the file name
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
+                };
+                input.click();
+            }
+        };
     }
-    AboutComponent.prototype.ngOnInit = function () {
+    EditPostComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.loading.show();
+        this.loginService.refreshKey().subscribe(function (data) {
+            _this.loading.hide();
+            _this.display = true;
+        }, function (error) {
+            _this.loading.hide();
+        });
+        var id = this.route.snapshot.paramMap.get('id');
+        this.registData.categoryID = '1';
+        this.registData.title = '';
+        if (id) {
+            this.initForEdit(id);
+        }
+        this.categoryService.list().subscribe(function (data) {
+            _this.categoryList = data;
+            _this.display = true;
+            _this.loading.hide();
+        });
     };
-    AboutComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-about',
-            template: __webpack_require__("../../../../../src/app/main/about/about.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/main/about/about.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], AboutComponent);
-    return AboutComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/main/contact/contact.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/main/contact/contact.component.html":
-/***/ (function(module, exports) {
-
-module.exports = " <!-- Page Header -->\r\n <header class=\"masthead\" style=\"background-image: url('./../assets/img/contact-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"page-heading\">\r\n          <h1>Contact Me</h1>\r\n          <span class=\"subheading\">Have questions? I have answers.</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<!-- Main Content -->\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n      <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>\r\n      <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->\r\n      <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->\r\n      <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->\r\n      <form name=\"sentMessage\" id=\"contactForm\" novalidate>\r\n        <div class=\"control-group\">\r\n          <div class=\"form-group floating-label-form-group controls\">\r\n            <label>Name</label>\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Name\" id=\"name\" required data-validation-required-message=\"Please enter your name.\">\r\n            <p class=\"help-block text-danger\"></p>\r\n          </div>\r\n        </div>\r\n        <div class=\"control-group\">\r\n          <div class=\"form-group floating-label-form-group controls\">\r\n            <label>Email Address</label>\r\n            <input type=\"email\" class=\"form-control\" placeholder=\"Email Address\" id=\"email\" required data-validation-required-message=\"Please enter your email address.\">\r\n            <p class=\"help-block text-danger\"></p>\r\n          </div>\r\n        </div>\r\n        <div class=\"control-group\">\r\n          <div class=\"form-group col-xs-12 floating-label-form-group controls\">\r\n            <label>Phone Number</label>\r\n            <input type=\"tel\" class=\"form-control\" placeholder=\"Phone Number\" id=\"phone\" required data-validation-required-message=\"Please enter your phone number.\">\r\n            <p class=\"help-block text-danger\"></p>\r\n          </div>\r\n        </div>\r\n        <div class=\"control-group\">\r\n          <div class=\"form-group floating-label-form-group controls\">\r\n            <label>Message</label>\r\n            <textarea rows=\"5\" class=\"form-control\" placeholder=\"Message\" id=\"message\" required data-validation-required-message=\"Please enter a message.\"></textarea>\r\n            <p class=\"help-block text-danger\"></p>\r\n          </div>\r\n        </div>\r\n        <br>\r\n        <div id=\"success\"></div>\r\n        <div class=\"form-group\">\r\n          <button type=\"submit\" class=\"btn btn-primary\" id=\"sendMessageButton\">Send</button>\r\n        </div>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<hr>\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/main/contact/contact.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ContactComponent = /** @class */ (function () {
-    function ContactComponent() {
-    }
-    ContactComponent.prototype.ngOnInit = function () {
+    EditPostComponent.prototype.initForEdit = function (id) {
+        var _this = this;
+        this.postService.getById(id).subscribe(function (data) {
+            _this.registData = data.data;
+            _this.dataModel = _this.registData.content;
+            _this.loading.hide();
+        });
     };
-    ContactComponent = __decorate([
+    EditPostComponent.prototype.change = function () {
+        $("#display").html(this.dataModel);
+    };
+    EditPostComponent.prototype.post = function () {
+        var _this = this;
+        if (!this.checkValid())
+            return false;
+        this.loading.show();
+        var imgList = $('img');
+        var count = 0;
+        imgList.toArray().forEach(function (element) {
+            if (element.src.indexOf('data') == 0) {
+                count++;
+                var params = {
+                    imageURI: element.src
+                };
+                _this.imageService.post(params).subscribe(function (data) {
+                    console.log("data image: ", data);
+                    element.src = data.imageUrl;
+                    count--;
+                    if (count == 0) {
+                        _this.regist();
+                    }
+                });
+            }
+        });
+        if (!count || !imgList.length) {
+            this.regist();
+        }
+    };
+    EditPostComponent.prototype.regist = function () {
+        var _this = this;
+        this.registData.content = $('#display').html();
+        if (this.registData.ID) {
+            this.postService.edit(this.registData).subscribe(function (data) {
+                _this.loading.hide();
+                console.log("regist post: ", data);
+                _this.success();
+            }, function (error) {
+                _this.loading.hide();
+                _this.dialog.showError("Something goes wrong! Try again!");
+            });
+            return;
+        }
+        this.postService.post(this.registData).subscribe(function (data) {
+            _this.loading.hide();
+            _this.registData = data.data;
+            console.log("regist post: ", data);
+            _this.success();
+        }, function (error) {
+            _this.loading.hide();
+            _this.dialog.showError("Something goes wrong! Try again!");
+        });
+    };
+    EditPostComponent.prototype.success = function () {
+        var _this = this;
+        this.dialog.showSuccess().subscribe(function (data) {
+            _this.router.navigate(['/main/post/' + _this.registData.ID]);
+        });
+    };
+    EditPostComponent.prototype.checkValid = function () {
+        if (!this.registData.title) {
+            this.dialog.showError("Empty title!");
+            return false;
+        }
+        if (!this.dataModel) {
+            this.dialog.showError("Empty content!");
+            return false;
+        }
+        return true;
+    };
+    EditPostComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-contact',
-            template: __webpack_require__("../../../../../src/app/main/contact/contact.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/main/contact/contact.component.css")]
+            selector: 'app-edit-post',
+            template: __webpack_require__("../../../../../src/app/main/edit-post/edit-post.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/main/edit-post/edit-post.component.css")]
         }),
-        __metadata("design:paramtypes", [])
-    ], ContactComponent);
-    return ContactComponent;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__core_api_category_service__["a" /* CategoryService */],
+            __WEBPACK_IMPORTED_MODULE_3__core_api_post_service__["a" /* PostService */],
+            __WEBPACK_IMPORTED_MODULE_4__core_api_image_service__["a" /* ImageService */],
+            __WEBPACK_IMPORTED_MODULE_5__core_util_loading_service__["a" /* LoadingService */],
+            __WEBPACK_IMPORTED_MODULE_6__core_dialog_dialog_service__["a" /* DialogService */],
+            __WEBPACK_IMPORTED_MODULE_7__core_api_login_service__["a" /* LoginService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]])
+    ], EditPostComponent);
+    return EditPostComponent;
 }());
 
 
@@ -143,7 +256,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/home/bref-post/bref-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"post-preview\">\n  <a href=\"post.html\">\n    <h2 class=\"post-title\">\n      {{post?.title}}\n    </h2>\n    <h3 class=\"post-subtitle\">\n      {{post?.subtitle}}\n    </h3>\n  </a>\n  <p class=\"post-meta\">Posted by\n    <a href=\"#\">{{post?.author.name}}</a> on September 24, 2018</p>\n</div>\n<hr>"
+module.exports = "<div class=\"post-preview\">\n  <a>\n    <h2 class=\"post-title\">\n      {{post?.title}}\n    </h2>\n    <h3 class=\"post-subtitle\">\n      {{post?.subtitle}}\n    </h3>\n  </a>\n  <p class=\"post-meta\">Posted by\n    <a>{{post?.author.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\n</div>\n<hr>"
 
 /***/ }),
 
@@ -153,6 +266,7 @@ module.exports = "<div class=\"post-preview\">\n  <a href=\"post.html\">\n    <h
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BrefPostComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_util_format_service__ = __webpack_require__("../../../../../src/app/core/util/format.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -163,13 +277,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var BrefPostComponent = /** @class */ (function () {
-    function BrefPostComponent() {
+    function BrefPostComponent(formatService) {
+        this.formatService = formatService;
     }
     BrefPostComponent.prototype.ngOnInit = function () {
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Object)
     ], BrefPostComponent.prototype, "post", void 0);
     BrefPostComponent = __decorate([
@@ -178,7 +294,7 @@ var BrefPostComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/main/home/bref-post/bref-post.component.html"),
             styles: [__webpack_require__("../../../../../src/app/main/home/bref-post/bref-post.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__core_util_format_service__["a" /* FormatService */]])
     ], BrefPostComponent);
     return BrefPostComponent;
 }());
@@ -208,7 +324,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n    <!-- Page Header -->\r\n    <header class=\"masthead\" style=\"background-image: url('./../assets/img/home-bg.jpg')\">\r\n      <div class=\"overlay\"></div>\r\n      <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n            <div class=\"site-heading\">\r\n              <h1>Clean Blog</h1>\r\n              <span class=\"subheading\">A Blog Theme by Start Bootstrap</span>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </header>\r\n\r\n    <!-- Main Content -->\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n\r\n          <app-bref-post *ngFor=\"let post of postList\" [post]=\"post\"></app-bref-post>\r\n          <!-- Pager -->\r\n          <div class=\"clearfix\">\r\n            <a class=\"btn btn-primary float-right\" href=\"#\">Older Posts &rarr;</a>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <hr>\r\n"
+module.exports = "\r\n    <!-- Page Header -->\r\n    <header class=\"masthead\" style=\"background-image: url('./../assets/img/home-bg.jpg')\">\r\n      <div class=\"overlay\"></div>\r\n      <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n            <div class=\"site-heading\">\r\n              <h1>Clean Blog</h1>\r\n              <span class=\"subheading\">A Blog Theme by Start Bootstrap</span>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </header>\r\n\r\n    <!-- Main Content -->\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n\r\n          <app-bref-post *ngFor=\"let post of postList\" [post]=\"post\" [routerLink]=\"['/main/post/' + post.ID]\"></app-bref-post>\r\n          <!-- Pager -->\r\n          <div class=\"clearfix\">\r\n            <a class=\"btn btn-primary float-left\" [routerLink]=\"['/main/home']\" [queryParams]=\"{page: page - 1}\" queryParamsHandling=\"merge\" *ngIf=\"page!=1\">&larr; Newer Posts</a>\r\n            <a class=\"btn btn-primary float-right\" [routerLink]=\"['/main/home']\" [queryParams]=\"{page: page - -1}\" queryParamsHandling=\"merge\" *ngIf=\"postList.length == 10\">Older Posts &rarr;</a>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    \r\n    <hr>\r\n"
 
 /***/ }),
 
@@ -218,8 +334,10 @@ module.exports = "\r\n    <!-- Page Header -->\r\n    <header class=\"masthead\"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_api_post_service__ = __webpack_require__("../../../../../src/app/core/api/post.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_filter__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/filter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_api_post_service__ = __webpack_require__("../../../../../src/app/core/api/post.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -232,15 +350,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(loadingService, postService) {
+    function HomeComponent(loadingService, postService, route) {
         this.loadingService = loadingService;
         this.postService = postService;
+        this.route = route;
+        this.postList = [];
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.loadingService.show();
-        this.postService.list().subscribe(function (data) {
+        this.route.queryParams
+            .subscribe(function (params) {
+            _this.page = params.page ? params.page : 1;
+            console.log("page: ", params.page, _this.page);
+            _this.getPostList();
+        });
+    };
+    HomeComponent.prototype.getPostList = function () {
+        var _this = this;
+        this.postService.list(this.page).subscribe(function (data) {
             _this.postList = data;
             console.log(" data: ", data);
             _this.loadingService.hide();
@@ -254,8 +385,9 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/main/home/home.component.html"),
             styles: [__webpack_require__("../../../../../src/app/main/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__core_util_loading_service__["a" /* LoadingService */],
-            __WEBPACK_IMPORTED_MODULE_2__core_api_post_service__["a" /* PostService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__["a" /* LoadingService */],
+            __WEBPACK_IMPORTED_MODULE_4__core_api_post_service__["a" /* PostService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -273,12 +405,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__main_routes__ = __webpack_require__("../../../../../src/app/main/main.routes.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home_component__ = __webpack_require__("../../../../../src/app/main/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__post_post_component__ = __webpack_require__("../../../../../src/app/main/post/post.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__about_about_component__ = __webpack_require__("../../../../../src/app/main/about/about.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__contact_contact_component__ = __webpack_require__("../../../../../src/app/main/contact/contact.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_routes__ = __webpack_require__("../../../../../src/app/main/main.routes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tinymce_tinymce_angular__ = __webpack_require__("../../../../@tinymce/tinymce-angular/esm5/tinymce-tinymce-angular.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_home_component__ = __webpack_require__("../../../../../src/app/main/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__post_post_component__ = __webpack_require__("../../../../../src/app/main/post/post.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_bref_post_bref_post_component__ = __webpack_require__("../../../../../src/app/main/home/bref-post/bref-post.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__edit_post_edit_post_component__ = __webpack_require__("../../../../../src/app/main/edit-post/edit-post.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -294,21 +427,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var MainModule = /** @class */ (function () {
     function MainModule() {
     }
     MainModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */].forChild(__WEBPACK_IMPORTED_MODULE_3__main_routes__["a" /* MainRoutes */]),
+                __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */].forChild(__WEBPACK_IMPORTED_MODULE_4__main_routes__["a" /* MainRoutes */]),
+                __WEBPACK_IMPORTED_MODULE_5__tinymce_tinymce_angular__["a" /* EditorModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormsModule */]
             ],
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_4__home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__post_post_component__["a" /* PostComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__about_about_component__["a" /* AboutComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__contact_contact_component__["a" /* ContactComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__home_bref_post_bref_post_component__["a" /* BrefPostComponent */]
+                __WEBPACK_IMPORTED_MODULE_6__home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__post_post_component__["a" /* PostComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__home_bref_post_bref_post_component__["a" /* BrefPostComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__edit_post_edit_post_component__["a" /* EditPostComponent */]
             ]
         })
     ], MainModule);
@@ -326,9 +461,7 @@ var MainModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainRoutes; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_home_component__ = __webpack_require__("../../../../../src/app/main/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__post_post_component__ = __webpack_require__("../../../../../src/app/main/post/post.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__about_about_component__ = __webpack_require__("../../../../../src/app/main/about/about.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__contact_contact_component__ = __webpack_require__("../../../../../src/app/main/contact/contact.component.ts");
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_post_edit_post_component__ = __webpack_require__("../../../../../src/app/main/edit-post/edit-post.component.ts");
 
 
 
@@ -340,14 +473,11 @@ var MainRoutes = [{
         path: 'home',
         component: __WEBPACK_IMPORTED_MODULE_0__home_home_component__["a" /* HomeComponent */]
     }, {
-        path: 'post',
+        path: 'post/:id',
         component: __WEBPACK_IMPORTED_MODULE_1__post_post_component__["a" /* PostComponent */]
     }, {
-        path: 'about',
-        component: __WEBPACK_IMPORTED_MODULE_2__about_about_component__["a" /* AboutComponent */]
-    }, {
-        path: 'contact',
-        component: __WEBPACK_IMPORTED_MODULE_3__contact_contact_component__["a" /* ContactComponent */]
+        path: 'edit-post/:id',
+        component: __WEBPACK_IMPORTED_MODULE_2__edit_post_edit_post_component__["a" /* EditPostComponent */]
     }];
 
 
@@ -374,7 +504,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/post/post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <!-- Page Header -->\r\n  <header class=\"masthead\" style=\"background-image: url('./../assets/img/post-bg.jpg')\">\r\n    <div class=\"overlay\"></div>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <div class=\"post-heading\">\r\n            <h1>Man must explore, and this is exploration at its greatest</h1>\r\n            <h2 class=\"subheading\">Problems look mighty small from 150 miles up</h2>\r\n            <span class=\"meta\">Posted by\r\n              <a href=\"#\">Start Bootstrap</a>\r\n              on August 24, 2018</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n\r\n  <!-- Post Content -->\r\n  <article>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>\r\n\r\n          <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>\r\n\r\n          <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>\r\n\r\n          <p>A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.</p>\r\n\r\n          <p>For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.</p>\r\n\r\n          <h2 class=\"section-heading\">The Final Frontier</h2>\r\n\r\n          <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>\r\n\r\n          <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>\r\n\r\n          <blockquote class=\"blockquote\">The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>\r\n\r\n          <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>\r\n\r\n          <h2 class=\"section-heading\">Reaching for the Stars</h2>\r\n\r\n          <p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>\r\n\r\n          <a href=\"#\">\r\n            <img class=\"img-fluid\" src=\"./../assets/img/post-sample-image.jpg\" alt=\"\">\r\n          </a>\r\n          <span class=\"caption text-muted\">To go places and do things that have never been done before – that’s what living is all about.</span>\r\n\r\n          <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>\r\n\r\n          <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>\r\n\r\n          <p>Placeholder text by\r\n            <a href=\"http://spaceipsum.com/\">Space Ipsum</a>. Photographs by\r\n            <a href=\"https://www.flickr.com/photos/nasacommons/\">NASA on The Commons</a>.</p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </article>\r\n\r\n  <hr>\r\n\r\n"
+module.exports = "  <!-- Page Header -->\r\n  <header class=\"masthead\" style=\"background-image: url('./../assets/img/post-bg.jpg')\">\r\n    <div class=\"overlay\"></div>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <div class=\"post-heading\">\r\n            <h1>{{postDetail.title}}</h1>\r\n            <h2 class=\"subheading\">{{postDetail?.subTitle}}</h2>\r\n            <span class=\"meta\">Posted by\r\n              <a>{{postDetail?.author?.name}}</a>\r\n              on {{formatService.formatDate(postDetail?.createdAt)}}</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n\r\n  <!-- Post Content -->\r\n  <article>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\" id=\"display\"></div>\r\n      </div>\r\n    </div>\r\n  </article>\r\n\r\n  <hr>\r\n\r\n"
 
 /***/ }),
 
@@ -384,6 +514,10 @@ module.exports = "  <!-- Page Header -->\r\n  <header class=\"masthead\" style=\
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PostComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_util_format_service__ = __webpack_require__("../../../../../src/app/core/util/format.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_api_post_service__ = __webpack_require__("../../../../../src/app/core/api/post.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -394,10 +528,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
 var PostComponent = /** @class */ (function () {
-    function PostComponent() {
+    function PostComponent(route, postService, formatService, loading) {
+        this.route = route;
+        this.postService = postService;
+        this.formatService = formatService;
+        this.loading = loading;
+        this.postDetail = {};
     }
     PostComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.loading.show();
+        var id = this.route.snapshot.paramMap.get('id');
+        console.log("id: ", id);
+        this.postService.getById(id).subscribe(function (data) {
+            console.log("post: ", id, data);
+            _this.loading.hide();
+            _this.postDetail = data.data;
+            $("#display").html(_this.postDetail.content);
+        }, function (error) {
+            _this.loading.hide();
+        });
     };
     PostComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -405,11 +560,546 @@ var PostComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/main/post/post.component.html"),
             styles: [__webpack_require__("../../../../../src/app/main/post/post.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
+            __WEBPACK_IMPORTED_MODULE_3__core_api_post_service__["a" /* PostService */],
+            __WEBPACK_IMPORTED_MODULE_2__core_util_format_service__["a" /* FormatService */],
+            __WEBPACK_IMPORTED_MODULE_4__core_util_loading_service__["a" /* LoadingService */]])
     ], PostComponent);
     return PostComponent;
 }());
 
+
+
+/***/ }),
+
+/***/ "../../../../@tinymce/tinymce-angular/esm5/tinymce-tinymce-angular.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditorModule; });
+/* unused harmony export ɵb */
+/* unused harmony export ɵa */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__("../../../../tslib/tslib.es6.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @record
+ */
+var Events = (function () {
+    function Events() {
+        this.onBeforePaste = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onBlur = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onClick = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onContextMenu = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onCopy = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onCut = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDblclick = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDrag = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDragDrop = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDragEnd = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDragGesture = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDragOver = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDrop = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onFocus = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onFocusIn = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onFocusOut = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onKeyDown = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onKeyPress = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onKeyUp = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onMouseDown = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onMouseEnter = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onMouseLeave = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onMouseMove = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onMouseOut = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onMouseOver = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onMouseUp = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onPaste = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onSelectionChange = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onActivate = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onAddUndo = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onBeforeAddUndo = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onBeforeExecCommand = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onBeforeGetContent = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onBeforeRenderUI = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onBeforeSetContent = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onChange = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onClearUndos = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDeactivate = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onDirty = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onExecCommand = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onGetContent = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onHide = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onInit = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onLoadContent = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onNodeChange = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onPostProcess = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onPostRender = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onPreInit = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onPreProcess = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onProgressState = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onRedo = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onRemove = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onReset = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onSaveContent = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onSetAttrib = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onObjectResizeStart = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onObjectResized = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onObjectSelected = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onSetContent = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onShow = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onSubmit = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onUndo = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.onVisualAid = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+    }
+    return Events;
+}());
+Events.propDecorators = {
+    "onBeforePaste": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onBlur": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onClick": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onContextMenu": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onCopy": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onCut": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDblclick": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDrag": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDragDrop": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDragEnd": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDragGesture": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDragOver": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDrop": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onFocus": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onFocusIn": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onFocusOut": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onKeyDown": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onKeyPress": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onKeyUp": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onMouseDown": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onMouseEnter": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onMouseLeave": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onMouseMove": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onMouseOut": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onMouseOver": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onMouseUp": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onPaste": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onSelectionChange": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onActivate": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onAddUndo": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onBeforeAddUndo": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onBeforeExecCommand": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onBeforeGetContent": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onBeforeRenderUI": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onBeforeSetContent": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onChange": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onClearUndos": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDeactivate": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onDirty": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onExecCommand": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onGetContent": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onHide": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onInit": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onLoadContent": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onNodeChange": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onPostProcess": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onPostRender": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onPreInit": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onPreProcess": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onProgressState": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onRedo": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onRemove": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onReset": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onSaveContent": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onSetAttrib": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onObjectResizeStart": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onObjectResized": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onObjectSelected": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onSetContent": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onShow": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onSubmit": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onUndo": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+    "onVisualAid": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* Output */] },],
+};
+var validEvents = [
+    'onActivate',
+    'onAddUndo',
+    'onBeforeAddUndo',
+    'onBeforeExecCommand',
+    'onBeforeGetContent',
+    'onBeforeRenderUI',
+    'onBeforeSetContent',
+    'onBeforePaste',
+    'onBlur',
+    'onChange',
+    'onClearUndos',
+    'onClick',
+    'onContextMenu',
+    'onCopy',
+    'onCut',
+    'onDblclick',
+    'onDeactivate',
+    'onDirty',
+    'onDrag',
+    'onDragDrop',
+    'onDragEnd',
+    'onDragGesture',
+    'onDragOver',
+    'onDrop',
+    'onExecCommand',
+    'onFocus',
+    'onFocusIn',
+    'onFocusOut',
+    'onGetContent',
+    'onHide',
+    'onInit',
+    'onKeyDown',
+    'onKeyPress',
+    'onKeyUp',
+    'onLoadContent',
+    'onMouseDown',
+    'onMouseEnter',
+    'onMouseLeave',
+    'onMouseMove',
+    'onMouseOut',
+    'onMouseOver',
+    'onMouseUp',
+    'onNodeChange',
+    'onObjectResizeStart',
+    'onObjectResized',
+    'onObjectSelected',
+    'onPaste',
+    'onPostProcess',
+    'onPostRender',
+    'onPreInit',
+    'onPreProcess',
+    'onProgressState',
+    'onRedo',
+    'onRemove',
+    'onReset',
+    'onSaveContent',
+    'onSelectionChange',
+    'onSetAttrib',
+    'onSetContent',
+    'onShow',
+    'onSubmit',
+    'onUndo',
+    'onVisualAid'
+];
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Copyright (c) 2017-present, Ephox, Inc.
+ *
+ * This source code is licensed under the Apache 2 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+var bindHandlers = function (ctx, editor) {
+    validEvents.forEach(function (eventName) {
+        var /** @type {?} */ eventEmitter = ctx[eventName];
+        if (eventEmitter.observers.length > 0) {
+            editor.on(eventName.substring(2), ctx.ngZone.run(function () { return function (event) { return eventEmitter.emit({ event: event, editor: editor }); }; }));
+        }
+    });
+};
+var unique = 0;
+var uuid = function (prefix) {
+    var /** @type {?} */ date = new Date();
+    var /** @type {?} */ time = date.getTime();
+    var /** @type {?} */ random = Math.floor(Math.random() * 1000000000);
+    unique++;
+    return prefix + '_' + random + unique + String(time);
+};
+var isTextarea = function (element) {
+    return typeof element !== 'undefined' && element.tagName.toLowerCase() === 'textarea';
+};
+var normalizePluginArray = function (plugins) {
+    if (typeof plugins === 'undefined' || plugins === '') {
+        return [];
+    }
+    return Array.isArray(plugins) ? plugins : plugins.split(' ');
+};
+var mergePlugins = function (initPlugins, inputPlugins) { return normalizePluginArray(initPlugins).concat(normalizePluginArray(inputPlugins)); };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Copyright (c) 2017-present, Ephox, Inc.
+ *
+ * This source code is licensed under the Apache 2 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+/**
+ * @record
+ */
+var injectScriptTag = function (scriptId, doc, url, callback) {
+    var /** @type {?} */ scriptTag = doc.createElement('script');
+    scriptTag.type = 'application/javascript';
+    scriptTag.id = scriptId;
+    scriptTag.addEventListener('load', callback);
+    scriptTag.src = url;
+    doc.head.appendChild(scriptTag);
+};
+var create = function () {
+    return {
+        listeners: [],
+        scriptId: uuid('tiny-script'),
+        scriptLoaded: false
+    };
+};
+var load = function (state, doc, url, callback) {
+    if (state.scriptLoaded) {
+        callback();
+    }
+    else {
+        state.listeners.push(callback);
+        if (!doc.getElementById(state.scriptId)) {
+            injectScriptTag(state.scriptId, doc, url, function () {
+                state.listeners.forEach(function (fn) { return fn(); });
+                state.scriptLoaded = true;
+            });
+        }
+    }
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Copyright (c) 2017-present, Ephox, Inc.
+ *
+ * This source code is licensed under the Apache 2 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+var getGlobal = function () { return (typeof window !== 'undefined' ? window : global); };
+var getTinymce = function () {
+    global = getGlobal();
+    return global && global.tinymce ? global.tinymce : null;
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var scriptState = create();
+var EDITOR_COMPONENT_VALUE_ACCESSOR = {
+    provide: __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* NG_VALUE_ACCESSOR */],
+    useExisting: Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_18" /* forwardRef */])(function () { return EditorComponent; }),
+    multi: true
+};
+var EditorComponent = (function (_super) {
+    __WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */](EditorComponent, _super);
+    /**
+     * @param {?} elementRef
+     * @param {?} ngZone
+     */
+    function EditorComponent(elementRef, ngZone) {
+        var _this = _super.call(this) || this;
+        _this.element = undefined;
+        _this.id = '';
+        _this.toolbar = null;
+        _this.onTouchedCallback = function () { };
+        _this.onChangeCallback = function (x) { };
+        _this.elementRef = elementRef;
+        _this.ngZone = ngZone;
+        _this.initialise = _this.initialise.bind(_this);
+        return _this;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    EditorComponent.prototype.writeValue = function (value) {
+        this.initialValue = value || this.initialValue;
+        if (this.editor && this.editor.initialized && typeof value === 'string') {
+            this.editor.setContent(value);
+        }
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    EditorComponent.prototype.registerOnChange = function (fn) {
+        this.onChangeCallback = fn;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    EditorComponent.prototype.registerOnTouched = function (fn) {
+        this.onTouchedCallback = fn;
+    };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    EditorComponent.prototype.setDisabledState = function (isDisabled) {
+        if (this.editor) {
+            this.editor.setMode(isDisabled ? 'readonly' : 'design');
+        }
+        else if (isDisabled) {
+            this.init = Object.assign({}, this.init, { readonly: true });
+        }
+    };
+    /**
+     * @return {?}
+     */
+    EditorComponent.prototype.ngAfterViewInit = function () {
+        this.id = this.id || uuid('tiny-react');
+        this.inline = typeof this.inline !== 'undefined' ? this.inline : this.init && this.init["inline"];
+        this.createElement();
+        if (getTinymce() !== null) {
+            this.initialise();
+        }
+        else if (this.element) {
+            var /** @type {?} */ doc = this.element.ownerDocument;
+            var /** @type {?} */ channel = this.cloudChannel || 'stable';
+            var /** @type {?} */ apiKey = this.apiKey || '';
+            load(scriptState, doc, "https://cloud.tinymce.com/" + channel + "/tinymce.min.js?apiKey=" + apiKey, this.initialise);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    EditorComponent.prototype.ngOnDestroy = function () {
+        getTinymce().remove(this.editor);
+    };
+    /**
+     * @return {?}
+     */
+    EditorComponent.prototype.createElement = function () {
+        var /** @type {?} */ tagName = typeof this.tagName === 'string' ? this.tagName : 'div';
+        this.element = document.createElement(this.inline ? tagName : 'textarea');
+        if (this.element) {
+            this.element.id = this.id;
+            if (isTextarea(this.element)) {
+                this.element.style.visibility = 'hidden';
+            }
+            this.elementRef.nativeElement.appendChild(this.element);
+        }
+    };
+    /**
+     * @return {?}
+     */
+    EditorComponent.prototype.initialise = function () {
+        var _this = this;
+        var /** @type {?} */ finalInit = Object.assign({}, this.init, { selector: "#" + this.id, inline: this.inline, plugins: mergePlugins(this.init && this.init["plugins"], this.plugins), toolbar: this.toolbar || (this.init && this.init["toolbar"]), setup: function (editor) {
+                _this.editor = editor;
+                editor.on('init', function () {
+                    _this.initEditor(editor);
+                });
+                if (_this.init && typeof _this.init["setup"] === 'function') {
+                    _this.init["setup"](editor);
+                }
+            } });
+        if (isTextarea(this.element)) {
+            this.element.style.visibility = '';
+        }
+        this.ngZone.runOutsideAngular(function () {
+            getTinymce().init(finalInit);
+        });
+    };
+    /**
+     * @param {?} editor
+     * @return {?}
+     */
+    EditorComponent.prototype.initEditor = function (editor) {
+        var _this = this;
+        if (typeof this.initialValue === 'string') {
+            this.ngZone.run(function () { return editor.setContent(_this.initialValue); });
+        }
+        editor.once('blur', function () { return _this.ngZone.run(function () { return _this.onTouchedCallback(); }); });
+        editor.on('setcontent', function (_a) {
+            var content = _a.content, format = _a.format;
+            return format === 'html' && content && _this.ngZone.run(function () { return _this.onChangeCallback(content); });
+        });
+        editor.on('change keyup', function () { return _this.ngZone.run(function () { return _this.onChangeCallback(editor.getContent()); }); });
+        bindHandlers(this, editor);
+    };
+    return EditorComponent;
+}(Events));
+EditorComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */], args: [{
+                selector: 'editor',
+                template: '<ng-template></ng-template>',
+                styles: [':host { display: block; }'],
+                providers: [EDITOR_COMPONENT_VALUE_ACCESSOR]
+            },] },
+];
+/** @nocollapse */
+EditorComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* NgZone */], },
+]; };
+EditorComponent.propDecorators = {
+    "cloudChannel": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+    "apiKey": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+    "init": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+    "id": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+    "initialValue": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+    "inline": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+    "tagName": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+    "plugins": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+    "toolbar": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["F" /* Input */] },],
+};
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var EditorModule = (function () {
+    function EditorModule() {
+    }
+    return EditorModule;
+}());
+EditorModule.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModule */], args: [{
+                imports: [__WEBPACK_IMPORTED_MODULE_3__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormsModule */]],
+                declarations: [EditorComponent],
+                exports: [EditorComponent]
+            },] },
+];
+/** @nocollapse */
+EditorModule.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+//# sourceMappingURL=tinymce-tinymce-angular.js.map
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("../../../../webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/add/operator/filter.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__operator_filter__ = __webpack_require__("../../../../rxjs/_esm5/operator/filter.js");
+/** PURE_IMPORTS_START .._.._Observable,.._.._operator_filter PURE_IMPORTS_END */
+
+
+__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */].prototype.filter = __WEBPACK_IMPORTED_MODULE_1__operator_filter__["a" /* filter */];
+//# sourceMappingURL=filter.js.map 
 
 
 /***/ })

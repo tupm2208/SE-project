@@ -69,6 +69,8 @@ var LoginComponent = /** @class */ (function () {
         this.save();
         this.loadingService.show();
         this.loginService.login({ username: this.username, password: this.password }).subscribe(function (data) {
+            console.log("data: ", data);
+            _this.storageService.set('token', data.token);
             _this.router.navigate(['/main/']);
             _this.loadingService.hide();
         }, function (error) {
@@ -96,7 +98,7 @@ var LoginComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__core_api_login_service__["a" /* LoginService */],
             __WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__["a" /* LoadingService */],
             __WEBPACK_IMPORTED_MODULE_4__core_util_storage_service__["a" /* StorageService */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]])
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -135,11 +137,11 @@ var LoginModule = /** @class */ (function () {
     function LoginModule() {
     }
     LoginModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(__WEBPACK_IMPORTED_MODULE_4__login_routes__["a" /* LoginRouters */]),
-                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
+                __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(__WEBPACK_IMPORTED_MODULE_4__login_routes__["a" /* LoginRouters */]),
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormsModule */]
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_5__login_component__["a" /* LoginComponent */],
@@ -179,7 +181,7 @@ var LoginRouters = [
 /***/ "../../../../../src/app/login/regist/regist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<body>\n    <h1 class=\"title-agile text-center\"></h1>\n    <div class=\"content-w3ls\">\n        <div class=\"content-top-agile\">\n            <h2>sign up</h2>\n        </div>\n        <div class=\"content-bottom\">\n            <form action=\"#\" method=\"post\">\n                <div class=\"field-group\">\n                    <span class=\"fa fa-user\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"fullname\" id=\"fullname\" type=\"text\" value=\"\" placeholder=\"Full Name\" required>\n                    </div>\n                </div>\n                <div class=\"field-group\">\n                    <span class=\"fa fa-lock\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"email\" id=\"email\" type=\"email\" placeholder=\"Email\" required>\n                    </div>\n                </div>\n                <div class=\"field-group\">\n                    <span class=\"fa fa-user\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"username\" id=\"username\" type=\"text\" value=\"\" placeholder=\"username\" required>\n                    </div>\n                </div>\n                <div class=\"field-group\">\n                    <span class=\"fa fa-lock\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"password\" id=\"password\" type=\"Password\" placeholder=\"password\" required>\n                    </div>\n                </div>\n                <div class=\"field-group\">\n                    <span class=\"fa fa-lock\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"repassword\" id=\"repassword\" type=\"Password\" placeholder=\"re-enter password\" required>\n                    </div>\n                </div>\n                \n                <a routerLink=\"\" style=\"color: navy;\" class=\"text-right\">Login</a>\n\n                <div class=\"wthree-field\">\n                    <input id=\"saveForm\" name=\"saveForm\" type=\"submit\" value=\"Sign Up\" />\n                </div>\n            </form>\n        </div>\n    </div>\n    <div class=\"copyright text-center\">\n        <p style=\"opacity: 0\">\n             © 2018 Switch Login Form. All rights reserved | Design by \n            <!-- <a href=\"http://w3layouts.com\">W3layouts</a> -->\n        </p>\n    </div>\n</body>"
+module.exports = "<body>\n    <h1 class=\"title-agile text-center\"></h1>\n    <div class=\"content-w3ls\">\n        <div class=\"content-top-agile\">\n            <h2>sign up</h2>\n        </div>\n        <div class=\"content-bottom\">\n            <form action=\"#\" method=\"post\">\n                <div class=\"field-group\">\n                    <span class=\"fa fa-user\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"fullname\" id=\"fullname\" type=\"text\" value=\"\" placeholder=\"Full Name\" required>\n                    </div>\n                </div>\n                <div class=\"field-group\">\n                    <span class=\"fa fa-lock\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"email\" id=\"email\" type=\"email\" placeholder=\"Email\" required>\n                    </div>\n                </div>\n                <div class=\"field-group\">\n                    <span class=\"fa fa-user\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"username\" id=\"username\" type=\"text\" value=\"\" placeholder=\"username\" required>\n                    </div>\n                </div>\n                <div class=\"field-group\">\n                    <span class=\"fa fa-lock\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"password\" id=\"password\" type=\"Password\" placeholder=\"password\" required>\n                    </div>\n                </div>\n                <div class=\"field-group\">\n                    <span class=\"fa fa-lock\" aria-hidden=\"true\"></span>\n                    <div class=\"wthree-field\">\n                        <input name=\"repassword\" id=\"repassword\" type=\"Password\" placeholder=\"re-enter password\" required>\n                    </div>\n                </div>\n                \n                <a routerLink=\"\" class=\"text-right\">\n                    <i class=\"material-icons\">keyboard_backspace</i> Back\n                </a>\n\n                <div class=\"wthree-field\">\n                    <input id=\"saveForm\" name=\"saveForm\" type=\"submit\" value=\"Sign Up\" />\n                </div>\n            </form>\n        </div>\n    </div>\n    <div class=\"copyright text-center\">\n        <p style=\"opacity: 0\">\n             © 2018 Switch Login Form. All rights reserved | Design by \n            <!-- <a href=\"http://w3layouts.com\">W3layouts</a> -->\n        </p>\n    </div>\n</body>"
 
 /***/ }),
 

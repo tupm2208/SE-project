@@ -50,7 +50,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Navigation -->\r\n<nav *ngIf=\"router.url.indexOf('main')!=-1\" class=\"navbar navbar-expand-lg navbar-light fixed-top\" id=\"mainNav\">\r\n  <div class=\"container\">\r\n    <a class=\"navbar-brand\" routerLink='home'>Blog</a>\r\n    <button class=\"navbar-toggler navbar-toggler-right\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      Menu\r\n      <i class=\"fa fa-bars\"></i>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\r\n      <ul class=\"navbar-nav ml-auto\">\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/home\">Home</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/about\">About</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/post\">Sample Post</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/contact\">Contact</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"login\">Logout</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n\r\n <!-- Footer -->\r\n <footer *ngIf=\"router.url.indexOf('main')!=-1\" class=\"footer\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <ul class=\"list-inline text-center\">\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-twitter fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-facebook fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-github fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n        <p class=\"copyright text-muted\">Copyright &copy; Your Website 2018</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n"
+module.exports = "<!-- Navigation -->\r\n<nav *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"navbar navbar-expand-lg navbar-light fixed-top\" id=\"mainNav\">\r\n  <div class=\"container\">\r\n    <a class=\"navbar-brand\" routerLink='home'>Blog</a>\r\n    <button class=\"navbar-toggler navbar-toggler-right collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      Menu\r\n      <i class=\"fa fa-bars\"></i>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\r\n      <ul class=\"navbar-nav ml-auto\">\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/home\">Home</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/edit-post/0\">Create Your Post</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/edit-post/0\">Profile</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"login\">Logout</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n\r\n <!-- Footer -->\r\n <footer *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"footer\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <ul class=\"list-inline text-center\">\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-twitter fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-facebook fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-github fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n        <p class=\"copyright text-muted\">Copyright &copy; Your Website 2018</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n"
 
 /***/ }),
 
@@ -75,6 +75,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AppComponent = /** @class */ (function () {
     function AppComponent(router) {
         this.router = router;
+        this.router.events.subscribe(function (val) {
+            $(window).scrollTop(0);
+        });
     }
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -82,7 +85,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/app.component.html"),
             styles: [__webpack_require__("../../../../../src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -124,16 +127,16 @@ var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */].forRoot(__WEBPACK_IMPORTED_MODULE_8__app_routers__["a" /* AppRoutes */]),
+                __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */].forRoot(__WEBPACK_IMPORTED_MODULE_8__app_routers__["a" /* AppRoutes */]),
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__core_core_module__["a" /* CoreModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["c" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_http__["c" /* HttpModule */]
             ],
             providers: [],
@@ -179,6 +182,9 @@ var AppRoutes = [{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_service__ = __webpack_require__("../../../../../src/app/core/api/login.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_service__ = __webpack_require__("../../../../../src/app/core/api/user.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__post_service__ = __webpack_require__("../../../../../src/app/core/api/post.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__category_service__ = __webpack_require__("../../../../../src/app/core/api/category.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__image_service__ = __webpack_require__("../../../../../src/app/core/api/image.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dialog_dialog_module__ = __webpack_require__("../../../../../src/app/core/dialog/dialog.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -191,24 +197,107 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+
 var ApiModule = /** @class */ (function () {
     function ApiModule() {
     }
     ApiModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_0__util_util_module__["a" /* UtilModule */]
+                __WEBPACK_IMPORTED_MODULE_0__util_util_module__["a" /* UtilModule */],
+                __WEBPACK_IMPORTED_MODULE_8__dialog_dialog_module__["a" /* DialogModule */]
             ],
             declarations: [],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_3__login_service__["a" /* LoginService */],
                 __WEBPACK_IMPORTED_MODULE_4__user_service__["a" /* UserService */],
-                __WEBPACK_IMPORTED_MODULE_5__post_service__["a" /* PostService */]
+                __WEBPACK_IMPORTED_MODULE_5__post_service__["a" /* PostService */],
+                __WEBPACK_IMPORTED_MODULE_6__category_service__["a" /* CategoryService */],
+                __WEBPACK_IMPORTED_MODULE_7__image_service__["a" /* ImageService */]
             ]
         })
     ], ApiModule);
     return ApiModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/api/category.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_main_api_service__ = __webpack_require__("../../../../../src/app/core/util/main-api.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CategoryService = /** @class */ (function () {
+    function CategoryService(mainApi) {
+        this.mainApi = mainApi;
+    }
+    CategoryService.prototype.list = function () {
+        return this.mainApi.get('category');
+    };
+    CategoryService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__util_main_api_service__["a" /* MainApiService */]])
+    ], CategoryService);
+    return CategoryService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/api/image.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ImageService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_main_api_service__ = __webpack_require__("../../../../../src/app/core/util/main-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_storage_service__ = __webpack_require__("../../../../../src/app/core/util/storage.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ImageService = /** @class */ (function () {
+    function ImageService(mainApi, storageService) {
+        this.mainApi = mainApi;
+        this.storageService = storageService;
+    }
+    ImageService.prototype.post = function (params) {
+        params.token = this.storageService.get('token');
+        return this.mainApi.post('image', params);
+    };
+    ImageService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__util_main_api_service__["a" /* MainApiService */],
+            __WEBPACK_IMPORTED_MODULE_2__util_storage_service__["a" /* StorageService */]])
+    ], ImageService);
+    return ImageService;
 }());
 
 
@@ -222,6 +311,10 @@ var ApiModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_main_api_service__ = __webpack_require__("../../../../../src/app/core/util/main-api.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_storage_service__ = __webpack_require__("../../../../../src/app/core/util/storage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dialog_dialog_service__ = __webpack_require__("../../../../../src/app/core/dialog/dialog.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -233,16 +326,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
+
 var LoginService = /** @class */ (function () {
-    function LoginService(mainApi) {
+    function LoginService(mainApi, storageService, router, dialogService, currentRouter) {
         this.mainApi = mainApi;
+        this.storageService = storageService;
+        this.router = router;
+        this.dialogService = dialogService;
+        this.currentRouter = currentRouter;
     }
     LoginService.prototype.login = function (params) {
         return this.mainApi.post('login', params);
     };
+    LoginService.prototype.refreshKey = function () {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */](function (observer) {
+            _this.mainApi.get('refreshToken?token=' + _this.storageService.get('token')).subscribe(function (data) {
+                _this.storageService.set('token', data.token);
+                observer.next();
+                observer.complete();
+            }, function (error) {
+                _this.dialogService.showError("Your Session work is expired! goto login!").subscribe(function (data) {
+                    _this.router.navigate(['/login'], { queryParams: { returnUrl: _this.router.url } });
+                    console.log("current route: ", _this.router.url);
+                });
+                observer.error();
+                observer.complete();
+            });
+        });
+    };
     LoginService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__util_main_api_service__["a" /* MainApiService */]])
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__util_main_api_service__["a" /* MainApiService */],
+            __WEBPACK_IMPORTED_MODULE_3__util_storage_service__["a" /* StorageService */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_5__dialog_dialog_service__["a" /* DialogService */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* ActivatedRoute */]])
     ], LoginService);
     return LoginService;
 }());
@@ -258,6 +380,7 @@ var LoginService = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PostService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_main_api_service__ = __webpack_require__("../../../../../src/app/core/util/main-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_storage_service__ = __webpack_require__("../../../../../src/app/core/util/storage.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -269,16 +392,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var PostService = /** @class */ (function () {
-    function PostService(mainApi) {
+    function PostService(mainApi, storageService) {
         this.mainApi = mainApi;
+        this.storageService = storageService;
     }
-    PostService.prototype.list = function () {
-        return this.mainApi.get('post');
+    PostService.prototype.list = function (page) {
+        return this.mainApi.get('post/10/' + page);
+    };
+    PostService.prototype.getById = function (id) {
+        return this.mainApi.get('post/' + id);
+    };
+    PostService.prototype.post = function (params) {
+        params.token = this.storageService.get('token');
+        return this.mainApi.post('post/', params);
+    };
+    PostService.prototype.edit = function (params) {
+        params.token = this.storageService.get('token');
+        return this.mainApi.put('post/', params);
     };
     PostService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__util_main_api_service__["a" /* MainApiService */]])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__util_main_api_service__["a" /* MainApiService */],
+            __WEBPACK_IMPORTED_MODULE_2__util_storage_service__["a" /* StorageService */]])
     ], PostService);
     return PostService;
 }());
@@ -313,7 +450,7 @@ var UserService = /** @class */ (function () {
         return this.mainApi.post('user', params);
     };
     UserService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__util_main_api_service__["a" /* MainApiService */]])
     ], UserService);
     return UserService;
@@ -347,7 +484,7 @@ var ConfigService = /** @class */ (function () {
         return this.urlBase;
     };
     ConfigService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], ConfigService);
     return ConfigService;
@@ -366,12 +503,14 @@ var ConfigService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api_api_module__ = __webpack_require__("../../../../../src/app/core/api/api.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dialog_dialog_module__ = __webpack_require__("../../../../../src/app/core/dialog/dialog.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -386,17 +525,251 @@ var CoreModule = /** @class */ (function () {
         };
     };
     CoreModule = CoreModule_1 = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_0__util_util_module__["a" /* UtilModule */],
-                __WEBPACK_IMPORTED_MODULE_3__api_api_module__["a" /* ApiModule */]
+                __WEBPACK_IMPORTED_MODULE_3__api_api_module__["a" /* ApiModule */],
+                __WEBPACK_IMPORTED_MODULE_4__dialog_dialog_module__["a" /* DialogModule */]
             ],
             declarations: []
         })
     ], CoreModule);
     return CoreModule;
     var CoreModule_1;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/dialog/dialog.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DialogModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dialog_service__ = __webpack_require__("../../../../../src/app/core/dialog/dialog.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__error_error_component__ = __webpack_require__("../../../../../src/app/core/dialog/error/error.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__success_success_component__ = __webpack_require__("../../../../../src/app/core/dialog/success/success.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+var DialogModule = /** @class */ (function () {
+    function DialogModule() {
+    }
+    DialogModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MatDialogModule */]
+            ],
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_4__error_error_component__["a" /* ErrorComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__success_success_component__["a" /* SuccessComponent */]
+            ],
+            providers: [
+                __WEBPACK_IMPORTED_MODULE_3__dialog_service__["a" /* DialogService */]
+            ],
+            entryComponents: [
+                __WEBPACK_IMPORTED_MODULE_4__error_error_component__["a" /* ErrorComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__success_success_component__["a" /* SuccessComponent */]
+            ]
+        })
+    ], DialogModule);
+    return DialogModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/dialog/dialog.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DialogService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error_error_component__ = __webpack_require__("../../../../../src/app/core/dialog/error/error.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__success_success_component__ = __webpack_require__("../../../../../src/app/core/dialog/success/success.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var DialogService = /** @class */ (function () {
+    function DialogService(dialog) {
+        this.dialog = dialog;
+    }
+    DialogService.prototype.showSuccess = function () {
+        return this.dialog.open(__WEBPACK_IMPORTED_MODULE_3__success_success_component__["a" /* SuccessComponent */]).afterClosed();
+    };
+    DialogService.prototype.showError = function (data) {
+        return this.dialog.open(__WEBPACK_IMPORTED_MODULE_2__error_error_component__["a" /* ErrorComponent */], { data: data }).afterClosed();
+    };
+    DialogService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatDialog */]])
+    ], DialogService);
+    return DialogService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/dialog/error/error.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/dialog/error/error.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div style=\"width: 286px;\">\n  <div style=\"width:100%;height:110px;background: red; text-align: center\">\n    <i class=\"material-icons\" style=\"font-size: 100px; color: white; top: 7%; position: relative;\">cancel</i>\n  </div>\n  <div class=\"body\" style=\"text-align: center;padding: 10px;background-color: white;\">\n    <div><strong>Oh Snap</strong></div>\n    <div>{{data? data: \"Change a few things up and try submitting again\"}}</div>\n    <button style=\"margin-top: 20px\" (click)=\"dialogRef.close()\" class=\"btn btn-danger\">close</button>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/dialog/error/error.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var ErrorComponent = /** @class */ (function () {
+    function ErrorComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    ErrorComponent.prototype.ngOnInit = function () {
+    };
+    ErrorComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-error',
+            template: __webpack_require__("../../../../../src/app/core/dialog/error/error.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/core/dialog/error/error.component.css")]
+        }),
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */], Object])
+    ], ErrorComponent);
+    return ErrorComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/dialog/success/success.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/dialog/success/success.component.html":
+/***/ (function(module, exports) {
+
+module.exports = " <div style=\"width: 286px;\">\n  <div style=\"width:100%;height:110px;background: cyan; text-align: center\">\n    <i class=\"material-icons\" style=\"font-size: 100px; color: white; top: 7%; position: relative;\">check_circle</i>\n  </div>\n  <div class=\"body\" style=\"text-align: center;padding: 10px;background-color: white;\">\n    <div><strong>Great!</strong></div>\n    <div>Thành Công!</div>\n    <div>\n      <button style=\"margin-top: 20px\" (click)=\"dialogRef.close()\"  class=\"btn btn-danger\">Đóng</button>\n    </div>\n  </div>\n</div> "
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/dialog/success/success.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SuccessComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var SuccessComponent = /** @class */ (function () {
+    function SuccessComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    SuccessComponent.prototype.ngOnInit = function () {
+    };
+    SuccessComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-success',
+            template: __webpack_require__("../../../../../src/app/core/dialog/success/success.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/core/dialog/success/success.component.css")]
+        }),
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */], Object])
+    ], SuccessComponent);
+    return SuccessComponent;
 }());
 
 
@@ -421,20 +794,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var FormatService = /** @class */ (function () {
     function FormatService() {
+        this.monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
     }
-    FormatService.prototype.formatDate = function (getTimeItem) {
-        getTimeItem = getTimeItem - 0;
-        var d = new Date(getTimeItem);
+    FormatService.prototype.formatDate = function (time) {
+        if (!time)
+            time = null;
+        var d = new Date(time);
         var day = d.getDate();
-        var month = d.getMonth() + 1;
+        var month = this.monthNames[d.getMonth()];
         var year = d.getFullYear();
-        if (day < 10) {
-            day = "0" + day;
-        }
-        if (month < 10) {
-            month = "0" + month;
-        }
-        return day + "/" + month + "/" + year;
+        return month + ' ' + day + ', ' + year;
     };
     ;
     FormatService.prototype.formatData = function (src, mainProp, level) {
@@ -472,19 +843,6 @@ var FormatService = /** @class */ (function () {
             des[e] = src[e];
         }
     };
-    FormatService.prototype.statusType = function (type) {
-        switch (type) {
-            case 1: return "Chưa Duyệt";
-            case 2: return "Đã Đặt Hàng";
-            case 3: return "Chưa Thanh Toán";
-            case 4: return "Đã Thanh Toán";
-            case 5: return "Chưa Về Kho Nhật";
-            case 6: return "Về Kho Nhật";
-            case 7: return "Về Kho Việt Nam";
-            case 8: return "Hoàn Tất";
-            default: return "Chưa Đặt Trạng Thái";
-        }
-    };
     FormatService.prototype.convertToArrayObservable = function (methodCallback, array, compareCallback, params, property) {
         var res = [];
         array.forEach(function (element) {
@@ -496,7 +854,7 @@ var FormatService = /** @class */ (function () {
         return res;
     };
     FormatService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], FormatService);
     return FormatService;
@@ -526,7 +884,7 @@ var HttpResponseService = /** @class */ (function () {
     function HttpResponseService() {
     }
     HttpResponseService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], HttpResponseService);
     return HttpResponseService;
@@ -658,7 +1016,7 @@ var HttpService = /** @class */ (function () {
         return options;
     };
     HttpService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_2__config_service__["a" /* ConfigService */]])
     ], HttpService);
     return HttpService;
@@ -686,7 +1044,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var LoadingService = /** @class */ (function () {
     function LoadingService() {
-        this.html = "<div class=\"image-container\" style=\"  position: fixed;\n                                                        z-index: 99999999;\n                                                        top: 0;\n                                                        bottom: 0;\n                                                        left: 0;\n                                                        text-align: center;\n                                                        right: 0;\n                                                        background-color: beige;\n                                                        opacity: 0.5;\"> \n                    <img class=\"jpg-image\" style=\"position: relative; top: calc(50% - 30px); \" width=40 height=40 src=\"https://media.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif\" />\n                </div>";
+        this.html = "<div class=\"image-container\" style=\"  position: fixed;\n                                                        z-index: 99999999;\n                                                        top: 0;\n                                                        bottom: 0;\n                                                        left: 0;\n                                                        text-align: center;\n                                                        right: 0;\n                                                        background-color: beige;\n                                                        opacity: 0.91;\"> \n                    <img class=\"jpg-image\" style=\"position: relative; top: calc(50% - 30px); \" width=100 height=100 src=\"https://media.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif\" />\n                </div>";
     }
     LoadingService.prototype.show = function (id) {
         if (!id) {
@@ -707,7 +1065,7 @@ var LoadingService = /** @class */ (function () {
         }
     };
     LoadingService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], LoadingService);
     return LoadingService;
@@ -745,7 +1103,7 @@ var MainApiService = /** @class */ (function () {
     MainApiService.prototype.get = function (url, params, options) {
         return this.http.get(url, params, options).map(function (res) {
             res = JSON.parse(res._body);
-            if (res.status !== 0) {
+            if (res.status !== false) {
                 return res;
             }
             else {
@@ -756,7 +1114,7 @@ var MainApiService = /** @class */ (function () {
     MainApiService.prototype.post = function (url, params, options) {
         return this.http.post(url, params, options).map(function (res) {
             res = JSON.parse(res._body);
-            if (res.status !== 0) {
+            if (res.status !== false) {
                 return res;
             }
             else {
@@ -787,7 +1145,7 @@ var MainApiService = /** @class */ (function () {
         });
     };
     MainApiService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__http_service__["a" /* HttpService */], __WEBPACK_IMPORTED_MODULE_1__config_service__["a" /* ConfigService */]])
     ], MainApiService);
     return MainApiService;
@@ -826,7 +1184,7 @@ var StorageService = /** @class */ (function () {
         delete localStorage[key];
     };
     StorageService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], StorageService);
     return StorageService;
@@ -869,7 +1227,7 @@ var UtilModule = /** @class */ (function () {
     function UtilModule() {
     }
     UtilModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["K" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_3__angular_common__["b" /* CommonModule */]
             ],
@@ -923,7 +1281,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_17" /* enableProdMode */])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
