@@ -7,8 +7,13 @@ export class PostService {
 
   constructor( private mainApi: MainApiService) { }
 
-  list(): Observable<any> {
+  list(page): Observable<any> {
 
-    return this.mainApi.get('post');
+    return this.mainApi.get('post?page=' + page);
+  }
+
+  getById(id): Observable<any> {
+
+    return this.mainApi.get('post/'+id);
   }
 }

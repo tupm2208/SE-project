@@ -6,24 +6,22 @@ declare let $: any;
 @Injectable()
 export class FormatService {
 
+  monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
   constructor() { }
 
-  formatDate(getTimeItem) {
-    
-    getTimeItem = getTimeItem - 0;
+  formatDate(time) {
 
-    let d = new Date(getTimeItem);
+    if(!time) time = null;
+
+    let d = new Date(time);
     let day: any = d.getDate();
-    let month: any = d.getMonth() + 1;
+    let month: any = this.monthNames[d.getMonth()];
     let year = d.getFullYear();
-    if (day < 10) {
-      day = "0" + day;
-    }
-    if (month < 10) {
-      month = "0" + month;
-    }
 
-    return day + "/" + month + "/" + year;
+    return month + ' ' + day + ', ' + year;
   };
 
   formatData(src, mainProp, level?) {
@@ -77,22 +75,6 @@ export class FormatService {
     for(let e in src) {
 
       des[e] = src[e];
-    }
-  }
-
-  statusType(type) {
-
-    switch(type) {
-
-      case 1: return "Chưa Duyệt";
-      case 2: return "Đã Đặt Hàng";
-      case 3: return "Chưa Thanh Toán";
-      case 4: return "Đã Thanh Toán";
-      case 5: return "Chưa Về Kho Nhật"
-      case 6: return "Về Kho Nhật";
-      case 7: return "Về Kho Việt Nam";
-      case 8: return "Hoàn Tất";
-      default: return "Chưa Đặt Trạng Thái";
     }
   }
 

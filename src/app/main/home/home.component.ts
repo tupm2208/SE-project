@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute  } from '@angular/router';
+import 'rxjs/add/operator/filter';
 
 import { LoadingService } from '../../core/util/loading.service';
 import { PostService } from '../../core/api/post.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,17 +13,38 @@ import { PostService } from '../../core/api/post.service';
 })
 export class HomeComponent implements OnInit {
 
+  private postList: Array<any> = [];
+  private page: Number;
+
   constructor(
     private loadingService: LoadingService,
-    private postService: PostService
+    private postService: PostService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
 
-    this.postService.list().subscribe( data => {
+    this.loadingService.show();
 
-      console.log("data: ", data);
-    })
+    this.route.queryParams
+      .subscribe(params => {
+        this.page = params.page | 1;
+
+        this.getPostList();
+      });
   }
 
+  getPostList() {
+
+    this.postService.list(this.page).subscribe( data => {
+
+      this.postList = data;
+
+      console.log(" data: ", data);
+      this.loadingService.hide();
+    }, error => {
+
+      this.loadingService.hide();
+    })
+  }
 }
