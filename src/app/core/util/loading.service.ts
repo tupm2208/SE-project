@@ -13,8 +13,8 @@ export class LoadingService {
                                                         text-align: center;
                                                         right: 0;
                                                         background-color: beige;
-                                                        opacity: 0.5;"> 
-                    <img class="jpg-image" style="position: relative; top: calc(50% - 30px); " width=40 height=40 src="https://media.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif" />
+                                                        opacity: 0.91;"> 
+                    <img class="jpg-image" style="position: relative; top: calc(50% - 30px); " width=100 height=100 src="https://media.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif" />
                 </div>`
   constructor() { }
 

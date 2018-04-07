@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { FormatService } from '../../core/util/format.service';
 import { PostService } from '../../core/api/post.service'
+import { LoadingService } from '../../core/util/loading.service';
+
+declare let $: any;
 
 @Component({
   selector: 'app-post',
@@ -16,10 +19,13 @@ export class PostComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
-    private formatService: FormatService
+    private formatService: FormatService,
+    private loading: LoadingService
   ) { }
 
   ngOnInit() {
+
+    this.loading.show();
 
     let id = this.route.snapshot.paramMap.get('id');
 
@@ -28,8 +34,13 @@ export class PostComponent implements OnInit {
     this.postService.getById(id).subscribe( data => {
 
       console.log("post: ",id, data);
+      this.loading.hide();
 
       this.postDetail = data.data;
+      $("#display").html(this.postDetail.content);
+    }, error => {
+
+      this.loading.hide();
     })
   }
 

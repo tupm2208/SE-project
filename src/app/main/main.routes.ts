@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
-import { ContactComponent } from './contact/contact.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 
 export const MainRoutes: Routes = [{
@@ -16,6 +16,6 @@ export const MainRoutes: Routes = [{
     path: 'post/:id',
     component: PostComponent
 }, {
-    path: 'contact',
-    component: ContactComponent
+    path: 'edit-post/:id',
+    component: EditPostComponent
 }];

@@ -28,8 +28,9 @@ export class HomeComponent implements OnInit {
 
     this.route.queryParams
       .subscribe(params => {
-        this.page = params.page | 1;
+        this.page = params.page? params.page: 1;
 
+        console.log("page: ", params.page, this.page);
         this.getPostList();
       });
   }
