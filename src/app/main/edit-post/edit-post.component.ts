@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import { CategoryService } from '../../core/api/category.service';
 import { PostService } from '../../core/api/post.service';
@@ -7,6 +8,7 @@ import { ImageService } from '../../core/api/image.service';
 import { LoadingService } from '../../core/util/loading.service';
 import { DialogService } from '../../core/dialog/dialog.service';
 import { LoginService } from '../../core/api/login.service';
+import { StorageService } from '../../core/util/storage.service';
 
 declare let tinymce: any;
 declare let $: any;
@@ -85,7 +87,8 @@ export class EditPostComponent implements OnInit {
     private dialog: DialogService,
     private loginService: LoginService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
@@ -107,9 +110,25 @@ export class EditPostComponent implements OnInit {
     this.registData.categoryID = '1';
     this.registData.title = '';
 
-    if(id) {
+    if(Number(id)) {
 
       this.initForEdit(id);
+    } else {
+
+      let data = this.storageService.get('preview');
+
+      console.log("preview Data: ", data);
+
+      setTimeout( () => {
+        $("#display").html(this.dataModel);
+      }, 50);
+
+      if(data) {
+
+        this.registData = data;
+
+        this.dataModel = this.registData.content;
+      }
     }
 
     this.categoryService.list().subscribe( data => {
@@ -136,79 +155,95 @@ export class EditPostComponent implements OnInit {
      $("#display").html(this.dataModel);
   }
 
-  post() {
+  post(): Observable<any> {
 
-    if(!this.checkValid()) return false;
+    return new Observable( observer => {
 
-    this.loading.show();
+      if (!this.checkValid()) {
 
-    let imgList = $('img');
+        observer.error();
+        observer.complete();
 
-    let count = 0;
-
-    imgList.toArray().forEach(element => {
-      
-      if(element.src.indexOf('data') == 0) {
-
-        count++;
-
-        let params: any = {
-          imageURI: element.src
-        }
-
-        this.imageService.post(params).subscribe( data => {
-
-          console.log("data image: ", data);
-          element.src = data.imageUrl;
-          count--;
-
-          if(count == 0) {
-
-            this.regist();
-          }
-        })
+        return;
       }
-    });
 
-    if(!count || !imgList.length) {
-      
-      this.regist();
-    }
+      this.loading.show();
+
+      let imgList = $('img');
+
+      let count = 0;
+
+      imgList.toArray().forEach(element => {
+
+        if (element.src.indexOf('data') == 0) {
+
+          count++;
+
+          let params: any = {
+            imageURI: element.src
+          }
+
+          this.imageService.post(params).subscribe(data => {
+
+            element.src = data.imageUrl;
+            count--;
+
+            if (count == 0) {
+
+              observer.next();
+              observer.complete();
+            }
+          })
+        }
+      });
+
+      if (!count || !imgList.length) {
+
+        observer.next();
+        observer.complete();
+      }
+
+    })
+
+    
   }
 
   regist() {
 
-    this.registData.content = $('#display').html();
+    this.post().subscribe(data => {
 
-    if(this.registData.ID) {
+      this.registData.content = $('#display').html();
 
-      this.postService.edit(this.registData).subscribe(data => {
+      if (this.registData.ID) {
+
+        this.postService.edit(this.registData).subscribe(data => {
+
+          this.loading.hide();
+
+          console.log("regist post: ", data);
+          this.success();
+        }, error => {
+
+          this.loading.hide();
+          this.dialog.showError("Something goes wrong! Try again!");
+        })
+
+        return;
+      }
+
+      this.postService.post(this.registData).subscribe(data => {
 
         this.loading.hide();
-        
+
+        this.registData = data.data;
         console.log("regist post: ", data);
+
         this.success();
       }, error => {
 
         this.loading.hide();
         this.dialog.showError("Something goes wrong! Try again!");
       })
-
-      return;
-    }
-
-    this.postService.post(this.registData).subscribe(data => {
-
-      this.loading.hide();
-
-      this.registData = data.data;
-      console.log("regist post: ", data);
-
-      this.success();
-    }, error => {
-
-      this.loading.hide();
-      this.dialog.showError("Something goes wrong! Try again!");
     })
   }
 
@@ -235,5 +270,22 @@ export class EditPostComponent implements OnInit {
     }
 
     return true;
+  }
+
+  preview() {
+
+    this.post().subscribe( data => {
+
+      this.registData.content = $('#display').html();
+
+      this.storageService.set('preview', this.registData);
+
+      this.loading.hide();
+
+      this.router.navigate(['main/preview']);
+    }, error => {
+
+      this.loading.hide();
+    })
   }
 }

@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import { BrefPostComponent } from './home/bref-post/bref-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { PreviewComponent } from './preview/preview.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { EditPostComponent } from './edit-post/edit-post.component';
     HomeComponent,
     PostComponent,
     BrefPostComponent,
-    EditPostComponent
+    EditPostComponent,
+    PreviewComponent
   ]
 })
 export class MainModule { }
