@@ -37,7 +37,10 @@ export class PostComponent implements OnInit {
       this.loading.hide();
 
       this.postDetail = data.data;
-      $("#display").html(this.postDetail.content);
+      
+      setTimeout( () => {
+        $("#display").html(this.postDetail.content);
+      }, 50)
     }, error => {
 
       this.loading.hide();
