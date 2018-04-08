@@ -6,8 +6,9 @@
     </div>
     <div class="useravatar">
       <img alt="" [src]="user.profilePicture">
+      <input type="file" (change)="onFileChange($event)" name="update" class="image-upload" #fileInput accept="image/*" />
     </div>
-    <input type="file" (change)="onFileChange($event)" class="image-upload" #fileInput accept="image/*" />
+    
     <div class="card-info"> <span class="card-title">{{user?.name}}</span>
 
     </div>
@@ -31,6 +32,6 @@
   </div>
 </div>
 
-<app-info *ngIf="type==1" [user]="user" (change)="post()"></app-info>
-<app-my-posts *ngIf="type==2"></app-my-posts>
-<app-change-pass *ngIf="type==3" [user]="user" (change)="post()"></app-change-pass>
+<app-info *ngIf="type==1" [user]="user" (changeF)="post()"></app-info>
+<app-my-posts *ngIf="type==2" [user]="user"></app-my-posts>
+<app-change-pass *ngIf="type==3" [user]="user" (changeF)="post()"></app-change-pass>

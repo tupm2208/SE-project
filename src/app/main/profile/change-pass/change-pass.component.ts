@@ -10,7 +10,7 @@ import { DialogService } from '../../../core/dialog/dialog.service';
 export class ChangePassComponent implements OnInit {
 
   @Input() user: any;
-  @Output() change = new EventEmitter();
+  @Output() changeF: EventEmitter<any> = new EventEmitter();
   private pass: String;
   private oldPass: String;
   private cfPass: String;
@@ -27,18 +27,13 @@ export class ChangePassComponent implements OnInit {
 
     if(!this.check()) return;
 
-    this.user.password = this.pass;
+    this.user.password = this.oldPass;
+    this.user.newPassword = this.pass;
 
-    this.change.emit();
+    this.changeF.emit();
   }
 
   check() {
-
-    if(this.user.password != this.oldPass) {
-
-      this.dialogService.showError("Wrong password!");
-      return false;
-    }
 
     if(this.pass != this.cfPass) {
 

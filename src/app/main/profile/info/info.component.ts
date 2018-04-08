@@ -10,7 +10,7 @@ import { DialogService } from '../../../core/dialog/dialog.service';
 export class InfoComponent implements OnInit {
 
   @Input() user: any;
-  @Output() change = new EventEmitter();
+  @Output() changeF = new EventEmitter();
   public name: String;
   public email: String;
   private isEdit: Boolean = false;
@@ -50,6 +50,6 @@ export class InfoComponent implements OnInit {
     this.user.email = this.email;
 
     this.isEdit = false;
-    this.change.emit();
+    this.changeF.emit();
   }
 }

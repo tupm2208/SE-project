@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute  } from '@angular/router';
 import 'rxjs/add/operator/filter';
 
@@ -16,6 +16,7 @@ export class MyPostsComponent implements OnInit {
 
   private postList: Array<any> = [];
   private page: number = 1;
+  @Input() user: any;
 
   private params: any = {};
 
@@ -28,15 +29,18 @@ export class MyPostsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.params.authorID = this.storageService.get('id');
+    this.postList = this.user.posts;
 
-    this.loadingService.show();
+    let tem = JSON.parse(JSON.stringify(this.user));
 
-    this.route.queryParams
-      .subscribe(params => {
+    delete tem.posts;
 
-        this.getPostList();
-      });
+    this.postList.forEach( element => {
+
+      element.author = tem;
+    })
+    
+    console.log("post: ", this.postList);
   }
 
   getPostList() {

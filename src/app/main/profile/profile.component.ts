@@ -57,15 +57,17 @@ export class ProfileComponent implements OnInit {
   post() {
 
     this.loading.show();
-    console.log("post: ", this.user);
 
     this.userService.update(this.user).subscribe( data => {
 
-      console.log("data");
+      console.log("data: ", data);
 
+      this.dialog.showSuccess();
       this.loading.hide();
     }, error => {
 
+      console.log("data: ", error);
+      this.dialog.showError('failed to change!');
       this.loading.hide();
     })
   }
