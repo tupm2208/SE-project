@@ -50,7 +50,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Navigation -->\r\n<nav *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"navbar navbar-expand-lg navbar-light fixed-top\" id=\"mainNav\">\r\n  <div class=\"container\">\r\n    <a class=\"navbar-brand\" routerLink='home'>Blog</a>\r\n    <button class=\"navbar-toggler navbar-toggler-right collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      Menu\r\n      <i class=\"fa fa-bars\"></i>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\r\n      <ul class=\"navbar-nav ml-auto\">\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/home\">Home</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/edit-post/0\">Create Your Post</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/edit-post/0\">Profile</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"login\">Logout</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n\r\n <!-- Footer -->\r\n <footer *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"footer\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <ul class=\"list-inline text-center\">\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-twitter fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-facebook fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-github fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n        <p class=\"copyright text-muted\">Copyright &copy; Your Website 2018</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n"
+module.exports = "<!-- Navigation -->\r\n<nav *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"navbar navbar-expand-lg navbar-light fixed-top\" id=\"mainNav\">\r\n  <div class=\"container\">\r\n    <a class=\"navbar-brand\" routerLink='home'>Blog</a>\r\n    <button class=\"navbar-toggler navbar-toggler-right collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      Menu\r\n      <i class=\"fa fa-bars\"></i>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\r\n      <ul class=\"navbar-nav ml-auto\">\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/home\">Home</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/edit-post/0\">Create Your Post</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" *ngIf=\"isLog\" routerLink=\"main/profile\">Profile</a>\r\n        </li>\r\n        <li class=\"nav-item\" *ngIf=\"isLog\">\r\n          <a class=\"nav-link\" routerLink=\"login\" (click)=\"storageService.set('token',null)\">Logout</a>\r\n        </li>\r\n        <li class=\"nav-item\" *ngIf=\"!isLog\">\r\n          <a class=\"nav-link\" routerLink=\"login\">Login</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n\r\n <!-- Footer -->\r\n <footer *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"footer\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <ul class=\"list-inline text-center\">\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-twitter fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-facebook fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-github fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n        <p class=\"copyright text-muted\">Copyright &copy; Your Website 2018</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n"
 
 /***/ }),
 
@@ -61,6 +61,7 @@ module.exports = "<!-- Navigation -->\r\n<nav *ngIf=\"router.url.indexOf('/main'
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_util_storage_service__ = __webpack_require__("../../../../../src/app/core/util/storage.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -72,11 +73,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(router) {
+    function AppComponent(router, storageService) {
+        var _this = this;
         this.router = router;
+        this.storageService = storageService;
+        this.isLog = false;
         this.router.events.subscribe(function (val) {
             $(window).scrollTop(0);
+            _this.isLog = _this.storageService.get('token') ? true : false;
         });
     }
     AppComponent = __decorate([
@@ -85,7 +91,8 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/app.component.html"),
             styles: [__webpack_require__("../../../../../src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_2__core_util_storage_service__["a" /* StorageService */]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -412,6 +419,10 @@ var PostService = /** @class */ (function () {
         params.token = this.storageService.get('token');
         return this.mainApi.put('post/', params);
     };
+    PostService.prototype.search = function (params) {
+        params.token = this.storageService.get('token');
+        return this.mainApi.post('post/search', params);
+    };
     PostService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__util_main_api_service__["a" /* MainApiService */],
@@ -431,6 +442,7 @@ var PostService = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_main_api_service__ = __webpack_require__("../../../../../src/app/core/util/main-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_storage_service__ = __webpack_require__("../../../../../src/app/core/util/storage.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -442,16 +454,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var UserService = /** @class */ (function () {
-    function UserService(mainApi) {
+    function UserService(mainApi, storageService) {
         this.mainApi = mainApi;
+        this.storageService = storageService;
     }
     UserService.prototype.post = function (params) {
         return this.mainApi.post('user', params);
     };
+    UserService.prototype.get = function (id) {
+        return this.mainApi.get('user/' + id + '?token=' + this.storageService.get('token'));
+    };
+    UserService.prototype.update = function (params) {
+        params.token = this.storageService.get('token');
+        return this.mainApi.put('user', params);
+    };
     UserService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__util_main_api_service__["a" /* MainApiService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__util_main_api_service__["a" /* MainApiService */],
+            __WEBPACK_IMPORTED_MODULE_2__util_storage_service__["a" /* StorageService */]])
     ], UserService);
     return UserService;
 }());

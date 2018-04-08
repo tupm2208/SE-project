@@ -71,6 +71,7 @@ var LoginComponent = /** @class */ (function () {
         this.loginService.login({ username: this.username, password: this.password }).subscribe(function (data) {
             console.log("data: ", data);
             _this.storageService.set('token', data.token);
+            _this.storageService.set('id', data.ID);
             _this.router.navigate(['/main/']);
             _this.loadingService.hide();
         }, function (error) {
