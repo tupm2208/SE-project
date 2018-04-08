@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../../core/api/login.service';
+import { UserService } from '../../core/api/user.service';
 import { LoadingService } from '../../core/util/loading.service';
+import { DialogService } from '../../core/dialog/dialog.service'
 
 @Component({
   selector: 'app-regist',
@@ -18,9 +19,11 @@ export class RegistComponent implements OnInit {
   private confirmPassword: String;
   private message: String;
   constructor(
-    private loginService: LoginService,
-    private loadingService: LoadingService) 
-    {}
+    private loginService: UserService,
+    private loadingService: LoadingService,
+    private dialog: DialogService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     
@@ -35,9 +38,14 @@ export class RegistComponent implements OnInit {
       }
 
       this.loadingService.show();
-      this.loginService.register(userInfo).subscribe( data => {
+      this.loginService.post(userInfo).subscribe( data => {
           
           this.loadingService.hide();
+
+          this.dialog.showSuccess().subscribe( data => {
+
+            this.router.navigate(['/login']);
+          })
       }, err => {
           this.message = err.message;
           this.loadingService.hide();
