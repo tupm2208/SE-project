@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { PreviewComponent } from './preview/preview.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 export const MainRoutes: Routes = [{
@@ -22,4 +23,7 @@ export const MainRoutes: Routes = [{
 }, {
     path: 'preview',
     component: PreviewComponent
+}, {
+    path: 'profile',
+    component: ProfileComponent
 }];

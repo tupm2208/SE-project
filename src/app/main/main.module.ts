@@ -11,6 +11,10 @@ import { PostComponent } from './post/post.component';
 import { BrefPostComponent } from './home/bref-post/bref-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { PreviewComponent } from './preview/preview.component';
+import { ProfileComponent } from './profile/profile.component';
+import { InfoComponent } from './profile/info/info.component';
+import { MyPostsComponent } from './profile/my-posts/my-posts.component';
+import { ChangePassComponent } from './profile/change-pass/change-pass.component';
 
 @NgModule({
   imports: [
@@ -24,7 +28,11 @@ import { PreviewComponent } from './preview/preview.component';
     PostComponent,
     BrefPostComponent,
     EditPostComponent,
-    PreviewComponent
+    PreviewComponent,
+    ProfileComponent,
+    InfoComponent,
+    MyPostsComponent,
+    ChangePassComponent
   ]
 })
 export class MainModule { }

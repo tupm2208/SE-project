@@ -15,10 +15,13 @@
           <a class="nav-link" routerLink="main/edit-post/0">Create Your Post</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="main/edit-post/0">Profile</a>
+          <a class="nav-link" *ngIf="isLog" routerLink="main/profile">Profile</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="login">Logout</a>
+        <li class="nav-item" *ngIf="isLog">
+          <a class="nav-link" routerLink="login" (click)="storageService.set('token',null)">Logout</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLog">
+          <a class="nav-link" routerLink="login">Login</a>
         </li>
       </ul>
     </div>

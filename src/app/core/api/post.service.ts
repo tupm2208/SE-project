@@ -34,4 +34,11 @@ export class PostService {
 
     return this.mainApi.put('post/', params);
   }
+
+  search(params): Observable<any> {
+
+    params.token = this.storageService.get('token');
+
+    return this.mainApi.post('post/search', params);
+  }
 }
