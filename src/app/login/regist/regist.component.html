@@ -4,10 +4,14 @@
         <div class="content-top-agile">
             <h2>sign up</h2>
         </div>
+        
         <div class="content-bottom">
+                
                 <!-- [formGroup]="registerForm" -->
             <form action="#" method="post" #registerForm="ngForm">
-
+                    <div id="resgiter-error-msg" class="err-msg">
+                            {{message}}
+                     </div>
                 <div class="field-group">
                     <span class="fa fa-user" aria-hidden="true"></span>
                     <div class="wthree-field">

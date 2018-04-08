@@ -11,4 +11,8 @@ export class LoginService {
 
     return this.mainApi.post('login', params);
   }
+
+  register(params): Observable<any> {
+    return this.mainApi.post('user',params);
+  }
 }

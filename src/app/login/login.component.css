@@ -2912,3 +2912,7 @@ ul.list-login li:nth-child(2) {
       margin: 1em 0 0 0;
   }
 }
+.err-msg {
+  color: red;
+  margin-bottom: 20px;
+}
