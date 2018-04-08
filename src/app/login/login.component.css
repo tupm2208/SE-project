@@ -394,9 +394,11 @@ form .field-group .wthree-field {
 }
 
 .wthree-field input[type="submit"]:hover {
-    background: #000;
-    color: #da0845;
     letter-spacing: 2px;
+}
+input#saveForm:disabled,input#saveForm:hover:disabled {
+  letter-spacing: 0px;
+  opacity: 0.5;
 }
 
 /* switch */
