@@ -292,7 +292,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/home/bref-post/bref-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"post-preview\">\n  <a>\n    <h2 class=\"post-title\">\n      {{post?.title}}\n    </h2>\n    <h3 class=\"post-subtitle\">\n      {{post?.subtitle}}\n    </h3>\n  </a>\n  <p class=\"post-meta\">Posted by\n    <a>{{post?.author.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\n</div>\n<hr>"
+module.exports = "<div class=\"post-preview\">\n  <a>\n    <h2 class=\"post-title\">\n      {{post?.title}}\n    </h2>\n    <h3 class=\"post-subtitle\">\n      {{post?.subtitle}}\n    </h3>\n  </a>\n  <p class=\"post-meta\">Posted by\n    <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\n</div>\n<hr>"
 
 /***/ }),
 
@@ -780,7 +780,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/change-pass/change-pass.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\" col-md-12 col-lg-12 \">\n  <table class=\"table table-user-information\">\n    <tbody>\n      <tr>\n        <td>Old Pass</td>\n        <td><input [(ngModel)]=\"oldPass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td>New Pass</td>\n        <td><input [(ngModel)]=\"pass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td>Confirm New Pass</td>\n        <td><input [(ngModel)]=\"cfPass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td></td>\n        <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
+module.exports = "<div class=\" col-md-12 col-lg-12 \">\n  <table class=\"table table-user-information\">\n    <tbody>\n      <tr>\n        <td>Old Pass</td>\n        <td><input [(ngModel)]=\"oldPass\" name=\"oldpass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td>New Pass</td>\n        <td><input [(ngModel)]=\"pass\" name=\"newpass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td>Confirm New Pass</td>\n        <td><input [(ngModel)]=\"cfPass\" name=\"cfnewpass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td></td>\n        <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
 
 /***/ }),
 
@@ -805,21 +805,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ChangePassComponent = /** @class */ (function () {
     function ChangePassComponent(dialogService) {
         this.dialogService = dialogService;
-        this.change = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.changeF = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
     }
     ChangePassComponent.prototype.ngOnInit = function () {
     };
     ChangePassComponent.prototype.submit = function () {
         if (!this.check())
             return;
-        this.user.password = this.pass;
-        this.change.emit();
+        this.user.password = this.oldPass;
+        this.user.newPassword = this.pass;
+        this.changeF.emit();
     };
     ChangePassComponent.prototype.check = function () {
-        if (this.user.password != this.oldPass) {
-            this.dialogService.showError("Wrong password!");
-            return false;
-        }
         if (this.pass != this.cfPass) {
             this.dialogService.showError("New Pass doens't match the cf one!");
             return false;
@@ -832,8 +829,8 @@ var ChangePassComponent = /** @class */ (function () {
     ], ChangePassComponent.prototype, "user", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
-        __metadata("design:type", Object)
-    ], ChangePassComponent.prototype, "change", void 0);
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */])
+    ], ChangePassComponent.prototype, "changeF", void 0);
     ChangePassComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-change-pass',
@@ -895,7 +892,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var InfoComponent = /** @class */ (function () {
     function InfoComponent(dialog) {
         this.dialog = dialog;
-        this.change = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.changeF = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.isEdit = false;
         this.isChangePass = false;
         this.re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -919,7 +916,7 @@ var InfoComponent = /** @class */ (function () {
         this.user.name = this.name;
         this.user.email = this.email;
         this.isEdit = false;
-        this.change.emit();
+        this.changeF.emit();
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
@@ -928,7 +925,7 @@ var InfoComponent = /** @class */ (function () {
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
         __metadata("design:type", Object)
-    ], InfoComponent.prototype, "change", void 0);
+    ], InfoComponent.prototype, "changeF", void 0);
     InfoComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-info',
@@ -1006,13 +1003,13 @@ var MyPostsComponent = /** @class */ (function () {
         this.params = {};
     }
     MyPostsComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.params.authorID = this.storageService.get('id');
-        this.loadingService.show();
-        this.route.queryParams
-            .subscribe(function (params) {
-            _this.getPostList();
+        this.postList = this.user.posts;
+        var tem = JSON.parse(JSON.stringify(this.user));
+        delete tem.posts;
+        this.postList.forEach(function (element) {
+            element.author = tem;
         });
+        console.log("post: ", this.postList);
     };
     MyPostsComponent.prototype.getPostList = function () {
         var _this = this;
@@ -1035,6 +1032,10 @@ var MyPostsComponent = /** @class */ (function () {
         this.loadingService.show();
         this.getPostList();
     };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", Object)
+    ], MyPostsComponent.prototype, "user", void 0);
     MyPostsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-my-posts',
@@ -1074,7 +1075,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-lg-12 col-sm-12\" style=\"padding: 0!important\">\n  <div class=\"card hovercard\">\n    <div class=\"card-background\">\n      <img class=\"card-bkimg\" alt=\"\" [src]=\"user.profilePicture\">\n      <!-- http://lorempixel.com/850/280/people/9/ -->\n    </div>\n    <div class=\"useravatar\">\n      <img alt=\"\" [src]=\"user.profilePicture\">\n    </div>\n    <input type=\"file\" (change)=\"onFileChange($event)\" class=\"image-upload\" #fileInput accept=\"image/*\" />\n    <div class=\"card-info\"> <span class=\"card-title\">{{user?.name}}</span>\n\n    </div>\n  </div>\n  <div class=\"btn-pref btn-group btn-group-justified btn-group-lg\" role=\"group\" aria-label=\"...\">\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 1? 'btn-primary': 'btn-default'\" (click)=\"type = 1\">\n                <div class=\"hidden-xs\">My Info</div>\n            </button>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 2? 'btn-primary': 'btn-default'\" (click)=\"type = 2\">\n                <div class=\"hidden-xs\">My Posts</div>\n            </button>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 3? 'btn-primary': 'btn-default'\" (click)=\"type = 3\">\n                <div class=\"hidden-xs\">Password</div>\n            </button>\n    </div>\n  </div>\n</div>\n\n<app-info *ngIf=\"type==1\" [user]=\"user\" (change)=\"post()\"></app-info>\n<app-my-posts *ngIf=\"type==2\"></app-my-posts>\n<app-change-pass *ngIf=\"type==3\" [user]=\"user\" (change)=\"post()\"></app-change-pass>"
+module.exports = "<div class=\"col-lg-12 col-sm-12\" style=\"padding: 0!important\">\n  <div class=\"card hovercard\">\n    <div class=\"card-background\">\n      <img class=\"card-bkimg\" alt=\"\" [src]=\"user.profilePicture\">\n      <!-- http://lorempixel.com/850/280/people/9/ -->\n    </div>\n    <div class=\"useravatar\">\n      <img alt=\"\" [src]=\"user.profilePicture\">\n    </div>\n    <input type=\"file\" (change)=\"onFileChange($event)\" name=\"update\" class=\"image-upload\" #fileInput accept=\"image/*\" />\n    <div class=\"card-info\"> <span class=\"card-title\">{{user?.name}}</span>\n\n    </div>\n  </div>\n  <div class=\"btn-pref btn-group btn-group-justified btn-group-lg\" role=\"group\" aria-label=\"...\">\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 1? 'btn-primary': 'btn-default'\" (click)=\"type = 1\">\n                <div class=\"hidden-xs\">My Info</div>\n            </button>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 2? 'btn-primary': 'btn-default'\" (click)=\"type = 2\">\n                <div class=\"hidden-xs\">My Posts</div>\n            </button>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 3? 'btn-primary': 'btn-default'\" (click)=\"type = 3\">\n                <div class=\"hidden-xs\">Password</div>\n            </button>\n    </div>\n  </div>\n</div>\n\n<app-info *ngIf=\"type==1\" [user]=\"user\" (changeF)=\"post()\"></app-info>\n<app-my-posts *ngIf=\"type==2\" [user]=\"user\"></app-my-posts>\n<app-change-pass *ngIf=\"type==3\" [user]=\"user\" (changeF)=\"post()\"></app-change-pass>"
 
 /***/ }),
 
@@ -1136,11 +1137,13 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.post = function () {
         var _this = this;
         this.loading.show();
-        console.log("post: ", this.user);
         this.userService.update(this.user).subscribe(function (data) {
-            console.log("data");
+            console.log("data: ", data);
+            _this.dialog.showSuccess();
             _this.loading.hide();
         }, function (error) {
+            console.log("data: ", error);
+            _this.dialog.showError('failed to change!');
             _this.loading.hide();
         });
     };
