@@ -7,6 +7,7 @@ import { LoginRouters } from './login.routes'
 
 import { LoginComponent } from './login.component';
 import { RegistComponent } from './regist/regist.component';
+import { MatchingValidatorDirective } from './regist/matching-validator.directive';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RegistComponent } from './regist/regist.component';
   ],
   declarations: [
     LoginComponent,
-    RegistComponent
+    RegistComponent,
+    MatchingValidatorDirective
   ]
 })
 export class LoginModule { }
