@@ -19,10 +19,10 @@
                     </div>
                 </div>
 
-                <div *ngIf="name.invalid && (name.dirty || name.touched)" style="margin-bottom: 10px">
-                    <p *ngIf="name.errors.required" class="alert alert-danger">
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger validation-err">
+                    <div *ngIf="name.errors.required" >
                         * Full Name is required.
-                    </p>
+                    </div>
                 </div>
 
                 <div class="field-group">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <div *ngIf="Email.invalid && (Email.dirty || Email.touched)" class="alert alert-danger" style="margin-bottom: 10px" >
+                <div *ngIf="Email.invalid && (Email.dirty || Email.touched)" class="alert alert-danger validation-err"  >
                     <div *ngIf="Email.errors.required">
                         * Email is required.
                     </div>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <div *ngIf="Username.invalid && (Username.dirty || Username.touched)" class="alert alert-danger" style="margin-bottom: 10px">
+                <div *ngIf="Username.invalid && (Username.dirty || Username.touched)" class="alert alert-danger validation-err" >
                     <div *ngIf="Username.errors.required">
                         * Username is required.
                     </div>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 
-                <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="alert alert-danger" style="margin-bottom: 10px">
+                <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="alert alert-danger validation-err" >
                     <div *ngIf="Password.errors.required">
                         * Password is required.
                     </div>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger" style="margin-bottom: 10px">
+                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger validation-err">
                        <div *ngIf="confirmPassword.errors?.mismatch">
                             Passwords do not match
                        </div>
