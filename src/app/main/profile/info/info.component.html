@@ -1,0 +1,24 @@
+<div class=" col-md-12 col-lg-12 ">
+  <table class="table table-user-information">
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td *ngIf="!isEdit">{{user?.name}}</td>
+        <td *ngIf="isEdit"><input [(ngModel)]="name" type="text"></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td *ngIf="!isEdit">{{user?.email}}</td>
+        <td *ngIf="isEdit"><input [(ngModel)]="email" type="text"></td>
+      </tr>
+      <tr *ngIf="isEdit">
+        <td><button class="btn btn-danger" (click)="isEdit=false">cancel</button></td>
+        <td><button class="btn btn-primary" (click)="submit()">submit</button></td>
+      </tr>
+      <tr *ngIf="!isEdit">
+        <td></td>
+        <td><button class="btn btn-primary" (click)="isEdit=true">change</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

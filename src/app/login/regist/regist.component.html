@@ -82,7 +82,7 @@
                         <input ngModel name="confirmPassword" id="repassword" type="Password" appMatchingValidator="password" #confirmPassword="ngModel" placeholder="Confirm password" required >
                     </div>
                 </div>
-               
+
                 <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger" style="margin-bottom: 10px">
                        <div *ngIf="confirmPassword.errors?.mismatch">
                             Passwords do not match

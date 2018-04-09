@@ -42,7 +42,12 @@ export class LoginComponent implements OnInit {
     this.loadingService.show();
     this.loginService.login({username: this.username,password: this.password}).subscribe( data => {
 
+      console.log("data: ", data);
+      this.storageService.set('token',data.token);
+      this.storageService.set('id', data.ID)
+      
       this.router.navigate(['/main/']);
+      
       this.loadingService.hide();
     }, error => {
 

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { FormatService } from '../../core/util/format.service';
+import { PostService } from '../../core/api/post.service'
+import { LoadingService } from '../../core/util/loading.service';
+
+declare let $: any;
 
 @Component({
   selector: 'app-post',
@@ -7,9 +14,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
-  constructor() { }
+  private postDetail: any = {};
+
+  constructor(
+    private route: ActivatedRoute,
+    private postService: PostService,
+    private formatService: FormatService,
+    private loading: LoadingService
+  ) { }
 
   ngOnInit() {
+
+    this.loading.show();
+
+    let id = this.route.snapshot.paramMap.get('id');
+
+    console.log("id: ", id);
+
+    this.postService.getById(id).subscribe( data => {
+
+      console.log("post: ",id, data);
+      this.loading.hide();
+
+      this.postDetail = data.data;
+      
+      setTimeout( () => {
+        $("#display").html(this.postDetail.content);
+      }, 50)
+    }, error => {
+
+      this.loading.hide();
+    })
   }
 
 }

@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1>{{postDetail.title}}</h1>
+            <h1>{{postDetail?.title}}</h1>
             <h2 class="subheading">{{postDetail?.subTitle}}</h2>
             <span class="meta">Posted by
               <a>{{postDetail?.author?.name}}</a>
@@ -23,6 +23,8 @@
         <div class="col-lg-8 col-md-10 mx-auto" id="display"></div>
       </div>
     </div>
+    <button class="btn btn-primary" routerLink="/main/edit-post/0">back</button>
+    <button style="float:right" class="btn btn-primary" (click)="post()">Post</button>
   </article>
 
   <hr>

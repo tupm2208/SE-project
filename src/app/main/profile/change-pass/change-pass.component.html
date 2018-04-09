@@ -1,0 +1,22 @@
+<div class=" col-md-12 col-lg-12 ">
+  <table class="table table-user-information">
+    <tbody>
+      <tr>
+        <td>Old Pass</td>
+        <td><input [(ngModel)]="oldPass" name="oldpass" type="password"></td>
+      </tr>
+      <tr>
+        <td>New Pass</td>
+        <td><input [(ngModel)]="pass" name="newpass" type="password"></td>
+      </tr>
+      <tr>
+        <td>Confirm New Pass</td>
+        <td><input [(ngModel)]="cfPass" name="cfnewpass" type="password"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><button class="btn btn-primary" (click)="submit()">submit</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

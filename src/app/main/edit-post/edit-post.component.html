@@ -1,0 +1,34 @@
+<header *ngIf="display" class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <!-- <h1>About Me</h1>  -->
+            <div class="form-group">
+            <label for="sel1">Select category:</label>
+            <select class="form-control" id="sel1" [(ngModel)]="registData.categoryID">
+              <option *ngFor="let item of categoryList" [value]="item.ID">{{item.category}}</option>
+            </select>
+          </div>
+          <input type="text" [(ngModel)]="registData.title" style="font-size: 3em; width: 100%" placeholder="Enter Title">
+          <span class="subheading">{{registData.title}}.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div id="display" style="position: absolute;
+    display: block;
+    height: 10px!important;
+    overflow: overlay;">
+  </div>
+</div>
+
+<div *ngIf="display" class="container">
+    <editor [(ngModel)]="dataModel" (ngModelChange)="change()" [init]="init" apiKey="npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7"></editor>  
+    <button class="btn btn-primary" (click)="post()">submit</button>
+    <button style="float:right" class="btn btn-primary" (click)="preview()">preview</button>
+</div>

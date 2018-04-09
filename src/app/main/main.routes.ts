@@ -2,8 +2,9 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
+import { PreviewComponent } from './preview/preview.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 export const MainRoutes: Routes = [{
@@ -14,12 +15,15 @@ export const MainRoutes: Routes = [{
     path: 'home',
     component: HomeComponent
 }, {
-    path: 'post',
+    path: 'post/:id',
     component: PostComponent
 }, {
-    path: 'about',
-    component: AboutComponent
+    path: 'edit-post/:id',
+    component: EditPostComponent
 }, {
-    path: 'contact',
-    component: ContactComponent
+    path: 'preview',
+    component: PreviewComponent
+}, {
+    path: 'profile',
+    component: ProfileComponent
 }];
