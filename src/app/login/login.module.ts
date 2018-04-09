@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { LoginRouters } from './login.routes'
 
 import { LoginComponent } from './login.component';
-import { RegistComponent } from './regist/regist.component';
-import { MatchingValidatorDirective } from './regist/matching-validator.directive';
+import { RegisterComponent } from './register/register.component';
+import { MatchingValidatorDirective } from './register/matching-validator.directive';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { MatchingValidatorDirective } from './regist/matching-validator.directiv
   ],
   declarations: [
     LoginComponent,
-    RegistComponent,
+    RegisterComponent,
     MatchingValidatorDirective
   ]
 })

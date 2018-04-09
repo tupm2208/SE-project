@@ -7,6 +7,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 /*--reset--*/
 
+html,body {
+  height:100%;
+}
+
 html,
 body,
 div,
@@ -87,7 +91,7 @@ time,
 mark,
 audio,
 video {
-    margin: 0;
+    /* margin: 0; */
     padding: 0;
     border: 0;
     font-size: 100%;
@@ -255,18 +259,18 @@ body {
 
 .content-w3ls {
     max-width: 450px;
-    margin: 3em auto;
+    margin: 1.6em auto;
 }
 
 .content-bottom {
-    padding: 3em;
+    padding: 1.5em 2em 2em 2em;
     background: #fff;
     border-radius: 0 0 25px 25px;
 }
 
 .content-top-agile {
     background: rgba(0, 0, 0, 0.28);
-    padding: 3em;
+    padding: 1.1em;
     text-align: center;
     border-radius: 25px 25px 0 0;
     text-transform: uppercase;
@@ -352,7 +356,7 @@ form .field-group span {
 }
 
 ul.list-login {
-    margin: 2em 0;
+    margin: 1em 0;
 }
 
 form .field-group .wthree-field {
@@ -489,13 +493,12 @@ input:checked+.slider:before {
 
 @media screen and (max-width: 768px) {
     .content-top-agile {
-        padding: 2.5em;
+        padding: 1.1em;
     }
 }
-
 @media screen and (max-width: 480px) {
     .content-w3ls {
-        margin: 3em 1em;
+        margin: 1em 1em;
     }
     h1.title-agile {
         font-size: 2.3em;
@@ -530,7 +533,7 @@ input:checked+.slider:before {
         font-size: 2.1em;
     }
     .content-w3ls {
-        margin: 2em 1em;
+        margin: 1.6em 1em;
     }
     .wthree-field input[type="submit"] {
         padding: 7px 15px;
@@ -542,10 +545,10 @@ input:checked+.slider:before {
         font-size: 2em;
     }
     .content-top-agile {
-        padding: 2em;
+        padding: 1.1em;
     }
     .content-bottom {
-        padding: 2em;
+      padding: 1.5em 2em 2em 2em;
     }
     .copyright p {
         letter-spacing: 0.5px;
@@ -557,7 +560,7 @@ input:checked+.slider:before {
         font-size: 1.7em;
     }
     .content-bottom {
-        padding: 2em 1.5em;
+      padding: 1.5em 2em 2em 2em;
     }
 }
 
@@ -2904,7 +2907,7 @@ input:checked+.slider:before {
 ul.list-login li:nth-child(2) {
     width: 100%;
     text-align: center;
-    margin: 2em 0;
+    margin: 1em 0;
 }
 
 @media screen and (max-width: 414px) {
@@ -2915,4 +2918,8 @@ ul.list-login li:nth-child(2) {
 .err-msg {
   color: red;
   margin-bottom: 20px;
+}
+.validation-err {
+  font-size: 17px;
+  margin-bottom: 10px;
 }
