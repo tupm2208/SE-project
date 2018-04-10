@@ -12,9 +12,9 @@ export class DialogService {
     private dialog: MatDialog
   ) { }
 
-  showSuccess(): Observable<any> {
+  showSuccess(data?): Observable<any> {
 
-    return this.dialog.open(SuccessComponent).afterClosed();
+    return this.dialog.open(SuccessComponent, {data: data }).afterClosed();
   }
 
   showError(data?): Observable<any> {

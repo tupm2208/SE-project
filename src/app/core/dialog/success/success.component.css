@@ -1,3 +1,7 @@
+.panel {
+    width: 290px;
+}
+
 .panel-top {
     width:100%;
     height:110px;
@@ -16,10 +20,17 @@
     background-color: rgb(255, 255, 255);
     padding: 30px auto;
 }
+
 .noti {
     font-family: 'Open Sans', sans-serif;
     color: rgb(47, 48, 47);
+}
+.noti-header {
     font-size: 1.2em;
+}
+.noti-content {
+    margin: 20px 0;
+    font-size: 1em;
 }
 .close-button {
     background: rgba(191, 40, 62,0.9);
