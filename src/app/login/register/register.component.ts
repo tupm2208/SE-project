@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
           
           this.loadingService.hide();
 
-          this.dialog.showSuccess().subscribe( data => {
+          this.dialog.showSuccess("Your account has been created. Please login now").subscribe( data => {
 
             this.router.navigate(['/login']);
           })

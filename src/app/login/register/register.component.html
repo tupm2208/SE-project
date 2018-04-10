@@ -1,5 +1,6 @@
 <body>
     <h1 class="title-agile text-center"></h1>
+
     <div class="content-w3ls">
         <div class="content-top-agile">
             <h2>sign up</h2>
@@ -82,25 +83,20 @@
                         <input ngModel name="confirmPassword" id="repassword" type="Password" appMatchingValidator="password" #confirmPassword="ngModel" placeholder="Confirm password" required >
                     </div>
                 </div>
-
+                
                 <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger validation-err">
                        <div *ngIf="confirmPassword.errors?.mismatch">
                             Passwords do not match
                        </div>
                 </div>
 
-                <a routerLink="" style="color: navy;" class="text-right">Login</a>
+                <!-- <a routerLink="" style="color: navy;" class="text-right">Login</a> -->
 
                 <div class="wthree-field">
-                    <input [disabled]="registerForm.invalid" id="saveForm" (click)="submit()" name="saveForm" type="submit" value="Sign Up" />
+                    <input [disabled]="registerForm.invalid" id="saveForm" style="margin-top: 20px;" (click)="submit()" name="saveForm" type="submit" value="Sign Up" />
                 </div>
             </form>
         </div>
     </div>
-    <div class="copyright text-center">
-        <p style="opacity: 0">
-             © 2018 Switch Login Form. All rights reserved | Design by 
-            <!-- <a href="http://w3layouts.com">W3layouts</a> -->
-        </p>
-    </div>
+    
 </body>

@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       
       this.loadingService.hide();
     }, error => {
-
+      
       this.loadingService.hide();
     })
   }
