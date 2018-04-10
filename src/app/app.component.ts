@@ -21,8 +21,7 @@ export class AppComponent {
     this.router.events.subscribe(val => {
 
       $(window).scrollTop(0);
-
-      this.isLog = this.storageService.get('token')? true: false;
+      this.isLog = this.storageService.get('token') ? true: false;
     })
   }
 }
