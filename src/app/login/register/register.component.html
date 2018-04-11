@@ -1,0 +1,111 @@
+<body>
+    <h1 class="title-agile text-center"></h1>
+
+    <div class="content-w3ls">
+        <div class="content-top-agile">
+            <h2>sign up</h2>
+        </div>
+        
+        <div class="content-bottom">
+                
+                <!-- [formGroup]="registerForm" -->
+            <form action="#" method="post" #registerForm="ngForm">
+                    <div id="resgiter-error-msg" class="err-msg">
+                            {{message}}
+                     </div>
+
+                     <div class="field-group">
+                        <span class="fa fa-user" aria-hidden="true"></span>
+                        <div class="wthree-field">
+                            <input  [(ngModel)]="username" name="username" id="username" type="text" value="" placeholder="Username" #Username="ngModel" required minlength="5" maxlength="25" pattern="^[a-zA-Z][\w-\.]{1,25}$">
+                        </div>
+                    </div>
+    
+                    <div *ngIf="Username.invalid && (Username.dirty || Username.touched)" class="alert alert-danger validation-err" >
+                        <div *ngIf="Username.errors.required">
+                            * Username is required.
+                        </div>
+                        <div *ngIf="Username.errors.minlength">
+                            * Username must contain at least 5 characters.
+                        </div>
+
+                        <div *ngIf="Username.errors.pattern && !Username.errors.minlength && !Username.errors.maxlength">
+                            * Username must start by a letter and contain letters, digits and some special character (.-_).
+                        </div>
+                    </div>
+                
+
+                    <div class="field-group">
+                        <span class="fa fa-lock" aria-hidden="true"></span>
+                        <div class="wthree-field">
+                            <input [(ngModel)]="email" name="email" #Email="ngModel" id="email" type="email" placeholder="Email"  required pattern="[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                        </div>
+                    </div>
+    
+                    <div *ngIf="Email.invalid && (Email.dirty || Email.touched)" class="alert alert-danger validation-err"  >
+                        <div *ngIf="Email.errors.required">
+                            * Email is required.
+                        </div>
+                        <div *ngIf="Email.errors.pattern">
+                            * Not a valid email
+                        </div>
+    
+                    </div>
+                
+                <div class="field-group">
+                    <span class="fa fa-user" aria-hidden="true"></span>
+                    <div class="wthree-field">
+                        <input  [(ngModel)]="fullname" name="fullname" id="fullname" type="text" value="" placeholder="Full Name"  #name="ngModel" required maxlength="25" pattern="^[A-Za-z][a-zA-Z ]{0,25}$">
+                    </div>
+                </div>
+
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger validation-err">
+                    <div *ngIf="name.errors.required" >
+                        * Full Name is required.
+                    </div>
+                    <div *ngIf="name.errors.pattern">
+                        Not a valid name
+                    </div>
+                </div>
+
+            
+                <div class="field-group">
+                    <span class="fa fa-lock" aria-hidden="true"></span>
+                    <div class="wthree-field">
+                        <input [(ngModel)]="password"  name="password" id="password" type="Password" placeholder="Password" #Password="ngModel" required minlength="6">
+                    </div>
+                </div>
+                
+                <div *ngIf="Password.invalid && (Password.dirty || Password.touched)" class="alert alert-danger validation-err" >
+                    <div *ngIf="Password.errors.required">
+                        * Password is required.
+                    </div>
+                    
+                    <div *ngIf="Password.errors.minlength">
+                        Password must be at least 6 characters long.
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <span class="fa fa-lock" aria-hidden="true"></span>
+                    <div class="wthree-field">
+                        <input ngModel name="confirmPassword" id="repassword" type="Password" appMatchingValidator="password" #confirmPassword="ngModel" placeholder="Confirm password" required >
+                    </div>
+                </div>
+                
+                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger validation-err">
+                       <div *ngIf="confirmPassword.errors?.mismatch">
+                            Passwords do not match
+                       </div>
+                </div>
+
+                <!-- <a routerLink="" style="color: navy;" class="text-right">Login</a> -->
+
+                <div class="wthree-field">
+                    <input [disabled]="registerForm.invalid" id="saveForm" style="margin-top: 20px;" (click)="submit()" name="saveForm" type="submit" value="Sign Up" />
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</body>

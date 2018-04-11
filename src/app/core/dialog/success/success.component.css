@@ -1,0 +1,44 @@
+.panel {
+    width: 290px;
+}
+
+.panel-top {
+    width:100%;
+    height:110px;
+    background:rgb(53, 186, 99); 
+    text-align: center;
+}
+.material-icons {
+    font-size: 100px; 
+    color: white; 
+    top: 7%; 
+    position: relative;
+}
+.panel-body {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 30px auto;
+}
+
+.noti {
+    font-family: 'Open Sans', sans-serif;
+    color: rgb(47, 48, 47);
+}
+.noti-header {
+    font-size: 1.2em;
+}
+.noti-content {
+    margin: 20px 0;
+    font-size: 1em;
+}
+.close-button {
+    background: rgba(191, 40, 62,0.9);
+    color: rgb(247, 227, 230);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+
+}
+button:focus {
+    outline: none;
+}

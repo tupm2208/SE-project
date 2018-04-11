@@ -10,7 +10,8 @@ import { NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
       useExisting: MatchingValidatorDirective,
       multi: true 
     }
-  ]
+  ],
+  exportAs: 'MatchingValidatorDirective'
 })
 export class MatchingValidatorDirective implements Validator {
     @Input() appMatchingValidator: string
@@ -24,5 +25,4 @@ export class MatchingValidatorDirective implements Validator {
         }
         return null;
   }
-
 }

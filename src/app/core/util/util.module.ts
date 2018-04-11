@@ -7,12 +7,13 @@ import { MainApiService } from './main-api.service';
 import { ConfigService } from '../config.service';
 import { LoadingService } from './loading.service';
 import { FormatService } from './format.service';
+import { MatchingValidatorDirective } from './matching-validator.directive'
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [],
+  declarations: [MatchingValidatorDirective],
   providers: [
     HttpResponseService,
     HttpService,
@@ -20,7 +21,10 @@ import { FormatService } from './format.service';
     StorageService,
     ConfigService,
     LoadingService,
-    FormatService
+    FormatService,
+  ],
+  exports: [
+    MatchingValidatorDirective
   ]
 })
 export class UtilModule { }

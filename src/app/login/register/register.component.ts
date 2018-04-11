@@ -6,11 +6,11 @@ import { LoadingService } from '../../core/util/loading.service';
 import { DialogService } from '../../core/dialog/dialog.service'
 
 @Component({
-  selector: 'app-regist',
-  templateUrl: './regist.component.html',
+  selector: 'app-register',
+  templateUrl: './register.component.html',
   styleUrls: ['../login.component.css']
 })
-export class RegistComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   
   private fullname: String;
   private email: String;
@@ -26,7 +26,7 @@ export class RegistComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
+
   }
 
   submit() {
@@ -42,7 +42,7 @@ export class RegistComponent implements OnInit {
           
           this.loadingService.hide();
 
-          this.dialog.showSuccess().subscribe( data => {
+          this.dialog.showSuccess("Your account has been created. Please login now").subscribe( data => {
 
             this.router.navigate(['/login']);
           })

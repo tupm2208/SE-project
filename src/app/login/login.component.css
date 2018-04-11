@@ -7,6 +7,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 /*--reset--*/
 
+html,body {
+  height:100%;
+}
+
 html,
 body,
 div,
@@ -87,7 +91,7 @@ time,
 mark,
 audio,
 video {
-    margin: 0;
+    /* margin: 0; */
     padding: 0;
     border: 0;
     font-size: 100%;
@@ -239,7 +243,8 @@ body a:hover {
 /* content */
 
 body {
-     background: url("../../assets/images/banner.jpg") no-repeat center; 
+    height: 100%;
+    background: url("../../assets/images/banner.jpg") no-repeat center; 
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -254,19 +259,19 @@ body {
 }
 
 .content-w3ls {
-    max-width: 450px;
-    margin: 3em auto;
+    max-width: 390px;
+    margin: 1.6em auto;
 }
 
 .content-bottom {
-    padding: 3em;
+    padding: 1em 2em 2em 2em;
     background: #fff;
     border-radius: 0 0 25px 25px;
 }
 
 .content-top-agile {
     background: rgba(0, 0, 0, 0.28);
-    padding: 3em;
+    padding: 1.1em;
     text-align: center;
     border-radius: 25px 25px 0 0;
     text-transform: uppercase;
@@ -352,7 +357,7 @@ form .field-group span {
 }
 
 ul.list-login {
-    margin: 2em 0;
+    margin: 1em 0 0;
 }
 
 form .field-group .wthree-field {
@@ -382,6 +387,7 @@ form .field-group .wthree-field {
     color: #fff;
     padding: 12px 15px;
     text-transform: uppercase;
+    border-radius: 20px; 
     font-size: 16px;
     font-weight: 600;
     font-family: 'Mukta Mahee', sans-serif;
@@ -416,7 +422,6 @@ li:nth-child(2) a,
 label.switch {
     text-transform: uppercase;
     font-size: 13px;
-    font-weight: 600;
     letter-spacing: 1px;
 }
 
@@ -489,16 +494,15 @@ input:checked+.slider:before {
 
 @media screen and (max-width: 768px) {
     .content-top-agile {
-        padding: 2.5em;
+        padding: 1.1em;
     }
 }
-
 @media screen and (max-width: 480px) {
     .content-w3ls {
-        margin: 3em 1em;
+        margin: 1em 1em;
     }
     h1.title-agile {
-        font-size: 2.3em;
+        /* font-size: 2.3em; */
         letter-spacing: 3px;
     }
     label.switch {
@@ -511,7 +515,7 @@ input:checked+.slider:before {
 
 @media screen and (max-width: 414px) {
     h1.title-agile {
-        font-size: 2.2em;
+        /* font-size: 2.2em; */
     }
     ul.list-login li:nth-child(2),
     li.switch-agileits {
@@ -542,10 +546,10 @@ input:checked+.slider:before {
         font-size: 2em;
     }
     .content-top-agile {
-        padding: 2em;
+        padding: 10px;
     }
     .content-bottom {
-        padding: 2em;
+      padding: 0.5em 2em 2em 2em;
     }
     .copyright p {
         letter-spacing: 0.5px;
@@ -554,10 +558,11 @@ input:checked+.slider:before {
 
 @media screen and (max-width: 320px) {
     h1.title-agile {
-        font-size: 1.7em;
+      padding-top: 1px;
+      font-size: 1.7em;
     }
     .content-bottom {
-        padding: 2em 1.5em;
+      padding: 0.5em 2em 2em 2em;
     }
 }
 
@@ -2904,7 +2909,7 @@ input:checked+.slider:before {
 ul.list-login li:nth-child(2) {
     width: 100%;
     text-align: center;
-    margin: 2em 0;
+    margin: 1em 0;
 }
 
 @media screen and (max-width: 414px) {
@@ -2914,5 +2919,14 @@ ul.list-login li:nth-child(2) {
 }
 .err-msg {
   color: red;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  font-size: 0.8em;
+}
+.validation-err {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+.slider-word {
+  margin:0;
 }
