@@ -50,7 +50,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Navigation -->\r\n<nav *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"navbar navbar-expand-lg navbar-light fixed-top\" id=\"mainNav\">\r\n  <div class=\"container\">\r\n    <a class=\"navbar-brand\" routerLink='home'>Blog</a>\r\n    <button class=\"navbar-toggler navbar-toggler-right collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      Menu\r\n      <i class=\"fa fa-bars\"></i>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\r\n      <ul class=\"navbar-nav ml-auto\">\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/home\">Home</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/edit-post/0\">Create Your Post</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" *ngIf=\"isLog\" routerLink=\"main/profile\">Profile</a>\r\n        </li>\r\n        <li class=\"nav-item\" *ngIf=\"isLog\">\r\n          <a class=\"nav-link\" routerLink=\"login\" (click)=\"storageService.set('token',null)\">Logout</a>\r\n        </li>\r\n        <li class=\"nav-item\" *ngIf=\"!isLog\">\r\n          <a class=\"nav-link\" routerLink=\"login\">Login</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n\r\n <!-- Footer -->\r\n <footer *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"footer\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <ul class=\"list-inline text-center\">\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-twitter fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-facebook fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-github fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n        <p class=\"copyright text-muted\">Copyright &copy; Your Website 2018</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n"
+module.exports = "<!-- Navigation -->\r\n<!-- *ngIf=\"router.url.indexOf('/main')!=-1\" -->\r\n<nav  class=\"navbar navbar-expand-lg navbar-light fixed-top\" id=\"mainNav\">\r\n  <div class=\"container\">\r\n    <a class=\"navbar-brand\" routerLink='home'>Blog</a>\r\n    <button class=\"navbar-toggler navbar-toggler-right collapsed\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      Menu\r\n      <i class=\"fa fa-bars\"></i>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\r\n      <ul class=\"navbar-nav ml-auto\">\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/home\">Home</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLink=\"main/edit-post/0\">Create Your Post</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" *ngIf=\"isLog\" routerLink=\"main/profile\">Profile</a>\r\n        </li>\r\n        <li class=\"nav-item\" *ngIf=\"isLog\">\r\n          <a class=\"nav-link\" routerLink=\"login\" (click)=\"storageService.set('token',null)\">Logout</a>\r\n        </li>\r\n        <li class=\"nav-item\" *ngIf=\"!isLog\">\r\n          <a class=\"nav-link\" routerLink=\"login\">Login</a>\r\n        </li>\r\n        <li class=\"nav-item\" *ngIf=\"!isLog\">\r\n            <a class=\"nav-link\" routerLink=\"login/register\">Sign up</a>\r\n        </li>  \r\n      </ul>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n\r\n <!-- Footer -->\r\n <footer *ngIf=\"router.url.indexOf('/main')!=-1\" class=\"footer\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <ul class=\"list-inline text-center\">\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-twitter fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-facebook fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n          <li class=\"list-inline-item\">\r\n            <a href=\"/\">\r\n              <span class=\"fa-stack fa-lg\">\r\n                <i class=\"fa fa-circle fa-stack-2x\"></i>\r\n                <i class=\"fa fa-github fa-stack-1x fa-inverse\"></i>\r\n              </span>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n        <p class=\"copyright text-muted\">Copyright &copy; Your Website 2018</p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</footer>\r\n"
 
 /***/ }),
 
@@ -643,8 +643,8 @@ var DialogService = /** @class */ (function () {
     function DialogService(dialog) {
         this.dialog = dialog;
     }
-    DialogService.prototype.showSuccess = function () {
-        return this.dialog.open(__WEBPACK_IMPORTED_MODULE_3__success_success_component__["a" /* SuccessComponent */]).afterClosed();
+    DialogService.prototype.showSuccess = function (data) {
+        return this.dialog.open(__WEBPACK_IMPORTED_MODULE_3__success_success_component__["a" /* SuccessComponent */], { data: data }).afterClosed();
     };
     DialogService.prototype.showError = function (data) {
         return this.dialog.open(__WEBPACK_IMPORTED_MODULE_2__error_error_component__["a" /* ErrorComponent */], { data: data }).afterClosed();
@@ -737,7 +737,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".panel {\r\n    width: 290px;\r\n}\r\n\r\n.panel-top {\r\n    width:100%;\r\n    height:110px;\r\n    background:rgb(53, 186, 99); \r\n    text-align: center;\r\n}\r\n\r\n.material-icons {\r\n    font-size: 100px; \r\n    color: white; \r\n    top: 7%; \r\n    position: relative;\r\n}\r\n\r\n.panel-body {\r\n    text-align: center;\r\n    padding: 10px;\r\n    background-color: rgb(255, 255, 255);\r\n    padding: 30px auto;\r\n}\r\n\r\n.noti {\r\n    font-family: 'Open Sans', sans-serif;\r\n    color: rgb(47, 48, 47);\r\n}\r\n\r\n.noti-header {\r\n    font-size: 1.2em;\r\n}\r\n\r\n.noti-content {\r\n    margin: 20px 0;\r\n    font-size: 1em;\r\n}\r\n\r\n.close-button {\r\n    background: rgba(191, 40, 62,0.9);\r\n    color: rgb(247, 227, 230);\r\n    font-family: 'Open Sans', sans-serif;\r\n    font-weight: 700;\r\n\r\n}\r\n\r\nbutton:focus {\r\n    outline: none;\r\n}", ""]);
 
 // exports
 
@@ -750,7 +750,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/core/dialog/success/success.component.html":
 /***/ (function(module, exports) {
 
-module.exports = " <div style=\"width: 286px;\">\n  <div style=\"width:100%;height:110px;background: cyan; text-align: center\">\n    <i class=\"material-icons\" style=\"font-size: 100px; color: white; top: 7%; position: relative;\">check_circle</i>\n  </div>\n  <div class=\"body\" style=\"text-align: center;padding: 10px;background-color: white;\">\n    <div><strong>Great!</strong></div>\n    <div>Thành Công!</div>\n    <div>\n      <button style=\"margin-top: 20px\" (click)=\"dialogRef.close()\"  class=\"btn btn-danger\">Đóng</button>\n    </div>\n  </div>\n</div> "
+module.exports = " <div class=\"panel\">\r\n  <div class=\"panel-top\" >\r\n    <i class=\"material-icons\">check_circle</i>\r\n  </div>\r\n  <div class=\"panel-body\">\r\n    <div class=\"noti noti-header\">Awesome!</div>\r\n    <div class=\"noti noti-content\">{{data ? data : \"\"}}</div>\r\n    <div>\r\n      <button style=\"margin-top: 20px\" (click)=\"dialogRef.close()\"  class=\"alert alert-danger close-button\">Close</button>\r\n    </div>\r\n  </div>\r\n</div> "
 
 /***/ }),
 
@@ -1177,6 +1177,62 @@ var MainApiService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/core/util/matching-validator.directive.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MatchingValidatorDirective; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var MatchingValidatorDirective = /** @class */ (function () {
+    function MatchingValidatorDirective() {
+    }
+    MatchingValidatorDirective_1 = MatchingValidatorDirective;
+    MatchingValidatorDirective.prototype.validate = function (control) {
+        var controlToCompare = control.parent.get(this.appMatchingValidator);
+        if (controlToCompare && controlToCompare.value !== control.value) {
+            return {
+                'mismatch': true
+            };
+        }
+        return null;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", String)
+    ], MatchingValidatorDirective.prototype, "appMatchingValidator", void 0);
+    MatchingValidatorDirective = MatchingValidatorDirective_1 = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */])({
+            selector: '[appMatchingValidator]',
+            providers: [
+                {
+                    provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* NG_VALIDATORS */],
+                    useExisting: MatchingValidatorDirective_1,
+                    multi: true
+                }
+            ],
+            exportAs: 'MatchingValidatorDirective'
+        })
+    ], MatchingValidatorDirective);
+    return MatchingValidatorDirective;
+    var MatchingValidatorDirective_1;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/core/util/storage.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1230,12 +1286,14 @@ var StorageService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__config_service__ = __webpack_require__("../../../../../src/app/core/config.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__format_service__ = __webpack_require__("../../../../../src/app/core/util/format.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__matching_validator_directive__ = __webpack_require__("../../../../../src/app/core/util/matching-validator.directive.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1253,7 +1311,7 @@ var UtilModule = /** @class */ (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_3__angular_common__["b" /* CommonModule */]
             ],
-            declarations: [],
+            declarations: [__WEBPACK_IMPORTED_MODULE_9__matching_validator_directive__["a" /* MatchingValidatorDirective */]],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_4__http_response_service__["a" /* HttpResponseService */],
                 __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */],
@@ -1261,7 +1319,10 @@ var UtilModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__storage_service__["a" /* StorageService */],
                 __WEBPACK_IMPORTED_MODULE_6__config_service__["a" /* ConfigService */],
                 __WEBPACK_IMPORTED_MODULE_7__loading_service__["a" /* LoadingService */],
-                __WEBPACK_IMPORTED_MODULE_8__format_service__["a" /* FormatService */]
+                __WEBPACK_IMPORTED_MODULE_8__format_service__["a" /* FormatService */],
+            ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_9__matching_validator_directive__["a" /* MatchingValidatorDirective */]
             ]
         })
     ], UtilModule);

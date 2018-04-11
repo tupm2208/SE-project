@@ -1139,7 +1139,7 @@ var ProfileComponent = /** @class */ (function () {
         this.loading.show();
         this.userService.update(this.user).subscribe(function (data) {
             console.log("data: ", data);
-            _this.dialog.showSuccess();
+            _this.dialog.showSuccess("Change ok!");
             _this.loading.hide();
         }, function (error) {
             console.log("data: ", error);
