@@ -259,7 +259,7 @@ body {
 }
 
 .content-w3ls {
-    max-width: 450px;
+    max-width: 390px;
     margin: 1.6em auto;
 }
 
@@ -2919,7 +2919,9 @@ ul.list-login li:nth-child(2) {
 }
 .err-msg {
   color: red;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  font-size: 0.8em;
 }
 .validation-err {
   font-size: 17px;

@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   private username: String;
   private password: String;
   private isRemember: Boolean;
+  private message: String;
 
   constructor(
     private loginService: LoginService,
@@ -50,8 +51,8 @@ export class LoginComponent implements OnInit {
       
       this.loadingService.hide();
     }, error => {
-      
       this.loadingService.hide();
+      this.message = (error.message) ? error.message : "Cannot perform action"
     })
   }
 
