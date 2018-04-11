@@ -14,10 +14,14 @@ export class DialogService {
 
   showSuccess(data?): Observable<any> {
 
+    if(!data) data = '';
+
     return this.dialog.open(SuccessComponent, {data: data }).afterClosed();
   }
 
   showError(data?): Observable<any> {
+
+    if(!data) data = '';
 
     return this.dialog.open(ErrorComponent, { data: data}).afterClosed();
   }
