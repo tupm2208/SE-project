@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
 
       console.log("data: ", data);
 
-      this.dialog.showSuccess();
+      this.dialog.showSuccess("Change ok!");
       this.loading.hide();
     }, error => {
 
