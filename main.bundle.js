@@ -500,7 +500,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ConfigService = /** @class */ (function () {
     function ConfigService() {
-        this.urlBase = 'https://app-4f8d70b2-24cf-4c7a-b0e0-24be6887ace4.cleverapps.io/api/';
+        this.urlBase = 'http://app-4a5dbc4f-d024-436d-a4c4-74ab131c9fa3.cleverapps.io/api/';
     }
     ConfigService.prototype.getBaseURL = function () {
         return this.urlBase;
