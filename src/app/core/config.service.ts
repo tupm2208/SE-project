@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ConfigService {
 
-  private urlBase = 'https://app-4f8d70b2-24cf-4c7a-b0e0-24be6887ace4.cleverapps.io/api/'
+  private urlBase = 'http://app-4a5dbc4f-d024-436d-a4c4-74ab131c9fa3.cleverapps.io/api/'
   constructor() { }
 
   getBaseURL() {
