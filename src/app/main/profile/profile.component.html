@@ -13,25 +13,34 @@
 
     </div>
   </div>
-  <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-    <div class="btn-group" role="group">
-      <button type="button" class="btn" [ngClass]="type == 1? 'btn-primary': 'btn-default'" (click)="type = 1">
-                <div class="hidden-xs">My Info</div>
-            </button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn" [ngClass]="type == 2? 'btn-primary': 'btn-default'" (click)="type = 2">
-                <div class="hidden-xs">My Posts</div>
-            </button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn" [ngClass]="type == 3? 'btn-primary': 'btn-default'" (click)="type = 3">
-                <div class="hidden-xs">Password</div>
-            </button>
-    </div>
-  </div>
+  <div class="container">
+</div>
 </div>
 
-<app-info *ngIf="type==1" [user]="user" (changeF)="post()"></app-info>
-<app-my-posts *ngIf="type==2" [user]="user"></app-my-posts>
-<app-change-pass *ngIf="type==3" [user]="user" (changeF)="post()"></app-change-pass>
+
+<div class="container body-container">
+    <div class="row">
+
+    <div class="col col-lg-3">
+      <ul id="nav-navi" class="nav nav-tabs nav-justified">
+        <li class="nav-item"  [ngClass]="type == 1? 'btn-primary': 'btn-default'" (click)="type = 1" >
+          <a class="nav-link nav-tab">My Profile</a>
+        </li>
+        <li class="nav-item"  [ngClass]="type == 2? 'btn-primary': 'btn-default'" (click)="type = 2">
+          <a class="nav-link nav-tab">My Posts</a>
+        </li>
+        <li class="nav-item"  [ngClass]="type == 3? 'btn-primary': 'btn-default'" (click)="type = 3">
+          <a class="nav-link nav-tab">Password</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <div class="col col-lg-1" ></div> -->
+    <main id="main" class="col col-lg-8">
+      <app-info *ngIf="type==1" [user]="user" (changeF)="post()"></app-info>
+      <app-my-posts  *ngIf="type==2" [user]="user"></app-my-posts>
+      <app-change-pass  *ngIf="type==3" [user]="user" (changeF)="post()"></app-change-pass>
+    </main>
+
+  </div>
+</div>

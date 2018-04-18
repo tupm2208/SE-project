@@ -1,17 +1,20 @@
-<div class=" col-md-12 col-lg-12 ">
+<div class=" col-md-6 col-lg-6">
+  <div>
+    <h3 style="font-weight: 100;">Change Password</h3>
+  </div>
   <table class="table table-user-information">
     <tbody>
-      <tr>
-        <td>Old Pass</td>
-        <td><input [(ngModel)]="oldPass" name="oldpass" type="password"></td>
+      <tr class="form-group">
+        <td><label for="oldpassword">Password</label></td>
+        <td><input id="oldpassword" class="form-control" [(ngModel)]="oldPass" name="oldpass" type="password"></td>
       </tr>
       <tr>
-        <td>New Pass</td>
-        <td><input [(ngModel)]="pass" name="newpass" type="password"></td>
+        <td>New Password</td>
+        <td><input class="form-control" [(ngModel)]="pass" name="newpass" type="password"></td>
       </tr>
       <tr>
-        <td>Confirm New Pass</td>
-        <td><input [(ngModel)]="cfPass" name="cfnewpass" type="password"></td>
+        <td>Confirm Password</td>
+        <td><input class="form-control" [(ngModel)]="cfPass" name="cfnewpass" type="password"></td>
       </tr>
       <tr>
         <td></td>
@@ -19,4 +22,5 @@
       </tr>
     </tbody>
   </table>
+
 </div>

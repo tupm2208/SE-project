@@ -76,7 +76,7 @@
 .card.hovercard .bottom {
     padding: 0 20px;
     margin-bottom: 17px;
-}
+}  
 .btn-pref .btn {
     -webkit-border-radius:0 !important;
 }
@@ -97,3 +97,79 @@
     z-index: 2;
     border-radius: 0;
 }
+#nav-navi {
+    display: flex;
+    flex-direction: column;
+}
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:700');
+.nav-tab {
+    font-family: 'Libre Franklin', sans-serif;
+    /* font-weight: 500; */
+    /* padding: 20px; */
+}
+.body-container {
+    margin-top: 20px;
+}
+@media screen and (max-width: 768px) {
+    #nav-navi {
+        display: flex;
+        flex-direction: row;
+    }
+    .nav-tab {
+        font-size: 20px;
+    }
+    #main {
+        font-size: 20px;
+    }
+    .body-container {
+        margin-top: 0px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .nav-tab{
+        font-size: 20px;
+    }
+    #main {
+        font-size: 20px;
+    }
+    #nav-navi {
+        display: flex;
+        flex-direction: row;
+    }
+    .body-container {
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .nav-tab{
+        font-size: 20px;
+    }
+    #main {
+        font-size: 20px;
+    }
+    #nav-navi {
+        display: flex;
+        flex-direction: row;
+    }
+    .body-container {
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 384px) {
+    .nav-tab{
+        font-size: 13px;
+    }
+    #main {
+        font-size: 13px;
+    }
+    #nav-navi {
+        display: flex;
+        flex-direction: row;
+    }
+    .body-container {
+        margin-top: 0px;
+    }
+}
+
