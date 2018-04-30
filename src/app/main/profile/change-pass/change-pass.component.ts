@@ -13,36 +13,28 @@ export class ChangePassComponent implements OnInit {
   @Output() changeF: EventEmitter<any> = new EventEmitter();
   private pass: String;
   private oldPass: String;
-  private cfPass: String;
+  private confirmPass: String;
 
   constructor(
     private dialogService: DialogService
   ) { }
 
   ngOnInit() {
-
+    
   }
 
   submit() {
 
-    if(!this.check()) return;
-
+  
     this.user.password = this.oldPass;
     this.user.newPassword = this.pass;
 
     this.changeF.emit();
-  }
 
-  check() {
+    // this.pass = "";
+    // this.oldPass ="";
+    // this.confirmPass="";
 
-    if(this.pass != this.cfPass) {
-
-      this.dialogService.showError("New Pass doens't match the cf one!");
-
-      return false;
-    }
-
-    return true;
   }
 
 }

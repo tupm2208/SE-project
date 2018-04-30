@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit {
 
     let id = this.storageService.get('id');
 
-    console.log("id: ", id);
 
     this.loading.show();
     this.loginService.refreshKey().subscribe( data => {
@@ -42,8 +41,6 @@ export class ProfileComponent implements OnInit {
       this.userService.get(id).subscribe( data => {
 
         this.user = data.data
-
-        console.log("data: ", this.user);
 
         this.type = 1;
         this.loading.hide();
@@ -60,14 +57,10 @@ export class ProfileComponent implements OnInit {
 
     this.userService.update(this.user).subscribe( data => {
 
-      console.log("data: ", data);
-
       this.dialog.showSuccess("Change ok!");
       this.loading.hide();
     }, error => {
-
-      console.log("data: ", error);
-      this.dialog.showError('failed to change!');
+      this.dialog.showError('Failed to change!');
       this.loading.hide();
     })
   }
