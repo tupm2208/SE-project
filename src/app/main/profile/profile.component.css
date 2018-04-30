@@ -176,7 +176,9 @@
 .wrapper {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 40px 100px 40px; 
+    /* grid-template-rows: 40px 100px 40px; 
+     */
+     grid-template-rows: auto;
 }
 .header{
     grid-column: span 12;
@@ -187,7 +189,7 @@
 .content {
     grid-column: span 10;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .menu{
         grid-row: span 1;
         grid-column: span 12;
