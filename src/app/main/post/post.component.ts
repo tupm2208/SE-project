@@ -15,6 +15,7 @@ declare let $: any;
 export class PostComponent implements OnInit {
 
   private postDetail: any = {};
+  private comments: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,14 +38,20 @@ export class PostComponent implements OnInit {
       this.loading.hide();
 
       this.postDetail = data.data;
-      
-      setTimeout( () => {
-        $("#display").html(this.postDetail.content);
-      }, 50)
+      this.comments = this.postDetail.comments;
+      this.loadContent();
     }, error => {
 
       this.loading.hide();
     })
+  }
+
+  loadContent() {
+    $("#display").html(this.postDetail.content);
+    $("img").css("max-width","100%");
+    $("img").css("height","auto");
+    $("iframe").css("max-width","100%");
+    $("iframe").css("height","auto");
   }
 
 }
