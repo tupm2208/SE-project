@@ -13,6 +13,7 @@ export class ChangePassComponent implements OnInit {
   @Output() changeF: EventEmitter<any> = new EventEmitter();
   private pass: String;
   private oldPass: String;
+  private confirmPass: String;
 
   constructor(
     private dialogService: DialogService
@@ -29,6 +30,11 @@ export class ChangePassComponent implements OnInit {
     this.user.newPassword = this.pass;
 
     this.changeF.emit();
+
+    // this.pass = "";
+    // this.oldPass ="";
+    // this.confirmPass="";
+
   }
 
 }
