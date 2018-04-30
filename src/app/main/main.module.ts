@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MainRoutes } from './main.routes';
 import { EditorModule } from '@tinymce/tinymce-angular';
-
+import { UtilModule } from '../core/util/util.module'
 import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import { BrefPostComponent } from './home/bref-post/bref-post.component';
@@ -21,7 +21,8 @@ import { ChangePassComponent } from './profile/change-pass/change-pass.component
     CommonModule,
     RouterModule.forChild(MainRoutes),
     EditorModule,
-    FormsModule
+    FormsModule,
+    UtilModule
   ],
   declarations: [
     HomeComponent,
