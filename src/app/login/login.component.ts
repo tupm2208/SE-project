@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit {
 
       console.log("data: ", data);
       this.storageService.set('token',data.token);
-      this.storageService.set('id', data.ID)
+      this.storageService.set('id', data.ID);
+      this.storageService.set('username', data.name);
       
       this.router.navigate(['/main/']);
       
