@@ -41,4 +41,11 @@ export class PostService {
 
     return this.mainApi.post('post/search', params);
   }
+
+  delete(id): Observable<any> {
+
+    let token = this.storageService.get('token');
+
+    return this.mainApi.delete('post/'+id + '?token=' + token);
+  }
 }

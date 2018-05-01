@@ -15,6 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { InfoComponent } from './profile/info/info.component';
 import { MyPostsComponent } from './profile/my-posts/my-posts.component';
 import { ChangePassComponent } from './profile/change-pass/change-pass.component';
+import { SubPostComponent } from './profile/my-posts/sub-post/sub-post.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ChangePassComponent } from './profile/change-pass/change-pass.component
     ProfileComponent,
     InfoComponent,
     MyPostsComponent,
-    ChangePassComponent
+    ChangePassComponent,
+    SubPostComponent
   ]
 })
 export class MainModule { }
