@@ -1,0 +1,13 @@
+<div class="comment-wrap">
+    <div class="photo">
+      <img src="{{comment?.commentator.profilePicture}}" class="avatar" alt="">
+      
+    </div>
+  <div class="comment-block">
+    <section class="comment-header">
+        <a class="comment-author"> {{comment?.commentator.name}}</a>
+        <small class="comment-date pull-right">{{formatService.formatDateTime(comment.createdAt)}}</small>		
+    </section>
+    <p class="comment-text">{{comment?.content}}</p>
+  </div>
+</div>

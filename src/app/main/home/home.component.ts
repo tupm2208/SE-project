@@ -29,8 +29,6 @@ export class HomeComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.page = params.page? params.page: 1;
-
-        console.log("page: ", params.page, this.page);
         this.getPostList();
       });
   }
@@ -41,7 +39,6 @@ export class HomeComponent implements OnInit {
 
       this.postList = data;
 
-      console.log(" data: ", data);
       this.loadingService.hide();
     }, error => {
 
