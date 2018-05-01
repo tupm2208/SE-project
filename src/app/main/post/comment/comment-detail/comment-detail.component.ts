@@ -13,7 +13,7 @@ export class CommentDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.comment);
+    
   }
 
 }

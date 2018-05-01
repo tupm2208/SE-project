@@ -11,11 +11,10 @@ declare var $: any;
 export class CommentComponent implements OnInit {
   
   @Input() postDetail: any;
-  @Input() comments: any;
+  @Input() comments: any ;
 
   private content: String;
   private isAuthor: Boolean;
-  // private newComment: new Object();
   private user: any;
   
   constructor(
@@ -34,10 +33,8 @@ export class CommentComponent implements OnInit {
       content: this.content,
       createdAt: Date.now()
     }   
-    console.log(newComment);
-    var newContent = '<app-comment-detail' + newComment + '="comment"></app-comment-detail>';
-    
-    $(".comment-details").prepend(newContent);
+  
+    this.comments.unshift(newComment);
   }
 
   getUserData() {
