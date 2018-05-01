@@ -35,7 +35,7 @@ export class FormatService {
     let Hour = ("0" + hour).slice(-2);
     let minute = d.getMinutes();
     let Minute = ("0" + minute).slice(-2); 
-    return month + ' ' + day + ', ' + year + '  ' + Hour + ':' + Minute;
+    return month + ' ' + day + ', ' + year + ' at ' + Hour + ':' + Minute;
 
   }
 
