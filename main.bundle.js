@@ -423,6 +423,10 @@ var PostService = /** @class */ (function () {
         params.token = this.storageService.get('token');
         return this.mainApi.post('post/search', params);
     };
+    PostService.prototype.delete = function (id) {
+        var token = this.storageService.get('token');
+        return this.mainApi.delete('post/' + id + '?token=' + token);
+    };
     PostService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__util_main_api_service__["a" /* MainApiService */],

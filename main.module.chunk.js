@@ -444,21 +444,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_routes__ = __webpack_require__("../../../../../src/app/main/main.routes.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tinymce_tinymce_angular__ = __webpack_require__("../../../../@tinymce/tinymce-angular/esm5/tinymce-tinymce-angular.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_home_component__ = __webpack_require__("../../../../../src/app/main/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__post_post_component__ = __webpack_require__("../../../../../src/app/main/post/post.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_bref_post_bref_post_component__ = __webpack_require__("../../../../../src/app/main/home/bref-post/bref-post.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__edit_post_edit_post_component__ = __webpack_require__("../../../../../src/app/main/edit-post/edit-post.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__preview_preview_component__ = __webpack_require__("../../../../../src/app/main/preview/preview.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__profile_profile_component__ = __webpack_require__("../../../../../src/app/main/profile/profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__profile_info_info_component__ = __webpack_require__("../../../../../src/app/main/profile/info/info.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__profile_my_posts_my_posts_component__ = __webpack_require__("../../../../../src/app/main/profile/my-posts/my-posts.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__profile_change_pass_change_pass_component__ = __webpack_require__("../../../../../src/app/main/profile/change-pass/change-pass.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_util_util_module__ = __webpack_require__("../../../../../src/app/core/util/util.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home_component__ = __webpack_require__("../../../../../src/app/main/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__post_post_component__ = __webpack_require__("../../../../../src/app/main/post/post.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__home_bref_post_bref_post_component__ = __webpack_require__("../../../../../src/app/main/home/bref-post/bref-post.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__edit_post_edit_post_component__ = __webpack_require__("../../../../../src/app/main/edit-post/edit-post.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__preview_preview_component__ = __webpack_require__("../../../../../src/app/main/preview/preview.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__profile_profile_component__ = __webpack_require__("../../../../../src/app/main/profile/profile.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__profile_info_info_component__ = __webpack_require__("../../../../../src/app/main/profile/info/info.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__profile_my_posts_my_posts_component__ = __webpack_require__("../../../../../src/app/main/profile/my-posts/my-posts.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__profile_change_pass_change_pass_component__ = __webpack_require__("../../../../../src/app/main/profile/change-pass/change-pass.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__profile_my_posts_sub_post_sub_post_component__ = __webpack_require__("../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -483,18 +487,20 @@ var MainModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */].forChild(__WEBPACK_IMPORTED_MODULE_4__main_routes__["a" /* MainRoutes */]),
                 __WEBPACK_IMPORTED_MODULE_5__tinymce_tinymce_angular__["a" /* EditorModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormsModule */]
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_6__core_util_util_module__["a" /* UtilModule */]
             ],
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_6__home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__post_post_component__["a" /* PostComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__home_bref_post_bref_post_component__["a" /* BrefPostComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__edit_post_edit_post_component__["a" /* EditPostComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__preview_preview_component__["a" /* PreviewComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__profile_profile_component__["a" /* ProfileComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__profile_info_info_component__["a" /* InfoComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__profile_my_posts_my_posts_component__["a" /* MyPostsComponent */],
-                __WEBPACK_IMPORTED_MODULE_14__profile_change_pass_change_pass_component__["a" /* ChangePassComponent */]
+                __WEBPACK_IMPORTED_MODULE_7__home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__post_post_component__["a" /* PostComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__home_bref_post_bref_post_component__["a" /* BrefPostComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__edit_post_edit_post_component__["a" /* EditPostComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__preview_preview_component__["a" /* PreviewComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__profile_profile_component__["a" /* ProfileComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__profile_info_info_component__["a" /* InfoComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__profile_my_posts_my_posts_component__["a" /* MyPostsComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__profile_change_pass_change_pass_component__["a" /* ChangePassComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__profile_my_posts_sub_post_sub_post_component__["a" /* SubPostComponent */]
             ]
         })
     ], MainModule);
@@ -767,7 +773,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".title {\r\n    margin-top: 10px;\r\n}\r\n.header {\r\n    font-weight: 100;\r\n    font-size: 25px;\r\n}\r\ninput#saveForm:disabled,input#saveForm:hover:disabled {\r\n    letter-spacing: 0px;\r\n    opacity: 0.5;\r\n  }\r\n@media screen and (max-width: 990px) {\r\n    \r\n}\r\n@media screen and (max-width: 768px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 480px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 414px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 384px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}", ""]);
 
 // exports
 
@@ -780,7 +786,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/change-pass/change-pass.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\" col-md-12 col-lg-12 \">\n  <table class=\"table table-user-information\">\n    <tbody>\n      <tr>\n        <td>Old Pass</td>\n        <td><input [(ngModel)]=\"oldPass\" name=\"oldpass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td>New Pass</td>\n        <td><input [(ngModel)]=\"pass\" name=\"newpass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td>Confirm New Pass</td>\n        <td><input [(ngModel)]=\"cfPass\" name=\"cfnewpass\" type=\"password\"></td>\n      </tr>\n      <tr>\n        <td></td>\n        <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
+module.exports = "<div class=\"col col-lg-8 col-md-8\">\r\n  <div class=\"title\">\r\n    <h3 class=\"header\">Change Password</h3>\r\n  </div>\r\n  <!--\r\n  <table class=\"table table-user-information\">\r\n    <tbody>\r\n      <tr class=\"form-group\">\r\n        <td><label for=\"oldpassword\">Password</label></td>\r\n        \r\n       \r\n        <td><input [(ngModel)]=\"password\" class=\"form-control\" name=\"password\" id=\"password\" type=\"Password\" #Password=\"ngModel\" required minlength=\"6\">\r\n        \r\n        \r\n      </td>\r\n      </tr>\r\n      \r\n      <tr class=\"form-group\">\r\n        <td>New Password</td>\r\n        <td><input class=\"form-control\" [(ngModel)]=\"pass\" name=\"newpass\" type=\"password\" required minlength=\"6\">\r\n          <div class=\"alert-danger\">*aaaaa</div>\r\n        </td>\r\n      </tr>\r\n      <tr class=\"form-group\">\r\n        <td>Confirm Password</td>\r\n        <td><input class=\"form-control\" [(ngModel)]=\"cfPass\" name=\"cfnewpass\" type=\"password\" required minlength=\"6\"></td>\r\n      </tr>\r\n      <tr>\r\n        <td></td>\r\n        <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n-->\r\n<form #changPasswordForm=\"ngForm\">\r\n  <div class=\"form-group\">\r\n    <label for=\"oldpassword\">Password</label>\r\n    <input [(ngModel)]=\"oldPass\" class=\"form-control\" name=\"oldPassword\" id=\"oldPassword\" type=\"Password\" #oldPassword=\"ngModel\" required minlength=\"6\">\r\n  </div>\r\n\r\n  <div class=\"form-group\">\r\n    <label for=\"newPass\">New Password</label>\r\n    <input class=\"form-control\" [(ngModel)]=\"pass\"  name=\"password\" id=\"password\" type=\"Password\" #Password=\"ngModel\" required minlength=\"6\">\r\n  </div>\r\n\r\n  <div *ngIf=\"Password.invalid && (Password.dirty || Password.touched)\" class=\"alert alert-danger validation-err\" >\r\n    <div *ngIf=\"Password.errors.required\">\r\n        * Password is required.\r\n    </div>\r\n    \r\n    <div *ngIf=\"Password.errors.minlength\">\r\n        Password must be at least 6 characters long.\r\n    </div>\r\n</div>\r\n  \r\n  <div class=\"form-group\">\r\n    <label for=\"cfnewpass\">Confirm Password</label>\r\n    <input class=\"form-control\" [(ngModel)]=\"confirmPass\" name=\"confirmPassword\" id=\"repassword\" type=\"Password\" appMatchingValidator=\"password\" #confirmPassword=\"ngModel\" required >\r\n  </div>\r\n\r\n\r\n  <div *ngIf=\"confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)\" class=\"alert alert-danger\" >\r\n     <div *ngIf=\"confirmPassword.errors?.mismatch\">\r\n        Passwords do not match\r\n      </div>\r\n  </div>\r\n  \r\n  <button [disabled]=\"changPasswordForm.invalid\" id=\"saveForm\" class=\"btn btn-primary\" (click)=\"submit(); changPasswordForm.reset(); \">submit</button>\r\n</form>\r\n</div>"
 
 /***/ }),
 
@@ -810,18 +816,12 @@ var ChangePassComponent = /** @class */ (function () {
     ChangePassComponent.prototype.ngOnInit = function () {
     };
     ChangePassComponent.prototype.submit = function () {
-        if (!this.check())
-            return;
         this.user.password = this.oldPass;
         this.user.newPassword = this.pass;
         this.changeF.emit();
-    };
-    ChangePassComponent.prototype.check = function () {
-        if (this.pass != this.cfPass) {
-            this.dialogService.showError("New Pass doens't match the cf one!");
-            return false;
-        }
-        return true;
+        // this.pass = "";
+        // this.oldPass ="";
+        // this.confirmPass="";
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
@@ -854,7 +854,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "input {\r\n    width: 100%\r\n}", ""]);
+exports.push([module.i, "input {\r\n    width: 100%\r\n}\r\n.title {\r\n    margin-top: 10px;\r\n}\r\n.header {\r\n    font-weight: 100;\r\n    font-size: 25px;\r\n}\r\n@media screen and (max-width: 990px) {\r\n    \r\n}\r\n@media screen and (max-width: 768px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 480px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 414px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 384px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}", ""]);
 
 // exports
 
@@ -867,7 +867,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/info/info.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\" col-md-12 col-lg-12 \">\n  <table class=\"table table-user-information\">\n    <tbody>\n      <tr>\n        <td>Name</td>\n        <td *ngIf=\"!isEdit\">{{user?.name}}</td>\n        <td *ngIf=\"isEdit\"><input [(ngModel)]=\"name\" type=\"text\"></td>\n      </tr>\n      <tr>\n        <td>Email</td>\n        <td *ngIf=\"!isEdit\">{{user?.email}}</td>\n        <td *ngIf=\"isEdit\"><input [(ngModel)]=\"email\" type=\"text\"></td>\n      </tr>\n      <tr *ngIf=\"isEdit\">\n        <td><button class=\"btn btn-danger\" (click)=\"isEdit=false\">cancel</button></td>\n        <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\n      </tr>\n      <tr *ngIf=\"!isEdit\">\n        <td></td>\n        <td><button class=\"btn btn-primary\" (click)=\"isEdit=true\">change</button></td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
+module.exports = "<div class=\"col col-lg-8 col-md-8\">\r\n    <table class=\"table table-user-information\">\r\n      <tbody>\r\n        <tr>\r\n          <td>Name</td>\r\n          <td *ngIf=\"!isEdit\">{{user?.name}}</td>\r\n          <td *ngIf=\"isEdit\"><input class=\"form-control\" [(ngModel)]=\"name\" type=\"text\"></td>\r\n        </tr>\r\n        <tr>\r\n          <td>Email</td>\r\n          <td *ngIf=\"!isEdit\">{{user?.email}}</td>\r\n          <td *ngIf=\"isEdit\"><input class=\"form-control\" [(ngModel)]=\"email\" type=\"text\"></td>\r\n        </tr>\r\n        <tr *ngIf=\"isEdit\">\r\n          <td><button class=\"btn btn-danger\" (click)=\"isEdit=false\">cancel</button></td>\r\n          <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\r\n        </tr>\r\n        <tr *ngIf=\"!isEdit\">\r\n          <td></td>\r\n          <td><button class=\"btn btn-primary\" (click)=\"isEdit=true\">change</button></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -962,7 +962,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/my-posts/my-posts.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\n\n      <app-bref-post *ngFor=\"let post of postList\" [post]=\"post\" [routerLink]=\"['/main/post/' + post.ID]\"></app-bref-post>\n      <!-- Pager -->\n      <div class=\"clearfix\">\n        <a class=\"btn btn-primary float-left\" *ngIf=\"page!=1\" (click)=\"newerPost()\">&larr; Newer Posts</a>\n        <a class=\"btn btn-primary float-right\" *ngIf=\"postList.length == 10\" (click)=\"olderPost()\">Older Posts &rarr;</a>\n      </div>\n    </div>\n  </div>\n</div>\n\n<hr>"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n\r\n      <app-sub-post *ngFor=\"let post of postList\" [post]=\"post\" (delete)=\"delete($event)\"></app-sub-post>\r\n      <!-- Pager -->\r\n      <div class=\"clearfix\">\r\n        <a class=\"btn btn-primary float-left\" *ngIf=\"page!=1\" (click)=\"newerPost()\">&larr; Newer Posts</a>\r\n        <a class=\"btn btn-primary float-right\" *ngIf=\"postList.length == 10\" (click)=\"olderPost()\">Older Posts &rarr;</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<hr>"
 
 /***/ }),
 
@@ -977,6 +977,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div cla
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_api_post_service__ = __webpack_require__("../../../../../src/app/core/api/post.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_util_storage_service__ = __webpack_require__("../../../../../src/app/core/util/storage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_dialog_dialog_service__ = __webpack_require__("../../../../../src/app/core/dialog/dialog.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -992,12 +993,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var MyPostsComponent = /** @class */ (function () {
-    function MyPostsComponent(loadingService, postService, route, storageService) {
+    function MyPostsComponent(loadingService, postService, route, storageService, dialogService) {
         this.loadingService = loadingService;
         this.postService = postService;
         this.route = route;
         this.storageService = storageService;
+        this.dialogService = dialogService;
         this.postList = [];
         this.page = 1;
         this.params = {};
@@ -1032,6 +1035,20 @@ var MyPostsComponent = /** @class */ (function () {
         this.loadingService.show();
         this.getPostList();
     };
+    MyPostsComponent.prototype.delete = function (data) {
+        var _this = this;
+        console.log("delete: ", data);
+        this.loadingService.show();
+        this.postService.delete(data.ID).subscribe(function (data) {
+            _this.dialogService.showSuccess("delete successfull!");
+            _this.postList.splice(_this.postList.indexOf(data), 1);
+            _this.loadingService.hide();
+        }, function (error) {
+            console.log("failed!");
+            _this.loadingService.hide();
+            _this.dialogService.showError("failed to delete this post");
+        });
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Object)
@@ -1045,9 +1062,86 @@ var MyPostsComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__["a" /* LoadingService */],
             __WEBPACK_IMPORTED_MODULE_4__core_api_post_service__["a" /* PostService */],
             __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
-            __WEBPACK_IMPORTED_MODULE_5__core_util_storage_service__["a" /* StorageService */]])
+            __WEBPACK_IMPORTED_MODULE_5__core_util_storage_service__["a" /* StorageService */],
+            __WEBPACK_IMPORTED_MODULE_6__core_dialog_dialog_service__["a" /* DialogService */]])
     ], MyPostsComponent);
     return MyPostsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "a.list-group-item {\r\n    background-color: #dadfe8\r\n}\r\n\r\na.list-group-item:hover {\r\n    background-color: #bccae2\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"post-preview\">\r\n  \r\n  <div  style=\"position: absolute; right: 0px;\" class=\"dropdown\">\r\n   <a data-toggle=\"dropdown\"><i class=\"material-icons\">more_horiz</i></a>\r\n    \r\n    <ul class=\"dropdown-menu\" style=\"padding: 0;\">\r\n      <li><a class=\"list-group-item\" [routerLink]=\"['/main/edit-post/' + post.ID]\">edit</a></li>\r\n      <li><a class=\"list-group-item\" (click)=\"deletePost()\">delete</a></li>\r\n    </ul>\r\n  </div>\r\n  <a [routerLink]=\"['/main/post/' + post.ID]\">\r\n    <h2 class=\"post-title\">\r\n      {{post?.title}}\r\n    </h2>\r\n    <h3 class=\"post-subtitle\">\r\n      {{post?.subtitle}}\r\n    </h3>\r\n  </a>\r\n  <p class=\"post-meta\">Posted by\r\n    <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\r\n</div>\r\n<hr>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SubPostComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_util_format_service__ = __webpack_require__("../../../../../src/app/core/util/format.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SubPostComponent = /** @class */ (function () {
+    function SubPostComponent(formatService) {
+        this.formatService = formatService;
+        this.delete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+    }
+    SubPostComponent.prototype.ngOnInit = function () {
+    };
+    SubPostComponent.prototype.deletePost = function () {
+        this.delete.emit(this.post);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", Object)
+    ], SubPostComponent.prototype, "post", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+        __metadata("design:type", Object)
+    ], SubPostComponent.prototype, "delete", void 0);
+    SubPostComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-sub-post',
+            template: __webpack_require__("../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__core_util_format_service__["a" /* FormatService */]])
+    ], SubPostComponent);
+    return SubPostComponent;
 }());
 
 
@@ -1062,7 +1156,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, " .card {\r\n    margin-top: 0;\r\n    padding: 0;\r\n    background-color: rgba(214, 224, 226, 0.2);\r\n    -moz-border-top-left-radius:5px;\r\n    border-top-left-radius:5px;\r\n    -moz-border-top-right-radius:5px;\r\n    border-top-right-radius:5px;\r\n    -webkit-box-sizing: border-box;\r\n    box-sizing: border-box;\r\n}\r\n.card.hovercard {\r\n    position: relative;\r\n    padding-top: 0;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    background-color: #fff;\r\n    background-color: rgba(255, 255, 255, 1);\r\n}\r\n.card.hovercard .card-background {\r\n    height: 300px;\r\n}\r\n.card-background img {\r\n    -webkit-filter: blur(25px);\r\n    -moz-filter: blur(25px);\r\n    -o-filter: blur(25px);\r\n    -ms-filter: blur(25px);\r\n    filter: blur(25px);\r\n    margin-left: -100px;\r\n    margin-top: -200px;\r\n    min-width: 130%;\r\n}\r\n.card.hovercard .useravatar {\r\n    position: absolute;\r\n    top: 15px;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n.card.hovercard .useravatar img {\r\n    /* width: 100px;\r\n    height: 100px; */\r\n    width: 180px;\r\n    height: 180px;\r\n    border-radius: 50%;\r\n    border: 5px solid rgba(255, 255, 255, 0.5);\r\n    -webkit-transform: translateX(0%) translateY(30%);\r\n            transform: translateX(0%) translateY(30%);\r\n}\r\n.card.hovercard .card-info {\r\n    position: absolute;\r\n    bottom: 14px;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n.card.hovercard .card-info .card-title {\r\n    padding:0 5px;\r\n    font-size: 20px;\r\n    line-height: 1;\r\n    color: #262626;\r\n    background-color: rgba(255, 255, 255, 0.1);\r\n    border-radius: 4px;\r\n}\r\n.card.hovercard .card-info {\r\n    overflow: hidden;\r\n    font-size: 12px;\r\n    line-height: 20px;\r\n    color: #737373;\r\n    text-overflow: ellipsis;\r\n}\r\n.card.hovercard .bottom {\r\n    padding: 0 20px;\r\n    margin-bottom: 17px;\r\n}\r\n.btn-pref .btn {\r\n    -webkit-border-radius:0 !important;\r\n}\r\n.btn {\r\n    padding: 15px 19px;\r\n    letter-spacing: 0;\r\n}\r\n.image-upload {\r\n    position: absolute;\r\n    max-width: 180px;\r\n    height: 180px;\r\n    border: 5px solid rgba(255, 255, 255, 0.5);\r\n    -webkit-transform: translateX(64%) translateY(38%);\r\n    transform: translateX(-100%) translateY(30%);\r\n    opacity: 0;\r\n    z-index: 2;\r\n    border-radius: 0;\r\n}", ""]);
+exports.push([module.i, " .card {\r\n    margin-top: 0;\r\n    padding: 0;\r\n    background-color: rgba(214, 224, 226, 0.2);\r\n    -moz-border-top-left-radius:5px;\r\n    border-top-left-radius:5px;\r\n    -moz-border-top-right-radius:5px;\r\n    border-top-right-radius:5px;\r\n    -webkit-box-sizing: border-box;\r\n    box-sizing: border-box;\r\n}\r\n.card.hovercard {\r\n    position: relative;\r\n    padding-top: 0;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    background-color: #fff;\r\n    background-color: rgba(255, 255, 255, 1);\r\n}\r\n.card.hovercard .card-background {\r\n    height: 300px;\r\n}\r\n.card-background img {\r\n    -webkit-filter: blur(25px);\r\n    -moz-filter: blur(25px);\r\n    -o-filter: blur(25px);\r\n    -ms-filter: blur(25px);\r\n    filter: blur(25px);\r\n    margin-left: -100px;\r\n    margin-top: -200px;\r\n    min-width: 130%;\r\n}\r\n.card.hovercard .useravatar {\r\n    position: absolute;\r\n    top: 15px;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n.card.hovercard .useravatar img {\r\n    /* width: 100px;\r\n    height: 100px; */\r\n    width: 180px;\r\n    height: 180px;\r\n    border-radius: 50%;\r\n    border: 5px solid rgba(255, 255, 255, 0.5);\r\n    -webkit-transform: translateX(0%) translateY(30%);\r\n            transform: translateX(0%) translateY(30%);\r\n}\r\n.card.hovercard .card-info {\r\n    position: absolute;\r\n    bottom: 14px;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n.card.hovercard .card-info .card-title {\r\n    padding:0 5px;\r\n    font-size: 20px;\r\n    line-height: 1;\r\n    color: #262626;\r\n    background-color: rgba(255, 255, 255, 0.1);\r\n    border-radius: 4px;\r\n}\r\n.card.hovercard .card-info {\r\n    overflow: hidden;\r\n    font-size: 12px;\r\n    line-height: 20px;\r\n    color: #737373;\r\n    text-overflow: ellipsis;\r\n}\r\n.card.hovercard .bottom {\r\n    padding: 0 20px;\r\n    margin-bottom: 17px;\r\n}\r\n.btn-pref .btn {\r\n    -webkit-border-radius:0 !important;\r\n}\r\n.btn {\r\n    padding: 15px 19px;\r\n    letter-spacing: 0;\r\n}\r\n.image-upload {\r\n    position: absolute;\r\n    max-width: 180px;\r\n    height: 180px;\r\n    border: 5px solid rgba(255, 255, 255, 0.5);\r\n    -webkit-transform: translateX(64%) translateY(38%);\r\n    transform: translateX(-100%) translateY(30%);\r\n    opacity: 0;\r\n    z-index: 2;\r\n    border-radius: 0;\r\n}\r\n#nav-navi {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: column;\r\n            flex-direction: column;\r\n}\r\n/* @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:700'); */\r\n.nav-tab {\r\n    font-family: 'Libre Franklin', sans-serif;\r\n    /* font-weight: 500; */\r\n    /* padding: 20px; */\r\n}\r\n.body-container {\r\n    margin-top: 20px;\r\n}\r\n@media screen and (max-width: 768px) {\r\n    #nav-navi {\r\n        display: -webkit-box;\r\n        display: -ms-flexbox;\r\n        display: flex;\r\n        -webkit-box-orient: vertical;\r\n        -webkit-box-direction: normal;\r\n            -ms-flex-direction: column;\r\n                flex-direction: column;\r\n    }\r\n    .nav-tab {\r\n        font-size: 20px;\r\n    }\r\n    #main {\r\n        font-size: 20px;\r\n    }\r\n    .body-container {\r\n        margin-top: 0px;\r\n    }\r\n}\r\n@media screen and (max-width: 480px) {\r\n    .nav-tab{\r\n        font-size: 20px;\r\n    }\r\n    #main {\r\n        font-size: 20px;\r\n    }\r\n    #nav-navi {\r\n        display: -webkit-box;\r\n        display: -ms-flexbox;\r\n        display: flex;\r\n        -webkit-box-orient: horizontal;\r\n        -webkit-box-direction: normal;\r\n            -ms-flex-direction: row;\r\n                flex-direction: row;\r\n    }\r\n    .body-container {\r\n        margin-top: 0px;\r\n    }\r\n}\r\n@media screen and (max-width: 414px) {\r\n    .nav-tab{\r\n        font-size: 20px;\r\n    }\r\n    #main {\r\n        font-size: 20px;\r\n    }\r\n    #nav-navi {\r\n        display: -webkit-box;\r\n        display: -ms-flexbox;\r\n        display: flex;\r\n        -webkit-box-orient: horizontal;\r\n        -webkit-box-direction: normal;\r\n            -ms-flex-direction: row;\r\n                flex-direction: row;\r\n    }\r\n    .body-container {\r\n        margin-top: 0px;\r\n    }\r\n}\r\n@media screen and (max-width: 384px) {\r\n    .nav-tab{\r\n        font-size: 13px;\r\n    }\r\n    #main {\r\n        font-size: 13px;\r\n    }\r\n    #nav-navi {\r\n        display: -webkit-box;\r\n        display: -ms-flexbox;\r\n        display: flex;\r\n        -webkit-box-orient: horizontal;\r\n        -webkit-box-direction: normal;\r\n            -ms-flex-direction: row;\r\n                flex-direction: row;\r\n    }\r\n    .body-container {\r\n        margin-top: 0px;\r\n    }\r\n}\r\n.wrapper {\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: (1fr)[12];\r\n        grid-template-columns: repeat(12, 1fr);\r\n    /* grid-template-rows: 40px 100px 40px; \r\n     */\r\n     -ms-grid-rows: auto;\r\n         grid-template-rows: auto;\r\n}\r\n.header{\r\n    grid-column: span 12;\r\n}\r\n.menu {\r\n    grid-column: span 2;\r\n}\r\n.content {\r\n    grid-column: span 10;\r\n}\r\n@media screen and (max-width: 767px) {\r\n    .menu{\r\n        grid-row: span 1;\r\n        grid-column: span 12;\r\n    }\r\n    .content {\r\n        grid-column: span 12;\r\n    }\r\n}\r\n", ""]);
 
 // exports
 
@@ -1075,7 +1169,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-lg-12 col-sm-12\" style=\"padding: 0!important\">\n  <div class=\"card hovercard\">\n    <div class=\"card-background\">\n      <img class=\"card-bkimg\" alt=\"\" [src]=\"user.profilePicture\">\n      <!-- http://lorempixel.com/850/280/people/9/ -->\n    </div>\n    <div class=\"useravatar\">\n      <img alt=\"\" [src]=\"user.profilePicture\">\n      <input type=\"file\" (change)=\"onFileChange($event)\" name=\"update\" class=\"image-upload\" #fileInput accept=\"image/*\" />\n    </div>\n    \n    <div class=\"card-info\"> <span class=\"card-title\">{{user?.name}}</span>\n\n    </div>\n  </div>\n  <div class=\"btn-pref btn-group btn-group-justified btn-group-lg\" role=\"group\" aria-label=\"...\">\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 1? 'btn-primary': 'btn-default'\" (click)=\"type = 1\">\n                <div class=\"hidden-xs\">My Info</div>\n            </button>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 2? 'btn-primary': 'btn-default'\" (click)=\"type = 2\">\n                <div class=\"hidden-xs\">My Posts</div>\n            </button>\n    </div>\n    <div class=\"btn-group\" role=\"group\">\n      <button type=\"button\" class=\"btn\" [ngClass]=\"type == 3? 'btn-primary': 'btn-default'\" (click)=\"type = 3\">\n                <div class=\"hidden-xs\">Password</div>\n            </button>\n    </div>\n  </div>\n</div>\n\n<app-info *ngIf=\"type==1\" [user]=\"user\" (changeF)=\"post()\"></app-info>\n<app-my-posts *ngIf=\"type==2\" [user]=\"user\"></app-my-posts>\n<app-change-pass *ngIf=\"type==3\" [user]=\"user\" (changeF)=\"post()\"></app-change-pass>"
+module.exports = "<div class=\"col-lg-12 col-sm-12\" style=\"padding: 0!important\">\r\n  <div class=\"card hovercard\">\r\n    <div class=\"card-background\">\r\n      <img class=\"card-bkimg\" alt=\"\" [src]=\"user.profilePicture\">\r\n      <!-- http://lorempixel.com/850/280/people/9/ -->\r\n    </div>\r\n    <div class=\"useravatar\">\r\n      <img alt=\"\" [src]=\"user.profilePicture\">\r\n      <input type=\"file\" (change)=\"onFileChange($event)\" name=\"update\" class=\"image-upload\" #fileInput accept=\"image/*\" />\r\n    </div>\r\n    \r\n    <div class=\"card-info\"> <span class=\"card-title\">{{user?.name}}</span>\r\n\r\n    </div>\r\n  </div>\r\n  <div class=\"container\">\r\n</div>\r\n</div>\r\n\r\n\r\n<!-- <div class=\"container body-container\"> -->\r\n    <!-- <div class=\"row\"> -->\r\n    <!-- <div class=\"col col-lg-2 col-md-3 col-navi\"> -->\r\n      <!-- <ul id=\"nav-navi\" class=\"nav nav-tabs nav-justified\">\r\n        <li class=\"nav-item\"  [ngClass]=\"type == 1? 'btn-primary': 'btn-default'\" (click)=\"type = 1\" >\r\n          <a class=\"nav-link nav-tab\">My Profile</a>\r\n        </li>\r\n        <li class=\"nav-item\"  [ngClass]=\"type == 2? 'btn-primary': 'btn-default'\" (click)=\"type = 2\">\r\n          <a class=\"nav-link nav-tab\">My Posts</a>\r\n        </li>\r\n        <li class=\"nav-item\"  [ngClass]=\"type == 3? 'btn-primary': 'btn-default'\" (click)=\"type = 3\">\r\n          <a class=\"nav-link nav-tab\">Password</a>\r\n        </li>\r\n      </ul> -->\r\n    <!-- </div> -->\r\n\r\n    <!-- <div class=\"col col-lg-1\" ></div> -->\r\n    <!-- <main id=\"main\" class=\"col col-lg-8\"> -->\r\n      <!-- <app-info *ngIf=\"type==1\" [user]=\"user\" (changeF)=\"post()\"></app-info>\r\n      <app-my-posts  *ngIf=\"type==2\" [user]=\"user\"></app-my-posts>\r\n      <app-change-pass  *ngIf=\"type==3\" [user]=\"user\" (changeF)=\"post()\"></app-change-pass> -->\r\n    <!-- </main> -->\r\n  <!-- </div> -->\r\n<!-- </div> -->\r\n\r\n<div class=\"container wrapper\">\r\n  <div class=\"menu\">\r\n      <ul id=\"nav-navi\" class=\"nav nav-tabs tabs-left\">\r\n          <li class=\"nav-item\"  [ngClass]=\"type == 1? 'btn-primary': 'btn-default'\" (click)=\"type = 1\" >\r\n            <a class=\"nav-link nav-tab\">Profile</a>\r\n          </li>\r\n          <li class=\"nav-item\"  [ngClass]=\"type == 2? 'btn-primary': 'btn-default'\" (click)=\"type = 2\">\r\n            <a class=\"nav-link nav-tab\">Posts</a>\r\n          </li>\r\n          <li class=\"nav-item\"  [ngClass]=\"type == 3? 'btn-primary': 'btn-default'\" (click)=\"type = 3\">\r\n            <a class=\"nav-link nav-tab\">Password</a>\r\n          </li>\r\n        </ul>\r\n  </div>\r\n  <div class=\"content\">\r\n      <app-info *ngIf=\"type==1\" [user]=\"user\" (changeF)=\"post()\"></app-info>\r\n      <app-my-posts  *ngIf=\"type==2\" [user]=\"user\"></app-my-posts>\r\n      <app-change-pass  *ngIf=\"type==3\" [user]=\"user\" (changeF)=\"post()\"></app-change-pass>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1121,12 +1215,10 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.user.profilePicture = 'assets/img/avatar.png';
         var id = this.storageService.get('id');
-        console.log("id: ", id);
         this.loading.show();
         this.loginService.refreshKey().subscribe(function (data) {
             _this.userService.get(id).subscribe(function (data) {
                 _this.user = data.data;
-                console.log("data: ", _this.user);
                 _this.type = 1;
                 _this.loading.hide();
             });
@@ -1138,12 +1230,10 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.loading.show();
         this.userService.update(this.user).subscribe(function (data) {
-            console.log("data: ", data);
             _this.dialog.showSuccess("Change ok!");
             _this.loading.hide();
         }, function (error) {
-            console.log("data: ", error);
-            _this.dialog.showError('failed to change!');
+            _this.dialog.showError('Failed to change!');
             _this.loading.hide();
         });
     };
