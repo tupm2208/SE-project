@@ -62,4 +62,17 @@
   .comment-actions li:hover {
     color: #0095ff;
   }
+  .dropdown-button  {
+    background: none;
+    border: none;
+    padding: 10px 10px;
+  }
+  .dropdown-button:focus {
+    background: none;
+    border: none;
+    outline: none;
+  }
+  .dropdown-button:hover {
+    background-color: #f7f7f7; 
+  }
   

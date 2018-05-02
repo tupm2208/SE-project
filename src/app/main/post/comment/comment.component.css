@@ -48,3 +48,10 @@ input, textarea {
     border-radius: 0.1875rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
   }
+  button:disabled,button:hover:disabled {
+    letter-spacing: 0px;
+    opacity: 0.5;
+    background-color: #007bff !important;
+    border: none;
+  }
+  

@@ -6,6 +6,14 @@
   <div class="comment-block">
     <section class="comment-header">
         <a class="comment-author"> {{comment?.commentator.name}}</a>
+        <span class="dropdown">
+          <button type="button" class="dropdown-toggle dropdown-button" data-toggle="dropdown">
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Edit</a>
+            <a class="dropdown-item" href="#">Delete</a>
+          </div>
+        </span>
         <small class="comment-date pull-right">{{formatService.formatDateTime(comment.createdAt)}}</small>		
     </section>
     <p class="comment-text">{{comment?.content}}</p>

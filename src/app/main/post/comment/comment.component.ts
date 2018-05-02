@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StorageService } from '../../../core/util/storage.service';
 import { FormatService } from '../../../core/util/format.service';
+import { CommentService } from '../../../core/api/comment.service';
 declare var $: any;
 
 @Component({
@@ -16,11 +17,14 @@ export class CommentComponent implements OnInit {
   private content: String;
   private isAuthor: Boolean;
   private user: any;
+  private isLogin: Boolean = false;
   
   constructor(
     private storageService: StorageService,
     private formatService: FormatService,
+    private commentService: CommentService,
   ) { 
+    this.isLogin = this.storageService.get("token") ? true : false;
   }
 
   ngOnInit() {
@@ -28,13 +32,26 @@ export class CommentComponent implements OnInit {
   }
 
   submit() {
+
+    if (!this.content) return;
+
     var newComment = {
-      commentator: this.getUserData(),
       content: this.content,
-      createdAt: Date.now()
-    }   
-  
-    this.comments.unshift(newComment);
+      postID: this.postDetail.ID,
+    }
+    // get User information as commentator
+    var commentator = this.getUserData();
+    
+    this.commentService.post(newComment).subscribe(dataReturn => {
+      // add commentator attribute and bind information to comments array
+      dataReturn.data.commentator = commentator;
+      this.comments.unshift(dataReturn.data);
+     
+    }, err => {
+      alert("Something wrong happen!!!");
+    })
+    
+    
   }
 
   getUserData() {

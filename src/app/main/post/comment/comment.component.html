@@ -1,10 +1,10 @@
 <div class="comments" >
 		<div class="comment-wrap">
 				<div class="comment-block">
-						<form action="" #commentForm="ngForm">
-								<textarea name="comment-box" id="comment-box" [(ngModel)]="content" cols="30" rows="3" placeholder="Add comment..."></textarea>
+						<form action="" #commentForm="ngForm" >
+								<textarea name="comment-box" id="comment-box" [(ngModel)]="content" cols="30" rows="3" [attr.placeholder]="isLogin ? 'Add comment...'  : 'Sign in to comment'" [disabled]="!isLogin"></textarea>
 						</form>
-						<button type="button" class="btn btn-primary pull-right" style="padding: 10px; font-size: 0.7em;" (click)="submit(); commentForm.reset();">Submit</button>
+						<button type="button" class="btn btn-primary pull-right" style="padding: 10px; font-size: 0.7em;" (click)="submit(); commentForm.reset();" [disabled]="!isLogin">Submit</button>
 				</div>
 		</div>
 		<div class="comment-details">
