@@ -11,11 +11,13 @@
           </button>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#">Edit</a>
-            <a class="dropdown-item" href="#">Delete</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" id="deleteButton" data-target="#exampleModal" (click)="delete()" >Delete</a>
           </div>
         </span>
-        <small class="comment-date pull-right">{{formatService.formatDateTime(comment.createdAt)}}</small>		
+        <small class="comment-date pull-right">{{formatService.formatDateTime(comment.createdAt)}}</small>	
+
     </section>
+            
     <p class="comment-text">{{comment?.content}}</p>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StorageService } from '../../../core/util/storage.service';
 import { FormatService } from '../../../core/util/format.service';
 import { CommentService } from '../../../core/api/comment.service';
+
 declare var $: any;
 
 @Component({
@@ -12,12 +13,13 @@ declare var $: any;
 export class CommentComponent implements OnInit {
   
   @Input() postDetail: any;
-  @Input() comments: any ;
+  @Input() comments: any [];
 
   private content: String;
   private isAuthor: Boolean;
   private user: any;
   private isLogin: Boolean = false;
+  private selectedComment: any;
   
   constructor(
     private storageService: StorageService,
@@ -61,6 +63,25 @@ export class CommentComponent implements OnInit {
       profilePicture: this.storageService.get('profilePicture'),
     }; 
      
+  }
+
+  setSelectedComment(comment) {
+    this.selectedComment = comment;
+  }
+
+  delete() {
+    var id = this.selectedComment.ID;
+    var index;
+    for( index = 0; index < this.comments.length; index++) {
+      if(this.comments[index].ID == id) break;
+    }
+    this.commentService.delete(id).subscribe(data => {
+      if(data.status == true) this.comments.splice(index,1);
+      
+      else alert("Cannot perform action");  
+    }, err => {
+      alert("Cannot perform action");
+    })
   }
 
 }

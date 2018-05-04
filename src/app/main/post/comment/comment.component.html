@@ -7,8 +7,27 @@
 						<button type="button" class="btn btn-primary pull-right" style="padding: 10px; font-size: 0.7em;" (click)="submit(); commentForm.reset();" [disabled]="!isLogin">Submit</button>
 				</div>
 		</div>
-		<div class="comment-details">
-				<app-comment-detail *ngFor="let comment of comments" [comment]="comment"></app-comment-detail>
+		<div class="comment-details" *ngFor="let comment of comments">
+        <app-comment-detail  [comment]="comment"></app-comment-detail>
 		</div>
-		
+		   <!-- Modal -->
+		   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h6 class="modal-title" id="exampleModalLongTitle">Delete</h6>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body modal-content">
+                      Are you sure you want to delete this comment?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary modal-button" data-dismiss="modal">Close</button>
+                      <button type="button" id="confirmButton" class="btn btn-primary modal-button" (click)="delete()" data-dismiss="modal">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 </div>

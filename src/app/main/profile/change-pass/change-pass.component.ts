@@ -31,10 +31,6 @@ export class ChangePassComponent implements OnInit {
 
     this.changeF.emit();
 
-    // this.pass = "";
-    // this.oldPass ="";
-    // this.confirmPass="";
-
   }
 
 }

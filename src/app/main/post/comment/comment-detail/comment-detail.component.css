@@ -75,4 +75,11 @@
   .dropdown-button:hover {
     background-color: #f7f7f7; 
   }
+  .modal-button {
+    font-size: 12px;
+    padding: 15px;
+  }
+  .modal-content {
+    font-size: 17px;
+  }
   
