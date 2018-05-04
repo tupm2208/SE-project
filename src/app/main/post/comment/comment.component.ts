@@ -15,11 +15,11 @@ export class CommentComponent implements OnInit {
   @Input() postDetail: any;
   @Input() comments: any [];
 
-  private content: String;
-  private isAuthor: Boolean;
+  private content: String; // content of new comment
+
   private user: any;
-  private isLogin: Boolean = false;
-  private selectedComment: any;
+  private isLogin: Boolean = false; 
+  private selectedComment: any; // the comment to be deleted
   
   constructor(
     private storageService: StorageService,
@@ -65,13 +65,14 @@ export class CommentComponent implements OnInit {
      
   }
 
+  // set the comment to operate on
   setSelectedComment(comment) {
     this.selectedComment = comment;
   }
 
   delete() {
     var id = this.selectedComment.ID;
-    var index;
+    var index; // position of deleted comment in comments
     for( index = 0; index < this.comments.length; index++) {
       if(this.comments[index].ID == id) break;
     }

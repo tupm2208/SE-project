@@ -20,4 +20,9 @@ export class CommentService {
         let token = this.storageService.get('token');
         return this.mainApi.delete('comment/'+id + '?token=' + token);
     }
+
+    put(params): Observable<any> {
+        params.token = this.storageService.get('token');
+        return this.mainApi.put('comment',params);
+    }
 }

@@ -30,11 +30,9 @@ export class PostComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
 
-    console.log("id: ", id);
 
     this.postService.getById(id).subscribe( data => {
 
-      console.log("post: ",id, data);
       this.loading.hide();
 
       this.postDetail = data.data;

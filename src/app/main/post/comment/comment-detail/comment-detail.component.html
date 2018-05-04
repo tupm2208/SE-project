@@ -3,21 +3,31 @@
       <img src="{{comment?.commentator.profilePicture}}" class="avatar" alt="">
       
     </div>
-  <div class="comment-block">
+  <div  class="comment-block" (mouseenter)="showDropdownButton()" (mouseleave)="hideDropdownButton()">
     <section class="comment-header">
         <a class="comment-author"> {{comment?.commentator.name}}</a>
-        <span class="dropdown">
-          <button type="button" class="dropdown-toggle dropdown-button" data-toggle="dropdown">
+        <span class="dropdown dropdown-arrow" *ngIf="isCommentator" attr.id="comment-block{{comment.ID}}">
+          <button type="button" class="dropdown-toggle dropdown-button" data-toggle="dropdown"> 
           </button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Edit</a>
-            <a class="dropdown-item" href="#" data-toggle="modal" id="deleteButton" data-target="#exampleModal" (click)="delete()" >Delete</a>
+            <a class="dropdown-item" (click)="isEdit = true">Edit</a>
+            <a class="dropdown-item" data-toggle="modal" id="deleteButton" data-target="#exampleModal" (click)="delete()" >Delete</a>
           </div>
         </span>
         <small class="comment-date pull-right">{{formatService.formatDateTime(comment.createdAt)}}</small>	
 
     </section>
+
             
-    <p class="comment-text">{{comment?.content}}</p>
+    <p class="comment-text" *ngIf="!isEdit">{{comment?.content}}</p>
+    <div class="edit-block" *ngIf="isEdit">
+      <form action="" (keydown)="keyDownFunction($event)" >
+          <input type="text"  [(ngModel)]="editContent" name="editcontent" class="form-control" value={{comment?.content}} (focusout)="cancelEdit()">
+      </form>
+      <!-- attr.id="input{{comment.ID}}" -->
+
+      <small>Press Esc to <a href="" (click)="cancelEdit()">cancel</a> </small>
+    </div>
+    
   </div>
 </div>
