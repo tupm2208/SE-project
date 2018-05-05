@@ -38,7 +38,6 @@ export class PostComponent implements OnInit {
       this.postDetail = data.data;
       this.comments = this.postDetail.comments;
       this.loadContent();
-      console.log(this.postDetail);
     }, error => {
       this.loading.hide();
     })
