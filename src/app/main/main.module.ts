@@ -38,9 +38,8 @@ import { SubPostComponent } from './profile/my-posts/sub-post/sub-post.component
     MyPostsComponent,
     ChangePassComponent,
     CommentComponent,
-    CommentDetailComponent
-    SubPostComponent
-
+    CommentDetailComponent,
+    SubPostComponent,
   ]
 })
 export class MainModule { }
