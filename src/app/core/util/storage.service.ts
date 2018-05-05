@@ -7,17 +7,17 @@ export class StorageService {
 
   set(key, value) {
 
-    localStorage.setItem(key, JSON.stringify(value));
+    sessionStorage.setItem(key, JSON.stringify(value));
   }
 
   get(key) {
 
-    return JSON.parse(localStorage.getItem(key));
+    return JSON.parse(sessionStorage.getItem(key));
   }
 
   public removeItem(key: string): void {
     
-    delete localStorage[key];
+    delete sessionStorage[key];
   }
 
 }

@@ -15,6 +15,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { InfoComponent } from './profile/info/info.component';
 import { MyPostsComponent } from './profile/my-posts/my-posts.component';
 import { ChangePassComponent } from './profile/change-pass/change-pass.component';
+import { CommentComponent } from './post/comment/comment.component';
+import { CommentDetailComponent } from './post/comment/comment-detail/comment-detail.component';
 import { SubPostComponent } from './profile/my-posts/sub-post/sub-post.component';
 
 @NgModule({
@@ -35,7 +37,10 @@ import { SubPostComponent } from './profile/my-posts/sub-post/sub-post.component
     InfoComponent,
     MyPostsComponent,
     ChangePassComponent,
+    CommentComponent,
+    CommentDetailComponent
     SubPostComponent
+
   ]
 })
 export class MainModule { }

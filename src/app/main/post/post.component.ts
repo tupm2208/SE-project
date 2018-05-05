@@ -15,6 +15,8 @@ declare let $: any;
 export class PostComponent implements OnInit {
 
   private postDetail: any = {};
+  private comments: any;
+  private url: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,22 +31,30 @@ export class PostComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
 
-    console.log("id: ", id);
-
     this.postService.getById(id).subscribe( data => {
 
-      console.log("post: ",id, data);
       this.loading.hide();
 
       this.postDetail = data.data;
-      
-      setTimeout( () => {
-        $("#display").html(this.postDetail.content);
-      }, 50)
+      this.comments = this.postDetail.comments;
+      this.loadContent();
     }, error => {
-
       this.loading.hide();
     })
+    this.url = window.location.href;
+  }
+
+  loadContent() {
+    $("#display").html(this.postDetail.content);
+    $("img").css("max-width","100%");
+    $("img").css("height","auto");
+    $("iframe").css("max-width","100%");
+    $("iframe").css("height","auto");
+  }
+
+  share(baseUrl) {
+    window.open(baseUrl + encodeURIComponent(this.url) + "&text="+ this.postDetail.title); 
+    return false;
   }
 
 }

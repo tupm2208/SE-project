@@ -5,6 +5,7 @@ import { LoginService } from '../core/api/login.service';
 
 import { LoadingService } from '../core/util/loading.service';
 import { StorageService } from '../core/util/storage.service';
+import { Profile } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-login',
@@ -45,8 +46,10 @@ export class LoginComponent implements OnInit {
 
       console.log("data: ", data);
       this.storageService.set('token',data.token);
-      this.storageService.set('id', data.ID)
-      
+      this.storageService.set('id', data.ID);
+      this.storageService.set('username', data.name);
+      this.storageService.set('profilePicture', data.profilePicture);
+
       this.router.navigate(['/main/']);
       
       this.loadingService.hide();
@@ -64,7 +67,6 @@ export class LoginComponent implements OnInit {
       this.storageService.set("username", this.username);
       this.storageService.set("password", this.password);
     } else {
-
       this.storageService.set("isRemember", false);
       this.storageService.set("username", '');
       this.storageService.set("password", '');
