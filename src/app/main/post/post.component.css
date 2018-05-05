@@ -9,9 +9,16 @@ img {
     }
 }
 
-
-
-
+.title-small {
+    text-align: left;
+    word-wrap: break-word;
+}
+.category {
+    font-family: 'Courier New', Courier, monospace;
+}
+.sharing-block {
+    margin: 1em auto 2em;
+}
 /** Social Button CSS **/
 
 .share-btn {
@@ -38,6 +45,7 @@ img {
 }
 .sharing-text {
     font-size: 15px;
+    margin: 10px auto;
 }
 
 .share-btn.twitter     { background: #55acee; }
