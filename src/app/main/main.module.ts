@@ -19,6 +19,7 @@ import { CommentComponent } from './post/comment/comment.component';
 import { CommentDetailComponent } from './post/comment/comment-detail/comment-detail.component';
 import { SubPostComponent } from './profile/my-posts/sub-post/sub-post.component';
 import { SearchComponent } from './search/search.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { SearchComponent } from './search/search.component';
     CommentDetailComponent,
     SubPostComponent,
     SearchComponent,
+    CategoryComponent,
   ]
 })
 export class MainModule { }
