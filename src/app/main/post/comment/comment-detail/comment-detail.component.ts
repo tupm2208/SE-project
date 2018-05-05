@@ -3,7 +3,6 @@ import { FormatService } from '../../../../core/util/format.service';
 import { StorageService } from '../../../../core/util/storage.service';
 import { CommentService } from '../../../../core/api/comment.service';
 import { CommentComponent } from '../comment.component'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $:any;
 

@@ -32,6 +32,7 @@
   
   .comment-text {
     margin: 15px auto;
+    font-size: 17px;
   }
   
   .bottom-comment {
@@ -40,7 +41,7 @@
   }
   
   .comment-date {
-    
+    font-size: 14px;
   }
   
   .comment-actions {

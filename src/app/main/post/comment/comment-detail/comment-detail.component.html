@@ -15,10 +15,9 @@
           </div>
         </span>
         <small class="comment-date pull-right">{{formatService.formatDateTime(comment.createdAt)}}</small>	
+    
+      </section>
 
-    </section>
-
-            
     <p class="comment-text" *ngIf="!isEdit">{{comment?.content}}</p>
     <div class="edit-block" *ngIf="isEdit">
       <form action="" (keydown)="keyDownFunction($event)" >

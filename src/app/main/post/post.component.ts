@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
 
   private postDetail: any = {};
   private comments: any;
+  private url: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +31,6 @@ export class PostComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
 
-
     this.postService.getById(id).subscribe( data => {
 
       this.loading.hide();
@@ -39,9 +39,9 @@ export class PostComponent implements OnInit {
       this.comments = this.postDetail.comments;
       this.loadContent();
     }, error => {
-
       this.loading.hide();
     })
+    this.url = window.location.href;
   }
 
   loadContent() {
@@ -50,6 +50,11 @@ export class PostComponent implements OnInit {
     $("img").css("height","auto");
     $("iframe").css("max-width","100%");
     $("iframe").css("height","auto");
+  }
+
+  share(baseUrl) {
+    window.open(baseUrl + encodeURIComponent(this.url) + "&text="+ this.postDetail.title); 
+    return false;
   }
 
 }
