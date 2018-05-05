@@ -49,6 +49,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 
 
 
@@ -119,35 +154,49 @@ var EditPostComponent = /** @class */ (function () {
         };
     }
     EditPostComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.loading.show();
-        this.loginService.refreshKey().subscribe(function (data) {
-            _this.loading.hide();
-            _this.display = true;
-        }, function (error) {
-            _this.loading.hide();
-        });
-        var id = this.route.snapshot.paramMap.get('id');
-        this.registData.categoryID = '1';
-        this.registData.title = '';
-        if (Number(id)) {
-            this.initForEdit(id);
-        }
-        else {
-            var data = this.storageService.get('preview');
-            console.log("preview Data: ", data);
-            setTimeout(function () {
-                $("#display").html(_this.dataModel);
-            }, 50);
-            if (data) {
-                this.registData = data;
-                this.dataModel = this.registData.content;
-            }
-        }
-        this.categoryService.list().subscribe(function (data) {
-            _this.categoryList = data;
-            _this.display = true;
-            _this.loading.hide();
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var data;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.loading.show();
+                        return [4 /*yield*/, this.loginService.refreshKey().toPromise().then(function (data) {
+                                // this.loading.hide();
+                                _this.display = true;
+                            }, function (error) {
+                                _this.loading.hide();
+                            })];
+                    case 1:
+                        _a.sent();
+                        if (!this.display)
+                            return [2 /*return*/];
+                        this.id = this.route.snapshot.paramMap.get('id');
+                        this.registData.categoryID = '1';
+                        this.registData.title = '';
+                        if (Number(this.id)) {
+                            this.initForEdit(this.id);
+                        }
+                        else {
+                            data = this.storageService.get('preview' + this.id);
+                            console.log("preview Data: ", data);
+                            setTimeout(function () {
+                                $("#display").html(_this.dataModel);
+                            }, 50);
+                            if (data) {
+                                this.registData = data;
+                                this.dataModel = this.registData.content;
+                            }
+                            this.loading.hide();
+                        }
+                        this.categoryService.list().subscribe(function (data) {
+                            _this.categoryList = data;
+                            _this.display = true;
+                            // this.loading.hide();
+                        });
+                        return [2 /*return*/];
+                }
+            });
         });
     };
     EditPostComponent.prototype.initForEdit = function (id) {
@@ -155,6 +204,15 @@ var EditPostComponent = /** @class */ (function () {
         this.postService.getById(id).subscribe(function (data) {
             _this.registData = data.data;
             _this.dataModel = _this.registData.content;
+            var data1 = _this.storageService.get('preview' + _this.id);
+            console.log("preview Data: ", data1);
+            setTimeout(function () {
+                $("#display").html(_this.dataModel);
+            }, 50);
+            if (data1) {
+                _this.registData = data1;
+                _this.dataModel = _this.registData.content;
+            }
             _this.loading.hide();
         });
     };
@@ -241,9 +299,10 @@ var EditPostComponent = /** @class */ (function () {
         var _this = this;
         this.post().subscribe(function (data) {
             _this.registData.content = $('#display').html();
-            _this.storageService.set('preview', _this.registData);
+            _this.storageService.set('preview' + _this.id, _this.registData);
+            console.log("pre: ", _this.storageService.get('preview' + _this.id));
             _this.loading.hide();
-            _this.router.navigate(['main/preview']);
+            _this.router.navigate(['main/preview/' + _this.id]);
         }, function (error) {
             _this.loading.hide();
         });
@@ -544,7 +603,7 @@ var MainRoutes = [{
         path: 'edit-post/:id',
         component: __WEBPACK_IMPORTED_MODULE_2__edit_post_edit_post_component__["a" /* EditPostComponent */]
     }, {
-        path: 'preview',
+        path: 'preview/:id',
         component: __WEBPACK_IMPORTED_MODULE_3__preview_preview_component__["a" /* PreviewComponent */]
     }, {
         path: 'profile',
@@ -938,7 +997,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/preview/preview.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <!-- Page Header -->\r\n  <header class=\"masthead\" style=\"background-image: url('assets/img/post-bg.jpg')\">\r\n    <div class=\"overlay\"></div>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <div class=\"post-heading\">\r\n            <h1>{{postDetail?.title}}</h1>\r\n            <h2 class=\"subheading\">{{postDetail?.subTitle}}</h2>\r\n            <span class=\"meta\">Posted by\r\n              <a>{{postDetail?.author?.name}}</a>\r\n              on {{formatService.formatDate(postDetail?.createdAt)}}</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n\r\n  <!-- Post Content -->\r\n  <article>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\" id=\"display\"></div>\r\n      </div>\r\n    </div>\r\n    <button class=\"btn btn-primary\" routerLink=\"/main/edit-post/0\">back</button>\r\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"post()\">Post</button>\r\n  </article>\r\n\r\n  <hr>\r\n\r\n"
+module.exports = "  <!-- Page Header -->\r\n  <header class=\"masthead\" style=\"background-image: url('assets/img/post-bg.jpg')\">\r\n    <div class=\"overlay\"></div>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <div class=\"post-heading\">\r\n            <h1>{{postDetail?.title}}</h1>\r\n            <h2 class=\"subheading\">{{postDetail?.subTitle}}</h2>\r\n            <span class=\"meta\">Posted by\r\n              <a>{{postDetail?.author?.name}}</a>\r\n              on {{formatService.formatDate(postDetail?.createdAt)}}</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n\r\n  <!-- Post Content -->\r\n  <article>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\" id=\"display\"></div>\r\n      </div>\r\n    </div>\r\n    <button class=\"btn btn-primary\" [routerLink]='[\"/main/edit-post/\" + id]'>back</button>\r\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"post()\">Post</button>\r\n  </article>\r\n\r\n  <hr>\r\n\r\n"
 
 /***/ }),
 
@@ -983,10 +1042,11 @@ var PreviewComponent = /** @class */ (function () {
         this.postDetail = {};
     }
     PreviewComponent.prototype.ngOnInit = function () {
-        this.postDetail = this.storageService.get('preview');
+        this.id = this.route.snapshot.paramMap.get('id');
+        this.postDetail = this.storageService.get('preview' + this.id);
         if (this.postDetail)
             $('#display').html(this.postDetail.content);
-        console.log("preview: ", this.postDetail);
+        console.log("preview: ", 'preview' + this.id);
     };
     PreviewComponent.prototype.post = function () {
         var _this = this;
@@ -1016,7 +1076,7 @@ var PreviewComponent = /** @class */ (function () {
         var _this = this;
         console.log("preview: ", this.postDetail);
         this.dialog.showSuccess().subscribe(function (data) {
-            _this.storageService.set('preview', null);
+            _this.storageService.set('preview' + _this.id, null);
             _this.router.navigate(['/main/post/' + _this.postDetail.ID]);
         });
     };
@@ -1366,7 +1426,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"post-preview\">\r\n  \r\n  <div  style=\"position: absolute; right: 0px;\" class=\"dropdown\">\r\n   <a data-toggle=\"dropdown\"><i class=\"material-icons\">more_horiz</i></a>\r\n    \r\n    <ul class=\"dropdown-menu\" style=\"padding: 0;\">\r\n      <li><a class=\"list-group-item\" [routerLink]=\"['/main/edit-post/' + post.ID]\">edit</a></li>\r\n      <li><a class=\"list-group-item\" (click)=\"deletePost()\">delete</a></li>\r\n    </ul>\r\n  </div>\r\n  <a [routerLink]=\"['/main/post/' + post.ID]\">\r\n    <h2 class=\"post-title\">\r\n      {{post?.title}}\r\n    </h2>\r\n    <h3 class=\"post-subtitle\">\r\n      {{post?.subtitle}}\r\n    </h3>\r\n  </a>\r\n  <p class=\"post-meta\">Posted by\r\n    <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\r\n</div>\r\n<hr>"
+module.exports = "<div class=\"post-preview\">\r\n  \r\n  <div  style=\"position: absolute; right: 0px;\" class=\"dropdown\">\r\n   <a data-toggle=\"dropdown\" style=\"cursor: pointer\"><i class=\"material-icons\">more_horiz</i></a>\r\n    \r\n    <ul class=\"dropdown-menu\" style=\"padding: 0;\">\r\n      <li><a class=\"list-group-item\" [routerLink]=\"['/main/edit-post/' + post.ID]\">edit</a></li>\r\n      <li><a class=\"list-group-item\" (click)=\"deletePost()\">delete</a></li>\r\n    </ul>\r\n  </div>\r\n  <a [routerLink]=\"['/main/post/' + post.ID]\">\r\n    <h2 class=\"post-title\">\r\n      {{post?.title}}\r\n    </h2>\r\n    <h3 class=\"post-subtitle\">\r\n      {{post?.subtitle}}\r\n    </h3>\r\n  </a>\r\n  <p class=\"post-meta\">Posted by\r\n    <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\r\n</div>\r\n<hr>"
 
 /***/ }),
 

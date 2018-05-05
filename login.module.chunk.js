@@ -51,18 +51,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(loginService, loadingService, storageService, router) {
+    function LoginComponent(loginService, loadingService, storageService, router, activatedRoute) {
         this.loginService = loginService;
         this.loadingService = loadingService;
         this.storageService = storageService;
         this.router = router;
+        this.activatedRoute = activatedRoute;
     }
     LoginComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.isRemember = this.storageService.get('isRemember');
         if (this.isRemember) {
             this.username = this.storageService.get('username');
             this.password = this.storageService.get('password');
         }
+        this.activatedRoute.queryParams.subscribe(function (data) {
+            _this.returnUrl = data.returnUrl;
+        });
     };
     LoginComponent.prototype.submit = function () {
         var _this = this;
@@ -74,7 +79,7 @@ var LoginComponent = /** @class */ (function () {
             _this.storageService.set('id', data.ID);
             _this.storageService.set('username', data.name);
             _this.storageService.set('profilePicture', data.profilePicture);
-            _this.router.navigate(['/main/']);
+            _this.router.navigate([_this.returnUrl ? _this.returnUrl : '/main/']);
             _this.loadingService.hide();
         }, function (error) {
             _this.loadingService.hide();
@@ -102,7 +107,8 @@ var LoginComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__core_api_login_service__["a" /* LoginService */],
             __WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__["a" /* LoadingService */],
             __WEBPACK_IMPORTED_MODULE_4__core_util_storage_service__["a" /* StorageService */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]])
     ], LoginComponent);
     return LoginComponent;
 }());
