@@ -21,7 +21,7 @@ export const MainRoutes: Routes = [{
     path: 'edit-post/:id',
     component: EditPostComponent
 }, {
-    path: 'preview',
+    path: 'preview/:id',
     component: PreviewComponent
 }, {
     path: 'profile',

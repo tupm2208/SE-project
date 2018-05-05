@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoginService } from '../core/api/login.service';
 
@@ -18,12 +18,14 @@ export class LoginComponent implements OnInit {
   private password: String;
   private isRemember: Boolean;
   private message: String;
+  private returnUrl: any;
 
   constructor(
     private loginService: LoginService,
     private loadingService: LoadingService,
     private storageService: StorageService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,11 @@ export class LoginComponent implements OnInit {
       this.username = this.storageService.get('username');
       this.password = this.storageService.get('password');
     }
+
+    this.activatedRoute.queryParams.subscribe( data => {
+
+      this.returnUrl = data.returnUrl;
+    })
   }
 
   submit() {
@@ -49,8 +56,8 @@ export class LoginComponent implements OnInit {
       this.storageService.set('id', data.ID);
       this.storageService.set('username', data.name);
       this.storageService.set('profilePicture', data.profilePicture);
-
-      this.router.navigate(['/main/']);
+      
+      this.router.navigate([this.returnUrl? this.returnUrl: '/main/']);
       
       this.loadingService.hide();
     }, error => {
