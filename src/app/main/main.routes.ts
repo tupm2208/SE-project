@@ -5,7 +5,7 @@ import { PostComponent } from './post/post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { PreviewComponent } from './preview/preview.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { SearchComponent } from './search/search.component';
 
 export const MainRoutes: Routes = [{
     path: '',
@@ -26,4 +26,7 @@ export const MainRoutes: Routes = [{
 }, {
     path: 'profile',
     component: ProfileComponent
+}, {
+    path: 'search',
+    component: SearchComponent
 }];
