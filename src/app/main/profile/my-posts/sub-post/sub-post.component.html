@@ -1,0 +1,22 @@
+<div class="post-preview">
+  
+  <div  style="position: absolute; right: 0px;" class="dropdown">
+   <a data-toggle="dropdown"><i class="material-icons">more_horiz</i></a>
+    
+    <ul class="dropdown-menu" style="padding: 0;">
+      <li><a class="list-group-item" [routerLink]="['/main/edit-post/' + post.ID]">edit</a></li>
+      <li><a class="list-group-item" (click)="deletePost()">delete</a></li>
+    </ul>
+  </div>
+  <a [routerLink]="['/main/post/' + post.ID]">
+    <h2 class="post-title">
+      {{post?.title}}
+    </h2>
+    <h3 class="post-subtitle">
+      {{post?.subtitle}}
+    </h3>
+  </a>
+  <p class="post-meta">Posted by
+    <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>
+</div>
+<hr>

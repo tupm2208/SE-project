@@ -17,6 +17,7 @@ import { MyPostsComponent } from './profile/my-posts/my-posts.component';
 import { ChangePassComponent } from './profile/change-pass/change-pass.component';
 import { CommentComponent } from './post/comment/comment.component';
 import { CommentDetailComponent } from './post/comment/comment-detail/comment-detail.component';
+import { SubPostComponent } from './profile/my-posts/sub-post/sub-post.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,8 @@ import { CommentDetailComponent } from './post/comment/comment-detail/comment-de
     ChangePassComponent,
     CommentComponent,
     CommentDetailComponent
+    SubPostComponent
+
   ]
 })
 export class MainModule { }

@@ -5,6 +5,7 @@ import 'rxjs/add/operator/filter';
 import { LoadingService } from '../../../core/util/loading.service';
 import { PostService } from '../../../core/api/post.service';
 import { StorageService } from '../../../core/util/storage.service';
+import { DialogService } from '../../../core/dialog/dialog.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class MyPostsComponent implements OnInit {
     private loadingService: LoadingService,
     private postService: PostService,
     private route: ActivatedRoute,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -75,5 +77,25 @@ export class MyPostsComponent implements OnInit {
     this.loadingService.show();
 
     this.getPostList();
+  }
+
+  delete(data) {
+
+    console.log("delete: ", data);
+
+    this.loadingService.show();
+
+    this.postService.delete(data.ID).subscribe( data => {
+
+      this.dialogService.showSuccess("delete successfull!");
+      this.postList.splice(this.postList.indexOf(data),1);
+      this.loadingService.hide();
+    }, error => {
+
+      console.log("failed!");
+      this.loadingService.hide();
+      this.dialogService.showError("failed to delete this post");
+    })
+    
   }
 }
