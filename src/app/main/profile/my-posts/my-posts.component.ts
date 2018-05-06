@@ -76,14 +76,15 @@ export class MyPostsComponent implements OnInit {
     this.getPostList();
   }
 
-  delete(data) {
+  delete(post) {
+
 
     this.loadingService.show();
 
-    this.postService.delete(data.ID).subscribe( data => {
+    this.postService.delete(post.ID).subscribe( data => {
 
       this.dialogService.showSuccess("delete successfull!");
-      this.postList.splice(this.postList.indexOf(data),1);
+      this.postList.splice(this.postList.indexOf(post),1);
       this.loadingService.hide();
     }, error => {
       this.loadingService.hide();
