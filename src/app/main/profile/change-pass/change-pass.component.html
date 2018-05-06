@@ -34,12 +34,12 @@
 -->
 <form #changPasswordForm="ngForm">
   <div class="form-group">
-    <label for="oldpassword">Password</label>
+    <label class="input-label" for="oldpassword">Password</label>
     <input [(ngModel)]="oldPass" class="form-control" name="oldPassword" id="oldPassword" type="Password" #oldPassword="ngModel" required minlength="6">
   </div>
 
   <div class="form-group">
-    <label for="newPass">New Password</label>
+    <label class="input-label" for="newPass">New Password</label>
     <input class="form-control" [(ngModel)]="pass"  name="password" id="password" type="Password" #Password="ngModel" required minlength="6">
   </div>
 
@@ -54,7 +54,7 @@
 </div>
   
   <div class="form-group">
-    <label for="cfnewpass">Confirm Password</label>
+    <label class="input-label" for="cfnewpass">Confirm Password</label>
     <input class="form-control" [(ngModel)]="confirmPass" name="confirmPassword" id="repassword" type="Password" appMatchingValidator="password" #confirmPassword="ngModel" required >
   </div>
 

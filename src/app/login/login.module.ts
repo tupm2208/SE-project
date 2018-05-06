@@ -7,6 +7,7 @@ import { LoginRouters } from './login.routes'
 
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register/register.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { RegisterComponent } from './register/register.component';
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgetPasswordComponent
   ]
 })
 export class LoginModule { }
