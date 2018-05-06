@@ -9,5 +9,6 @@
   </a>
   <p class="post-meta">Posted by
     <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>
+    <small id="category-tag"><a href="" [routerLink]='["/main/category/",post?.category?.ID]' [queryParams]="{topic: post?.category?.category}">{{post?.category?.category}}</a></small>
 </div>
 <hr>

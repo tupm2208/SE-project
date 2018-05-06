@@ -24,7 +24,11 @@
     letter-spacing: 1px;
     text-transform: uppercase;
   }
-  
+.search-box {
+  width: 400%;
+}
+
+
   @media only screen and (min-width: 992px) {
     #mainNav {
       border-bottom: 1px solid transparent;
@@ -43,6 +47,9 @@
     }
     #mainNav .navbar-nav > li.nav-item > a:focus, #mainNav .navbar-nav > li.nav-item > a:hover {
       color: rgba(255, 255, 255, 0.8);
+    }
+    .search-box {
+      width: 350px !important;
     }
   }
   
@@ -88,5 +95,8 @@
       -ms-transform: translate3d(0, 100%, 0);
       -o-transform: translate3d(0, 100%, 0);
       transform: translate3d(0, 100%, 0);
+    }
+    .search-box {
+      width: 350px !important;
     }
   }

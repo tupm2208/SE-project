@@ -16,15 +16,15 @@
 <!-- Main Content -->
 <div class="container">
   <div class="row">
-
     <div class="col-lg-8 col-md-10 mx-auto">
-
+      <h2 class="message" *ngIf="numberResults">Matching results for "{{query}}"</h2>
+      <h2 class="message" *ngIf="!numberResults">Ooops, There is no matching results for "{{query}}"</h2>
       <app-bref-post *ngFor="let post of postList" [post]="post" [routerLink]="['/main/post/' + post.ID]"></app-bref-post>
       <!-- Pager -->
       <div class="clearfix">
-        <a class="btn btn-primary float-left" [routerLink]="['/main/home']" [queryParams]="{page: page - 1}" queryParamsHandling="merge"
+        <a class="btn btn-primary float-left" [routerLink]="['/main/search']" [queryParams]="{page: page - 1}" queryParamsHandling="merge"
           *ngIf="page!=1">&larr; Newer Posts</a>
-        <a class="btn btn-primary float-right" [routerLink]="['/main/home']" [queryParams]="{page: page - -1}" queryParamsHandling="merge"
+        <a class="btn btn-primary float-right" [routerLink]="['/main/search']" [queryParams]="{page: page - -1}" queryParamsHandling="merge"
           *ngIf="postList.length == 10">Older Posts &rarr;</a>
       </div>
     </div>

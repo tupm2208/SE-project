@@ -16,9 +16,18 @@
     </div>
   </header>
 
-  <div class="col-lg-7 col-md-10 mx-auto">
+  <div class="col-lg-7 col-md-10 mx-auto post-info">
     <h3 class="title-small">{{postDetail?.title}}</h3>
-    <small class="category"><a href="">{{postDetail?.category?.category}}</a></small>
+    <small><a href="" [routerLink]="['/main/category/' + postDetail?.category?.ID]" [queryParams]="{topic: postDetail?.category?.category}">Topic: {{postDetail?.category?.category}}</a></small>
+    <div>
+        <small>Author: </small>
+        <div class="photo">
+            <img src="{{postDetail?.author?.profilePicture}}" style="width: 4.5rem; height: 5rem;" class="photo" alt="">
+            <span><a >{{postDetail?.author?.name}}</a></span>
+        </div>
+        
+    </div>
+    
   </div>
 
   <div class="col-lg-7 col-md-10 mx-auto sharing-block">

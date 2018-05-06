@@ -12,8 +12,11 @@ export class PostService {
   ) { }
 
   list(page): Observable<any> {
-
     return this.mainApi.get('post/10/' + page );
+  }
+
+  getByCategory(params): Observable<any> {
+    return this.mainApi.get('post/10/'+ params.page + "?category=" + params.categoryID);
   }
 
   getById(id): Observable<any> {
