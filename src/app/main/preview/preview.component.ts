@@ -39,6 +39,11 @@ export class PreviewComponent implements OnInit {
     if(this.postDetail) $('#display').html(this.postDetail.content);
 
     console.log("preview: ", 'preview'+this.id);
+
+    $(".share-btn").click((e) => {
+      e.preventDefault();
+      return false;
+    })
   }
 
   post() {
