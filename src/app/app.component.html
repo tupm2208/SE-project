@@ -9,6 +9,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item" (keydown)="keyDownFunction($event)">
+            <div class="input-group">
+                <input class="form-control search-box" [(ngModel)]="searchContent" name="searchcontent" placeholder="Find an article...">
+              </div>
+        </li> 
+        <li class="nav-item" id="search-button">
+            <a class="nav-link" (click)="search()"><i class="fa fa-search"></i></a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="main/home">Home</a>
         </li>
