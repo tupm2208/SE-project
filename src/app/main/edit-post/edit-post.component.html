@@ -29,6 +29,6 @@
 
 <div *ngIf="display" class="container">
     <editor [(ngModel)]="dataModel" (ngModelChange)="change()" [init]="init" apiKey="npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7"></editor>  
-    <button class="btn btn-primary" (click)="post()">submit</button>
-    <button style="float:right" class="btn btn-primary" (click)="preview()">preview</button>
+    <button class="btn btn-primary pull-left" [routerLink]="['/main/post/'+id]" >Cancel</button>
+    <button style="float:right" class="btn btn-primary" (click)="preview()">Preview</button>
 </div>

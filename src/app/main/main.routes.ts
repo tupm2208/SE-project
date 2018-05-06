@@ -24,6 +24,9 @@ export const MainRoutes: Routes = [{
 }, {
     path: 'preview/:id',
     component: PreviewComponent
+},{
+    path: 'profile/:id',
+    component: ProfileComponent
 }, {
     path: 'profile',
     component: ProfileComponent
@@ -34,3 +37,4 @@ export const MainRoutes: Routes = [{
     path: 'category/:id',
     component: CategoryComponent
 }];
+  

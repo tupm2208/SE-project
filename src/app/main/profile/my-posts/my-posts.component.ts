@@ -18,6 +18,7 @@ export class MyPostsComponent implements OnInit {
   private postList: Array<any> = [];
   private page: number = 1;
   @Input() user: any;
+  @Input() isUser: any;
 
   private params: any = {};
 
@@ -41,8 +42,6 @@ export class MyPostsComponent implements OnInit {
 
       element.author = tem;
     })
-    
-    console.log("post: ", this.postList);
   }
 
   getPostList() {
@@ -52,8 +51,6 @@ export class MyPostsComponent implements OnInit {
     this.postService.list(this.params.page).subscribe( data => {
 
       this.postList = data;
-
-      console.log(" data: ", data);
       this.loadingService.hide();
     }, error => {
 
@@ -79,20 +76,17 @@ export class MyPostsComponent implements OnInit {
     this.getPostList();
   }
 
-  delete(data) {
+  delete(post) {
 
-    console.log("delete: ", data);
 
     this.loadingService.show();
 
-    this.postService.delete(data.ID).subscribe( data => {
+    this.postService.delete(post.ID).subscribe( data => {
 
       this.dialogService.showSuccess("delete successfull!");
-      this.postList.splice(this.postList.indexOf(data),1);
+      this.postList.splice(this.postList.indexOf(post),1);
       this.loadingService.hide();
     }, error => {
-
-      console.log("failed!");
       this.loadingService.hide();
       this.dialogService.showError("failed to delete this post");
     })
