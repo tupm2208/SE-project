@@ -5,7 +5,7 @@
     </div>
   <div  class="comment-block" (mouseenter)="showDropdownButton()" (mouseleave)="hideDropdownButton()">
     <section class="comment-header">
-        <a class="comment-author"> {{comment?.commentator.name}}</a>
+        <a class="comment-author" [routerLink]='["/main/profile/",comment?.authorID]'> {{comment?.commentator.name}}</a>
         <span class="dropdown dropdown-arrow" *ngIf="isCommentator" attr.id="comment-block{{comment.ID}}">
           <button type="button" class="dropdown-toggle dropdown-button" data-toggle="dropdown"> 
           </button>

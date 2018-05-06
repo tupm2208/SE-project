@@ -6,7 +6,7 @@
     </div>
     <div class="useravatar">
       <img alt="" [src]="user.profilePicture">
-      <input type="file" (change)="onFileChange($event)" name="update" class="image-upload" #fileInput accept="image/*" />
+      <input type="file" *ngIf="isUser" (change)="onFileChange($event)" name="update" class="image-upload" #fileInput accept="image/*" />
     </div>
     
     <div class="card-info"> <span class="card-title">{{user?.name}}</span>
@@ -17,33 +17,7 @@
 </div>
 </div>
 
-
-<!-- <div class="container body-container"> -->
-    <!-- <div class="row"> -->
-    <!-- <div class="col col-lg-2 col-md-3 col-navi"> -->
-      <!-- <ul id="nav-navi" class="nav nav-tabs nav-justified">
-        <li class="nav-item"  [ngClass]="type == 1? 'btn-primary': 'btn-default'" (click)="type = 1" >
-          <a class="nav-link nav-tab">My Profile</a>
-        </li>
-        <li class="nav-item"  [ngClass]="type == 2? 'btn-primary': 'btn-default'" (click)="type = 2">
-          <a class="nav-link nav-tab">My Posts</a>
-        </li>
-        <li class="nav-item"  [ngClass]="type == 3? 'btn-primary': 'btn-default'" (click)="type = 3">
-          <a class="nav-link nav-tab">Password</a>
-        </li>
-      </ul> -->
-    <!-- </div> -->
-
-    <!-- <div class="col col-lg-1" ></div> -->
-    <!-- <main id="main" class="col col-lg-8"> -->
-      <!-- <app-info *ngIf="type==1" [user]="user" (changeF)="post()"></app-info>
-      <app-my-posts  *ngIf="type==2" [user]="user"></app-my-posts>
-      <app-change-pass  *ngIf="type==3" [user]="user" (changeF)="post()"></app-change-pass> -->
-    <!-- </main> -->
-  <!-- </div> -->
-<!-- </div> -->
-
-<div class="container wrapper">
+<div class="container wrapper" >
   <div class="menu">
       <ul id="nav-navi" class="nav nav-tabs tabs-left">
           <li class="nav-item"  [ngClass]="type == 1? 'btn-primary': 'btn-default'" (click)="type = 1" >
@@ -52,15 +26,15 @@
           <li class="nav-item"  [ngClass]="type == 2? 'btn-primary': 'btn-default'" (click)="type = 2">
             <a class="nav-link nav-tab">Posts</a>
           </li>
-          <li class="nav-item"  [ngClass]="type == 3? 'btn-primary': 'btn-default'" (click)="type = 3">
+          <li class="nav-item" *ngIf="isUser" [ngClass]="type == 3? 'btn-primary': 'btn-default'" (click)="type = 3">
             <a class="nav-link nav-tab">Password</a>
           </li>
         </ul>
   </div>
   <div class="content">
-      <app-info *ngIf="type==1" [user]="user" (changeF)="post()"></app-info>
-      <app-my-posts  *ngIf="type==2" [user]="user"></app-my-posts>
-      <app-change-pass  *ngIf="type==3" [user]="user" (changeF)="post()"></app-change-pass>
+      <app-info *ngIf="type==1" [user]="user" [isUser]="isUser" (changeF)="post()"></app-info>
+      <app-my-posts  *ngIf="type==2" [user]="user" [isUser]="isUser"></app-my-posts>
+      <app-change-pass *ngIf="type==3" [user]="user" (changeF)="post()"></app-change-pass>
   </div>
 
 </div>

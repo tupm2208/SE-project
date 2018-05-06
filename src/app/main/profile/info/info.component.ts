@@ -10,6 +10,8 @@ import { DialogService } from '../../../core/dialog/dialog.service';
 export class InfoComponent implements OnInit {
 
   @Input() user: any;
+  @Input() isUser:any;
+  
   @Output() changeF = new EventEmitter();
   public name: String;
   public email: String;
