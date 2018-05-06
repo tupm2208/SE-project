@@ -25,6 +25,7 @@ export class EditPostComponent implements OnInit {
   private title: String;
   private registData: any = {};
   private categoryList: Array<any> = [];
+  private id: any;
 
   private init = {
     selector: 'textarea',
@@ -91,13 +92,13 @@ export class EditPostComponent implements OnInit {
     private storageService: StorageService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.loading.show();
 
-    this.loginService.refreshKey().subscribe( data => {
+    await this.loginService.refreshKey().toPromise().then( data => {
       
-      this.loading.hide();
+      // this.loading.hide();
 
       this.display = true;
     }, error => {
@@ -105,17 +106,19 @@ export class EditPostComponent implements OnInit {
       this.loading.hide();
     })
 
-    let id = this.route.snapshot.paramMap.get('id');
+    if(!this.display) return;
+
+    this.id = this.route.snapshot.paramMap.get('id');
 
     this.registData.categoryID = '1';
     this.registData.title = '';
 
-    if(Number(id)) {
+    if(Number(this.id)) {
 
-      this.initForEdit(id);
+      this.initForEdit(this.id);
     } else {
 
-      let data = this.storageService.get('preview');
+      let data = this.storageService.get('preview' + this.id);
 
       console.log("preview Data: ", data);
 
@@ -129,6 +132,8 @@ export class EditPostComponent implements OnInit {
 
         this.dataModel = this.registData.content;
       }
+
+      this.loading.hide();
     }
 
     this.categoryService.list().subscribe( data => {
@@ -136,7 +141,7 @@ export class EditPostComponent implements OnInit {
       this.categoryList = data;
 
       this.display = true;
-      this.loading.hide();
+      // this.loading.hide();
     })
   }
 
@@ -146,6 +151,21 @@ export class EditPostComponent implements OnInit {
 
       this.registData = data.data;
       this.dataModel = this.registData.content;
+
+      let data1 = this.storageService.get('preview' + this.id);
+
+      console.log("preview Data: ", data1);
+
+      setTimeout( () => {
+        $("#display").html(this.dataModel);
+      }, 50);
+
+      if(data1) {
+
+        this.registData = data1;
+
+        this.dataModel = this.registData.content;
+      }
       this.loading.hide();
     })
   }
@@ -278,11 +298,12 @@ export class EditPostComponent implements OnInit {
 
       this.registData.content = $('#display').html();
 
-      this.storageService.set('preview', this.registData);
+      this.storageService.set('preview' + this.id, this.registData);
+      console.log("pre: ", this.storageService.get('preview'+this.id));
 
       this.loading.hide();
 
-      this.router.navigate(['main/preview']);
+      this.router.navigate(['main/preview/'+ this.id]);
     }, error => {
 
       this.loading.hide();

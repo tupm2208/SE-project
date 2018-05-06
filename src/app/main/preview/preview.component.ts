@@ -18,6 +18,7 @@ declare let $: any;
 export class PreviewComponent implements OnInit {
 
   private postDetail: any = {};
+  private id: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,11 +32,13 @@ export class PreviewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.postDetail = this.storageService.get('preview');
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    this.postDetail = this.storageService.get('preview' + this.id);
 
     if(this.postDetail) $('#display').html(this.postDetail.content);
 
-    console.log("preview: ", this.postDetail);
+    console.log("preview: ", 'preview'+this.id);
   }
 
   post() {
@@ -79,7 +82,7 @@ export class PreviewComponent implements OnInit {
     console.log("preview: ", this.postDetail);
     this.dialog.showSuccess().subscribe( data => {
 
-      this.storageService.set('preview', null);
+      this.storageService.set('preview' + this.id, null);
 
       this.router.navigate(['/main/post/'+ this.postDetail.ID])
     })
