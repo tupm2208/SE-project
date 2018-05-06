@@ -21,6 +21,10 @@ export class LoginService {
     return this.mainApi.post('login', params);
   }
 
+  forgetPassword(params): Observable<any> {
+    return this.mainApi.post('forgetpassword',params);
+  }
+
 
   refreshKey(): Observable<any> {
 

@@ -357,7 +357,7 @@ form .field-group span {
 }
 
 ul.list-login {
-    margin: 1em 0 0;
+    margin: 0.3em 0 0;
 }
 
 form .field-group .wthree-field {
@@ -2914,7 +2914,7 @@ ul.list-login li:nth-child(2) {
 
 @media screen and (max-width: 414px) {
     ul.list-login li:nth-child(2) {
-      margin: 1em 0 0 0;
+      margin: 0.3em 0 0 0;
   }
 }
 .err-msg {

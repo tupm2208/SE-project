@@ -9,6 +9,9 @@ input#saveForm:disabled,input#saveForm:hover:disabled {
     letter-spacing: 0px;
     opacity: 0.5;
   }
+  .input-label {
+      font-size: 17px;
+  }
 @media screen and (max-width: 990px) {
     
 }
