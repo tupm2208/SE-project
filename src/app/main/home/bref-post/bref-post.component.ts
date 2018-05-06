@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { FormatService } from '../../../core/util/format.service';
-
+declare var $: any;
 @Component({
   selector: 'app-bref-post',
   templateUrl: './bref-post.component.html',
@@ -16,6 +16,9 @@ export class BrefPostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    $("#category-tag").click((e)=>{
+      e.stopPropagation();
+    })
   }
 
 }
