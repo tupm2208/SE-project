@@ -1,6 +1,6 @@
 webpackJsonp(["main.module"],{
 
-/***/ "../../../../../src/app/main/category/category.component.css":
+/***/ "../../../../../src/app/main/edit-post/edit-post.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -18,135 +18,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/main/category/category.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<!-- Page Header -->\r\n<header class=\"masthead\" style=\"background-image: url('assets/img/home-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"site-heading\">\r\n          <h1>Clean Blog</h1>\r\n          <span class=\"subheading\">A Blog Theme by Start Bootstrap</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<!-- Main Content -->\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n      \r\n      <app-bref-post *ngFor=\"let post of postList\" [post]=\"post\" [routerLink]=\"['/main/post/' + post.ID]\"></app-bref-post>\r\n      <!-- Pager -->\r\n      <div class=\"clearfix\">\r\n         \r\n        <a class=\"btn btn-primary float-left\" [routerLink]=\"['/main/category/', categoryID]\" [queryParams]=\"{page: page - 1}\" queryParamsHandling=\"merge\" *ngIf=\"page!=1\" (click)=\"loadPreviousPage()\">&larr; Newer Posts</a>\r\n          \r\n        <a class=\"btn btn-primary float-right\" *ngIf=\"postList.length == 10\" [routerLink]=\"['/main/category/', categoryID]\" [queryParams]=\"{page: page - -1}\" queryParamsHandling=\"merge\" (click)=\"loadNextPage()\">Older Posts &rarr;</a>\r\n    \r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<hr>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/main/category/category.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_filter__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/filter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_api_post_service__ = __webpack_require__("../../../../../src/app/core/api/post.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_api_category_service__ = __webpack_require__("../../../../../src/app/core/api/category.service.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var CategoryComponent = /** @class */ (function () {
-    function CategoryComponent(loadingService, postService, categoryService, route, router) {
-        this.loadingService = loadingService;
-        this.postService = postService;
-        this.categoryService = categoryService;
-        this.route = route;
-        this.router = router;
-        this.postList = [];
-    }
-    CategoryComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.loadingService.show();
-        this.route.params
-            .subscribe(function (params) {
-            _this.categoryID = params.id;
-            _this.categoryService.list().subscribe(function (data) {
-                for (var index = 0; index < data.length; index++) {
-                    var element = data[index];
-                    if (element.ID == _this.categoryID) {
-                        _this.category = element.category;
-                        break;
-                    }
-                }
-            });
-        });
-        this.route.queryParams
-            .subscribe(function (params) {
-            _this.page = params.page ? params.page : 1;
-        });
-        this.getPostList();
-    };
-    CategoryComponent.prototype.getPostList = function () {
-        var _this = this;
-        var param = {
-            page: this.page,
-            categoryID: this.categoryID,
-        };
-        this.postService.getByCategory(param).subscribe(function (data) {
-            _this.postList = data;
-            _this.numberResults = _this.postList.length;
-            _this.loadingService.hide();
-        }, function (error) {
-            _this.loadingService.hide();
-        });
-    };
-    CategoryComponent.prototype.loadNextPage = function () {
-        this.page = this.page - -1;
-        this.router.navigate(["main/category", this.categoryID], { queryParams: { topic: this.category, page: this.page, } });
-        this.getPostList();
-    };
-    CategoryComponent.prototype.loadPreviousPage = function () {
-        this.page = this.page - 1;
-        this.router.navigate(["main/category", this.categoryID], { queryParams: { topic: this.category, page: this.page, } });
-        this.getPostList();
-    };
-    CategoryComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-search',
-            template: __webpack_require__("../../../../../src/app/main/category/category.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/main/category/category.component.css")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__["a" /* LoadingService */],
-            __WEBPACK_IMPORTED_MODULE_4__core_api_post_service__["a" /* PostService */],
-            __WEBPACK_IMPORTED_MODULE_5__core_api_category_service__["a" /* CategoryService */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
-    ], CategoryComponent);
-    return CategoryComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/main/edit-post/edit-post.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "button {\r\n    margin-top: 20px;\r\n}", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ "../../../../../src/app/main/edit-post/edit-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header *ngIf=\"display\" class=\"masthead\" style=\"background-image: url('assets/img/about-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"page-heading\">\r\n          <!-- <h1>About Me</h1>  -->\r\n            <div class=\"form-group\">\r\n            <label for=\"sel1\">Select category:</label>\r\n            <select class=\"form-control\" id=\"sel1\" [(ngModel)]=\"registData.categoryID\">\r\n              <option *ngFor=\"let item of categoryList\" [value]=\"item.ID\">{{item.category}}</option>\r\n            </select>\r\n          </div>\r\n          <input type=\"text\" [(ngModel)]=\"registData.title\" style=\"font-size: 3em; width: 100%\" placeholder=\"Enter Title\">\r\n          <span class=\"subheading\">{{registData.title}}.</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<div class=\"container\">\r\n  <div id=\"display\" style=\"position: absolute;\r\n    display: block;\r\n    height: 10px!important;\r\n    overflow: overlay;\">\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"display\" class=\"container\">\r\n    <editor [(ngModel)]=\"dataModel\" (ngModelChange)=\"change()\" [init]=\"init\" apiKey=\"npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7\"></editor>  \r\n    <button class=\"btn btn-primary pull-left\" [routerLink]=\"['/main/post/'+id]\" >Cancel</button>\r\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"preview()\">Preview</button>\r\n</div>"
+module.exports = "<header *ngIf=\"display\" class=\"masthead\" style=\"background-image: url('assets/img/about-bg.jpg')\">\n  <div class=\"overlay\"></div>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\n        <div class=\"page-heading\">\n          <!-- <h1>About Me</h1>  -->\n            <div class=\"form-group\">\n            <label for=\"sel1\">Select category:</label>\n            <select class=\"form-control\" id=\"sel1\" [(ngModel)]=\"registData.categoryID\">\n              <option *ngFor=\"let item of categoryList\" [value]=\"item.ID\">{{item.category}}</option>\n            </select>\n          </div>\n          <input type=\"text\" [(ngModel)]=\"registData.title\" style=\"font-size: 3em; width: 100%\" placeholder=\"Enter Title\">\n          <span class=\"subheading\">{{registData.title}}.</span>\n        </div>\n      </div>\n    </div>\n  </div>\n</header>\n\n<div class=\"container\">\n  <div id=\"display\" style=\"position: absolute;\n    display: block;\n    height: 10px!important;\n    overflow: overlay;\">\n  </div>\n</div>\n\n<div *ngIf=\"display\" class=\"container\">\n    <editor [(ngModel)]=\"dataModel\" (ngModelChange)=\"change()\" [init]=\"init\" apiKey=\"npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7\"></editor>  \n    <button class=\"btn btn-primary\" (click)=\"post()\">submit</button>\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"preview()\">preview</button>\n</div>"
 
 /***/ }),
 
@@ -173,41 +48,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
 };
 
 
@@ -279,49 +119,35 @@ var EditPostComponent = /** @class */ (function () {
         };
     }
     EditPostComponent.prototype.ngOnInit = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            var data;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.loading.show();
-                        return [4 /*yield*/, this.loginService.refreshKey().toPromise().then(function (data) {
-                                // this.loading.hide();
-                                _this.display = true;
-                            }, function (error) {
-                                _this.loading.hide();
-                            })];
-                    case 1:
-                        _a.sent();
-                        if (!this.display)
-                            return [2 /*return*/];
-                        this.id = this.route.snapshot.paramMap.get('id');
-                        this.registData.categoryID = '1';
-                        this.registData.title = '';
-                        if (Number(this.id)) {
-                            this.initForEdit(this.id);
-                        }
-                        else {
-                            data = this.storageService.get('preview' + this.id);
-                            console.log("preview Data: ", data);
-                            setTimeout(function () {
-                                $("#display").html(_this.dataModel);
-                            }, 50);
-                            if (data) {
-                                this.registData = data;
-                                this.dataModel = this.registData.content;
-                            }
-                            this.loading.hide();
-                        }
-                        this.categoryService.list().subscribe(function (data) {
-                            _this.categoryList = data;
-                            _this.display = true;
-                            // this.loading.hide();
-                        });
-                        return [2 /*return*/];
-                }
-            });
+        var _this = this;
+        this.loading.show();
+        this.loginService.refreshKey().subscribe(function (data) {
+            _this.loading.hide();
+            _this.display = true;
+        }, function (error) {
+            _this.loading.hide();
+        });
+        var id = this.route.snapshot.paramMap.get('id');
+        this.registData.categoryID = '1';
+        this.registData.title = '';
+        if (Number(id)) {
+            this.initForEdit(id);
+        }
+        else {
+            var data = this.storageService.get('preview');
+            console.log("preview Data: ", data);
+            setTimeout(function () {
+                $("#display").html(_this.dataModel);
+            }, 50);
+            if (data) {
+                this.registData = data;
+                this.dataModel = this.registData.content;
+            }
+        }
+        this.categoryService.list().subscribe(function (data) {
+            _this.categoryList = data;
+            _this.display = true;
+            _this.loading.hide();
         });
     };
     EditPostComponent.prototype.initForEdit = function (id) {
@@ -329,15 +155,6 @@ var EditPostComponent = /** @class */ (function () {
         this.postService.getById(id).subscribe(function (data) {
             _this.registData = data.data;
             _this.dataModel = _this.registData.content;
-            var data1 = _this.storageService.get('preview' + _this.id);
-            console.log("preview Data: ", data1);
-            setTimeout(function () {
-                $("#display").html(_this.dataModel);
-            }, 50);
-            if (data1) {
-                _this.registData = data1;
-                _this.dataModel = _this.registData.content;
-            }
             _this.loading.hide();
         });
     };
@@ -424,10 +241,9 @@ var EditPostComponent = /** @class */ (function () {
         var _this = this;
         this.post().subscribe(function (data) {
             _this.registData.content = $('#display').html();
-            _this.storageService.set('preview' + _this.id, _this.registData);
-            console.log("pre: ", _this.storageService.get('preview' + _this.id));
+            _this.storageService.set('preview', _this.registData);
             _this.loading.hide();
-            _this.router.navigate(['main/preview/' + _this.id]);
+            _this.router.navigate(['main/preview']);
         }, function (error) {
             _this.loading.hide();
         });
@@ -463,7 +279,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".post-meta {\r\n    margin-bottom: 0px;\r\n}", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -476,7 +292,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/home/bref-post/bref-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"post-preview\">\r\n  <a>\r\n    <h2 class=\"post-title\">\r\n      {{post?.title}}\r\n    </h2>\r\n    <h3 class=\"post-subtitle\">\r\n      {{post?.subtitle}}\r\n    </h3>\r\n  </a>\r\n  <p class=\"post-meta\">Posted by\r\n    <a class=\"authorname-tag\" [routerLink]='[\"/main/profile/\",post?.authorID]'>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\r\n    <small class=\"category-tag\"><a href=\"\" [routerLink]='[\"/main/category/\",post?.category?.ID]' [queryParams]=\"{topic: post?.category?.category}\">{{post?.category?.category}}</a></small>\r\n</div>\r\n<hr>"
+module.exports = "<div class=\"post-preview\">\n  <a>\n    <h2 class=\"post-title\">\n      {{post?.title}}\n    </h2>\n    <h3 class=\"post-subtitle\">\n      {{post?.subtitle}}\n    </h3>\n  </a>\n  <p class=\"post-meta\">Posted by\n    <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\n</div>\n<hr>"
 
 /***/ }),
 
@@ -503,12 +319,6 @@ var BrefPostComponent = /** @class */ (function () {
         this.formatService = formatService;
     }
     BrefPostComponent.prototype.ngOnInit = function () {
-        $(".category-tag").click(function (e) {
-            e.stopPropagation();
-        });
-        $(".authorname-tag").click(function (e) {
-            e.stopPropagation();
-        });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
@@ -550,7 +360,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Page Header -->\r\n<header class=\"masthead\" style=\"background-image: url('assets/img/home-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"site-heading\">\r\n          <h1>Clean Blog</h1>\r\n          <span class=\"subheading\">A Blog Theme by Start Bootstrap</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<!-- Main Content -->\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n\r\n      <app-bref-post *ngFor=\"let post of postList\" [post]=\"post\" [routerLink]=\"['/main/post/' + post.ID]\"></app-bref-post>\r\n      <!-- Pager -->\r\n      <div class=\"clearfix\">\r\n        <a class=\"btn btn-primary float-left\" [routerLink]=\"['/main/home']\" [queryParams]=\"{page: page - 1}\" queryParamsHandling=\"merge\"\r\n          *ngIf=\"page!=1\">&larr; Newer Posts</a>\r\n        <a class=\"btn btn-primary float-right\" [routerLink]=\"['/main/home']\" [queryParams]=\"{page: page - -1}\" queryParamsHandling=\"merge\"\r\n          *ngIf=\"postList.length == 10\">Older Posts &rarr;</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<hr>"
+module.exports = "<!-- Page Header -->\n<header class=\"masthead\" style=\"background-image: url('assets/img/home-bg.jpg')\">\n  <div class=\"overlay\"></div>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\n        <div class=\"site-heading\">\n          <h1>Clean Blog</h1>\n          <span class=\"subheading\">A Blog Theme by Start Bootstrap</span>\n        </div>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- Main Content -->\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\n\n      <app-bref-post *ngFor=\"let post of postList\" [post]=\"post\" [routerLink]=\"['/main/post/' + post.ID]\"></app-bref-post>\n      <!-- Pager -->\n      <div class=\"clearfix\">\n        <a class=\"btn btn-primary float-left\" [routerLink]=\"['/main/home']\" [queryParams]=\"{page: page - 1}\" queryParamsHandling=\"merge\"\n          *ngIf=\"page!=1\">&larr; Newer Posts</a>\n        <a class=\"btn btn-primary float-right\" [routerLink]=\"['/main/home']\" [queryParams]=\"{page: page - -1}\" queryParamsHandling=\"merge\"\n          *ngIf=\"postList.length == 10\">Older Posts &rarr;</a>\n      </div>\n    </div>\n  </div>\n</div>\n\n<hr>"
 
 /***/ }),
 
@@ -645,16 +455,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__post_comment_comment_component__ = __webpack_require__("../../../../../src/app/main/post/comment/comment.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__post_comment_comment_detail_comment_detail_component__ = __webpack_require__("../../../../../src/app/main/post/comment/comment-detail/comment-detail.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__profile_my_posts_sub_post_sub_post_component__ = __webpack_require__("../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__search_search_component__ = __webpack_require__("../../../../../src/app/main/search/search.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__category_category_component__ = __webpack_require__("../../../../../src/app/main/category/category.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
 
 
 
@@ -699,8 +505,6 @@ var MainModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_16__post_comment_comment_component__["a" /* CommentComponent */],
                 __WEBPACK_IMPORTED_MODULE_17__post_comment_comment_detail_comment_detail_component__["a" /* CommentDetailComponent */],
                 __WEBPACK_IMPORTED_MODULE_18__profile_my_posts_sub_post_sub_post_component__["a" /* SubPostComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__search_search_component__["a" /* SearchComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__category_category_component__["a" /* CategoryComponent */],
             ]
         })
     ], MainModule);
@@ -721,10 +525,6 @@ var MainModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_post_edit_post_component__ = __webpack_require__("../../../../../src/app/main/edit-post/edit-post.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__preview_preview_component__ = __webpack_require__("../../../../../src/app/main/preview/preview.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__profile_profile_component__ = __webpack_require__("../../../../../src/app/main/profile/profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search_search_component__ = __webpack_require__("../../../../../src/app/main/search/search.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__category_category_component__ = __webpack_require__("../../../../../src/app/main/category/category.component.ts");
-
-
 
 
 
@@ -744,20 +544,11 @@ var MainRoutes = [{
         path: 'edit-post/:id',
         component: __WEBPACK_IMPORTED_MODULE_2__edit_post_edit_post_component__["a" /* EditPostComponent */]
     }, {
-        path: 'preview/:id',
+        path: 'preview',
         component: __WEBPACK_IMPORTED_MODULE_3__preview_preview_component__["a" /* PreviewComponent */]
-    }, {
-        path: 'profile/:id',
-        component: __WEBPACK_IMPORTED_MODULE_4__profile_profile_component__["a" /* ProfileComponent */]
     }, {
         path: 'profile',
         component: __WEBPACK_IMPORTED_MODULE_4__profile_profile_component__["a" /* ProfileComponent */]
-    }, {
-        path: 'search',
-        component: __WEBPACK_IMPORTED_MODULE_5__search_search_component__["a" /* SearchComponent */]
-    }, {
-        path: 'category/:id',
-        component: __WEBPACK_IMPORTED_MODULE_6__category_category_component__["a" /* CategoryComponent */]
     }];
 
 
@@ -771,7 +562,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".comment-wrap {\r\n    margin-bottom: 1.25rem;\r\n    display: table;\r\n    width: 100%;\r\n    min-height: 5.3125rem;\r\n  }\r\n  \r\n  .photo {\r\n    padding-top: 0.625rem;\r\n    display: table-cell;\r\n    width: 3.5rem;\r\n  }\r\n  \r\n  .photo .avatar {\r\n    height: 2.25rem;\r\n    width: 2.25rem;\r\n    border-radius: 50%;\r\n    background-size: contain;\r\n  }\r\n  \r\n  .comment-block {\r\n    padding: 1rem;\r\n    background-color: #fff;\r\n    display: table-cell;\r\n    vertical-align: top;\r\n    border-radius: 0.1875rem;\r\n    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);\r\n            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);\r\n  }\r\n  \r\n  .comment-block textarea {\r\n    width: 100%;\r\n    resize: none;\r\n  }\r\n  \r\n  .comment-text {\r\n    margin: 15px auto;\r\n    font-size: 17px;\r\n  }\r\n  \r\n  .bottom-comment {\r\n    color: #acb4c2;\r\n    font-size: 0.875rem;\r\n  }\r\n  \r\n  .comment-date {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .comment-actions {\r\n    float: right;\r\n  }\r\n  \r\n  .comment-actions li {\r\n    display: inline;\r\n    margin: -2px;\r\n    cursor: pointer;\r\n  }\r\n  \r\n  .comment-actions li.complain {\r\n    padding-right: 0.75rem;\r\n    border-right: 1px solid #e1e5eb;\r\n  }\r\n  \r\n  .comment-actions li.reply {\r\n    padding-left: 0.75rem;\r\n    padding-right: 0.125rem;\r\n  }\r\n  \r\n  .comment-actions li:hover {\r\n    color: #0095ff;\r\n  }\r\n  \r\n  .dropdown-button  {\r\n    background: none;\r\n    border: none;\r\n    padding: 0px 10px;\r\n  }\r\n  \r\n  .dropdown-button:focus {\r\n    background: none;\r\n    border: none;\r\n    outline: none;\r\n  }\r\n  \r\n  .dropdown-button:hover {\r\n    background-color: #f7f7f7; \r\n  }\r\n  \r\n  .modal-button {\r\n    font-size: 12px;\r\n    padding: 15px;\r\n  }\r\n  \r\n  .modal-content {\r\n    font-size: 17px;\r\n  }\r\n  \r\n  ", ""]);
+exports.push([module.i, ".comment-wrap {\n    margin-bottom: 1.25rem;\n    display: table;\n    width: 100%;\n    min-height: 5.3125rem;\n  }\n  \n  .photo {\n    padding-top: 0.625rem;\n    display: table-cell;\n    width: 3.5rem;\n  }\n  \n  .photo .avatar {\n    height: 2.25rem;\n    width: 2.25rem;\n    border-radius: 50%;\n    background-size: contain;\n  }\n  \n  .comment-block {\n    padding: 1rem;\n    background-color: #fff;\n    display: table-cell;\n    vertical-align: top;\n    border-radius: 0.1875rem;\n    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);\n            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);\n  }\n  \n  .comment-block textarea {\n    width: 100%;\n    resize: none;\n  }\n  \n  .comment-text {\n    margin: 15px auto;\n    font-size: 17px;\n  }\n  \n  .bottom-comment {\n    color: #acb4c2;\n    font-size: 0.875rem;\n  }\n  \n  .comment-date {\n    font-size: 14px;\n  }\n  \n  .comment-actions {\n    float: right;\n  }\n  \n  .comment-actions li {\n    display: inline;\n    margin: -2px;\n    cursor: pointer;\n  }\n  \n  .comment-actions li.complain {\n    padding-right: 0.75rem;\n    border-right: 1px solid #e1e5eb;\n  }\n  \n  .comment-actions li.reply {\n    padding-left: 0.75rem;\n    padding-right: 0.125rem;\n  }\n  \n  .comment-actions li:hover {\n    color: #0095ff;\n  }\n  \n  .dropdown-button  {\n    background: none;\n    border: none;\n    padding: 0px 10px;\n  }\n  \n  .dropdown-button:focus {\n    background: none;\n    border: none;\n    outline: none;\n  }\n  \n  .dropdown-button:hover {\n    background-color: #f7f7f7; \n  }\n  \n  .modal-button {\n    font-size: 12px;\n    padding: 15px;\n  }\n  \n  .modal-content {\n    font-size: 17px;\n  }\n  \n  ", ""]);
 
 // exports
 
@@ -784,7 +575,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/post/comment/comment-detail/comment-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"comment-wrap\">\r\n    <div class=\"photo\">\r\n      <img src=\"{{comment?.commentator.profilePicture}}\" class=\"avatar\" alt=\"\">\r\n      \r\n    </div>\r\n  <div  class=\"comment-block\" (mouseenter)=\"showDropdownButton()\" (mouseleave)=\"hideDropdownButton()\">\r\n    <section class=\"comment-header\">\r\n        <a class=\"comment-author\" [routerLink]='[\"/main/profile/\",comment?.authorID]'> {{comment?.commentator.name}}</a>\r\n        <span class=\"dropdown dropdown-arrow\" *ngIf=\"isCommentator\" attr.id=\"comment-block{{comment.ID}}\">\r\n          <button type=\"button\" class=\"dropdown-toggle dropdown-button\" data-toggle=\"dropdown\"> \r\n          </button>\r\n          <div class=\"dropdown-menu\">\r\n            <a class=\"dropdown-item\" (click)=\"isEdit = true\">Edit</a>\r\n            <a class=\"dropdown-item\" data-toggle=\"modal\" id=\"deleteButton\" data-target=\"#exampleModal\" (click)=\"delete()\" >Delete</a>\r\n          </div>\r\n        </span>\r\n        <small class=\"comment-date pull-right\">{{formatService.formatDateTime(comment.createdAt)}}</small>\t\r\n    \r\n      </section>\r\n\r\n    <p class=\"comment-text\" *ngIf=\"!isEdit\">{{comment?.content}}</p>\r\n    <div class=\"edit-block\" *ngIf=\"isEdit\">\r\n      <form action=\"\" (keydown)=\"keyDownFunction($event)\" >\r\n          <input type=\"text\"  [(ngModel)]=\"editContent\" name=\"editcontent\" class=\"form-control\" value={{comment?.content}} (focusout)=\"cancelEdit()\">\r\n      </form>\r\n      <!-- attr.id=\"input{{comment.ID}}\" -->\r\n\r\n      <small>Press Esc to <a href=\"\" (click)=\"cancelEdit()\">cancel</a> </small>\r\n    </div>\r\n    \r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"comment-wrap\">\n    <div class=\"photo\">\n      <img src=\"{{comment?.commentator.profilePicture}}\" class=\"avatar\" alt=\"\">\n      \n    </div>\n  <div  class=\"comment-block\" (mouseenter)=\"showDropdownButton()\" (mouseleave)=\"hideDropdownButton()\">\n    <section class=\"comment-header\">\n        <a class=\"comment-author\"> {{comment?.commentator.name}}</a>\n        <span class=\"dropdown dropdown-arrow\" *ngIf=\"isCommentator\" attr.id=\"comment-block{{comment.ID}}\">\n          <button type=\"button\" class=\"dropdown-toggle dropdown-button\" data-toggle=\"dropdown\"> \n          </button>\n          <div class=\"dropdown-menu\">\n            <a class=\"dropdown-item\" (click)=\"isEdit = true\">Edit</a>\n            <a class=\"dropdown-item\" data-toggle=\"modal\" id=\"deleteButton\" data-target=\"#exampleModal\" (click)=\"delete()\" >Delete</a>\n          </div>\n        </span>\n        <small class=\"comment-date pull-right\">{{formatService.formatDateTime(comment.createdAt)}}</small>\t\n    \n      </section>\n\n    <p class=\"comment-text\" *ngIf=\"!isEdit\">{{comment?.content}}</p>\n    <div class=\"edit-block\" *ngIf=\"isEdit\">\n      <form action=\"\" (keydown)=\"keyDownFunction($event)\" >\n          <input type=\"text\"  [(ngModel)]=\"editContent\" name=\"editcontent\" class=\"form-control\" value={{comment?.content}} (focusout)=\"cancelEdit()\">\n      </form>\n      <!-- attr.id=\"input{{comment.ID}}\" -->\n\n      <small>Press Esc to <a href=\"\" (click)=\"cancelEdit()\">cancel</a> </small>\n    </div>\n    \n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -906,7 +697,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\r\ninput, textarea {\r\n    outline: none;\r\n    border: none;\r\n    display: block;\r\n    margin: 0;\r\n    padding: 0;\r\n    -webkit-font-smoothing: antialiased;\r\n    font-family: \"PT Sans\", \"Helvetica Neue\", \"Helvetica\", \"Roboto\", \"Arial\", sans-serif;\r\n    font-size: 1rem;\r\n    color: #555f77;\r\n    width: 100%;\r\n  }\r\n  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {\r\n    color: #ced2db;\r\n  }\r\n  input::-moz-placeholder, textarea::-moz-placeholder {\r\n    color: #ced2db;\r\n  }\r\n  input:-moz-placeholder, textarea:-moz-placeholder {\r\n    color: #ced2db;\r\n  }\r\n  input:-ms-input-placeholder, textarea:-ms-input-placeholder {\r\n    color: #ced2db;\r\n  }\r\n  p {\r\n    line-height: 1.3125rem;\r\n  }\r\n  .comments {\r\n    margin: 2.5rem auto 0;\r\n    max-width: 60.75rem;\r\n    padding: 20px 1.25rem;\r\n    background-color: #f7f7f7;\r\n  }\r\n  .comment-wrap {\r\n    margin-bottom: 1.25rem;\r\n    display: table;\r\n    width: 100%;\r\n    min-height: 5.3125rem;\r\n  }\r\n  .comment-block {\r\n    padding: 1rem;\r\n    background-color: #fff;\r\n    display: table-cell;\r\n    vertical-align: top;\r\n    border-radius: 0.1875rem;\r\n    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);\r\n            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);\r\n  }\r\n  button:disabled,button:hover:disabled {\r\n    letter-spacing: 0px;\r\n    opacity: 0.5;\r\n    background-color: #007bff !important;\r\n    border: none;\r\n  }\r\n\r\n", ""]);
+exports.push([module.i, "\ninput, textarea {\n    outline: none;\n    border: none;\n    display: block;\n    margin: 0;\n    padding: 0;\n    -webkit-font-smoothing: antialiased;\n    font-family: \"PT Sans\", \"Helvetica Neue\", \"Helvetica\", \"Roboto\", \"Arial\", sans-serif;\n    font-size: 1rem;\n    color: #555f77;\n    width: 100%;\n  }\n  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {\n    color: #ced2db;\n  }\n  input::-moz-placeholder, textarea::-moz-placeholder {\n    color: #ced2db;\n  }\n  input:-moz-placeholder, textarea:-moz-placeholder {\n    color: #ced2db;\n  }\n  input:-ms-input-placeholder, textarea:-ms-input-placeholder {\n    color: #ced2db;\n  }\n  p {\n    line-height: 1.3125rem;\n  }\n  .comments {\n    margin: 2.5rem auto 0;\n    max-width: 60.75rem;\n    padding: 20px 1.25rem;\n    background-color: #f7f7f7;\n  }\n  .comment-wrap {\n    margin-bottom: 1.25rem;\n    display: table;\n    width: 100%;\n    min-height: 5.3125rem;\n  }\n  .comment-block {\n    padding: 1rem;\n    background-color: #fff;\n    display: table-cell;\n    vertical-align: top;\n    border-radius: 0.1875rem;\n    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);\n            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);\n  }\n  button:disabled,button:hover:disabled {\n    letter-spacing: 0px;\n    opacity: 0.5;\n    background-color: #007bff !important;\n    border: none;\n  }\n\n", ""]);
 
 // exports
 
@@ -919,7 +710,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/post/comment/comment.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-9 col-md-10 mx-auto\">\r\n\r\n\r\n<div class=\"comments\" >\r\n\t\t<div class=\"comment-wrap\">\r\n\t\t\t\t<div class=\"comment-block\">\r\n\t\t\t\t\t\t<form action=\"\" #commentForm=\"ngForm\" >\r\n\t\t\t\t\t\t\t\t<textarea name=\"comment-box\" id=\"comment-box\" [(ngModel)]=\"content\" cols=\"30\" rows=\"3\" [attr.placeholder]=\"isLogin ? 'Add comment...'  : 'Sign in to comment'\" [disabled]=\"!isLogin\"></textarea>\r\n\t\t\t\t\t\t</form>\r\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary pull-right\" style=\"padding: 10px; font-size: 0.7em;\" (click)=\"submit(); commentForm.reset();\" [disabled]=\"!isLogin\">Submit</button>\r\n\t\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"comment-details\" *ngFor=\"let comment of comments\">\r\n        <app-comment-detail [comment]=\"comment\"></app-comment-detail>\r\n\t\t</div>\r\n\t\t   <!-- Modal -->\r\n\t\t   <div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalCenterTitle\" aria-hidden=\"true\">\r\n                <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n                  <div class=\"modal-content\">\r\n                    <div class=\"modal-header\">\r\n                      <h6 class=\"modal-title\" id=\"exampleModalLongTitle\">Delete</h6>\r\n                      <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                        <span aria-hidden=\"true\">&times;</span>\r\n                      </button>\r\n                    </div>\r\n                    <div class=\"modal-body modal-content\">\r\n                      Are you sure you want to delete this comment?\r\n                    </div>\r\n                    <div class=\"modal-footer\">\r\n                      <button type=\"button\" class=\"btn btn-secondary modal-button\" data-dismiss=\"modal\">Close</button>\r\n                      <button type=\"button\" id=\"confirmButton\" class=\"btn btn-primary modal-button\" (click)=\"delete()\" data-dismiss=\"modal\">Delete</button>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n</div>\r\n\r\n</div>\r\n\r\n</div>\r\n\r\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-lg-9 col-md-10 mx-auto\">\n\n\n<div class=\"comments\" >\n\t\t<div class=\"comment-wrap\">\n\t\t\t\t<div class=\"comment-block\">\n\t\t\t\t\t\t<form action=\"\" #commentForm=\"ngForm\" >\n\t\t\t\t\t\t\t\t<textarea name=\"comment-box\" id=\"comment-box\" [(ngModel)]=\"content\" cols=\"30\" rows=\"3\" [attr.placeholder]=\"isLogin ? 'Add comment...'  : 'Sign in to comment'\" [disabled]=\"!isLogin\"></textarea>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary pull-right\" style=\"padding: 10px; font-size: 0.7em;\" (click)=\"submit(); commentForm.reset();\" [disabled]=\"!isLogin\">Submit</button>\n\t\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"comment-details\" *ngFor=\"let comment of comments\">\n        <app-comment-detail  [comment]=\"comment\"></app-comment-detail>\n\t\t</div>\n\t\t   <!-- Modal -->\n\t\t   <div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalCenterTitle\" aria-hidden=\"true\">\n                <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n                  <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                      <h6 class=\"modal-title\" id=\"exampleModalLongTitle\">Delete</h6>\n                      <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                      </button>\n                    </div>\n                    <div class=\"modal-body modal-content\">\n                      Are you sure you want to delete this comment?\n                    </div>\n                    <div class=\"modal-footer\">\n                      <button type=\"button\" class=\"btn btn-secondary modal-button\" data-dismiss=\"modal\">Close</button>\n                      <button type=\"button\" id=\"confirmButton\" class=\"btn btn-primary modal-button\" (click)=\"delete()\" data-dismiss=\"modal\">Delete</button>\n                    </div>\n                  </div>\n                </div>\n              </div>\n</div>\n\n</div>\n\n</div>\n\n</div>"
 
 /***/ }),
 
@@ -1034,7 +825,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "img {\r\n    max-width: 100%;\r\n    height: auto;\r\n}\r\n@media screen and (max-width: 768px) {\r\n    img {\r\n       max-width: 100%;\r\n        height: auto;\r\n    }\r\n}\r\n.title-small {\r\n    text-align: left;\r\n    word-wrap: break-word;\r\n}\r\n.post-info {\r\n    font-family: 'Courier New', Courier, monospace;\r\n}\r\n.sharing-block {\r\n    margin: 1em auto 2em;\r\n}\r\n/** Social Button CSS **/\r\n.share-btn {\r\n    display: inline-block;\r\n    color: #ffffff;\r\n    border: none;\r\n    padding: 0.5em;\r\n    width: 4em;\r\n    -webkit-box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);\r\n            box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);\r\n    outline: none;\r\n    text-align: center;\r\n}\r\n.share-btn:hover {\r\n  color: #eeeeee;\r\n}\r\n.share-btn:active {\r\n  position: relative;\r\n  top: 2px;\r\n  -webkit-box-shadow: none;\r\n          box-shadow: none;\r\n  color: #e2e2e2;\r\n  outline: none;\r\n}\r\n.sharing-text {\r\n    font-size: 15px;\r\n    margin: 10px auto;\r\n}\r\n.share-btn.twitter     { background: #55acee; }\r\n.share-btn.google-plus { background: #dd4b39; }\r\n.share-btn.facebook    { background: #3B5998; }\r\n.share-btn.stumbleupon { background: #EB4823; }\r\n.share-btn.reddit      { background: #ff5700; }\r\n.share-btn.linkedin    { background: #4875B4; }\r\n.share-btn.email       { background: #444444; }", ""]);
+exports.push([module.i, "img {\n    max-width: 100%;\n    height: auto;\n}\n@media screen and (max-width: 768px) {\n    img {\n       max-width: 100%;\n        height: auto;\n    }\n}\n.title-small {\n    text-align: left;\n    word-wrap: break-word;\n}\n.category {\n    font-family: 'Courier New', Courier, monospace;\n}\n.sharing-block {\n    margin: 1em auto 2em;\n}\n/** Social Button CSS **/\n.share-btn {\n    display: inline-block;\n    color: #ffffff;\n    border: none;\n    padding: 0.5em;\n    width: 4em;\n    -webkit-box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);\n            box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);\n    outline: none;\n    text-align: center;\n}\n.share-btn:hover {\n  color: #eeeeee;\n}\n.share-btn:active {\n  position: relative;\n  top: 2px;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n  color: #e2e2e2;\n  outline: none;\n}\n.sharing-text {\n    font-size: 15px;\n    margin: 10px auto;\n}\n.share-btn.twitter     { background: #55acee; }\n.share-btn.google-plus { background: #dd4b39; }\n.share-btn.facebook    { background: #3B5998; }\n.share-btn.stumbleupon { background: #EB4823; }\n.share-btn.reddit      { background: #ff5700; }\n.share-btn.linkedin    { background: #4875B4; }\n.share-btn.email       { background: #444444; }", ""]);
 
 // exports
 
@@ -1047,7 +838,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/post/post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <!-- Page Header -->\r\n  <header class=\"masthead\" style=\"background-image: url('assets/img/post-bg.jpg')\">\r\n    <div class=\"overlay\"></div>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <div class=\"post-heading\">\r\n            <h1>{{postDetail.title}}</h1>\r\n            <h2 class=\"subheading\">{{postDetail?.subTitle}}</h2>\r\n            <span class=\"meta\">By\r\n              <a >{{postDetail?.author?.name}}</a>\r\n              on {{formatService.formatDate(postDetail?.createdAt)}}</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n\r\n  <div class=\"col-lg-7 col-md-10 mx-auto post-info\">\r\n    <h3 class=\"title-small\">{{postDetail?.title}}</h3>\r\n    <small><a href=\"\" [routerLink]=\"['/main/category/' + postDetail?.category?.ID]\" [queryParams]=\"{topic: postDetail?.category?.category}\">Topic: {{postDetail?.category?.category}}</a></small>\r\n    <div>\r\n        <small>Author: </small>\r\n        <div class=\"photo\" >\r\n            <img src=\"{{postDetail?.author?.profilePicture}}\" style=\"width: 4.5rem; height: 5rem;\" class=\"photo\" alt=\"\">\r\n            <span><a [routerLink]='[\"/main/profile/\",postDetail?.authorID]'>{{postDetail?.author?.name}}</a></span>\r\n        </div>\r\n        \r\n    </div>\r\n    \r\n  </div>\r\n\r\n  <div class=\"col-lg-7 col-md-10 mx-auto sharing-block\">\r\n    <!-- Social Button HTML -->\r\n    <p class=\"sharing-text\">Share this to your social media:</p>\r\n    \r\n    <!-- Twitter -->\r\n    <a href=\"https://twitter.com/intent/tweet?text={{postDetail?.title}}&url=\" target=\"_blank\" class=\"share-btn twitter\" (click)=\"share('https://twitter.com/intent/tweet?url=')\">\r\n      <i class=\"fa fa-twitter\"></i>\r\n    </a>\r\n\r\n\r\n    <!-- Google Plus -->\r\n    <a href=\"https://plus.google.com/share?url=\" target=\"_blank\" class=\"share-btn google-plus\" (click)=\"share('https://plus.google.com/share?url=')\">\r\n      <i class=\"fa fa-google-plus\"></i>\r\n    </a>\r\n\r\n    <!-- Facebook -->\r\n    <a href=\"https://www.facebook.com/sharer/sharer.php?u=&t=\" title=\"Share on Facebook\"  target=\"_blank\" class=\"share-btn facebook\" (click)=\"share('https://www.facebook.com/sharer/sharer.php?u=')\">\r\n      <i class=\"fa fa-facebook\"></i>\r\n    </a>\r\n\r\n\r\n    <!-- LinkedIn -->\r\n    <a href=\"http://www.linkedin.com/shareArticle?url={{url}}&title={{postDetail.title}}&source={{url}}\" target=\"_blank\" class=\"share-btn linkedin\">\r\n      <i class=\"fa fa-linkedin\"></i>\r\n    </a>\r\n\r\n  </div>\r\n\r\n  <!-- Post Content -->\r\n  <article>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-9 col-md-10 mx-auto\" id=\"display\"></div>\r\n      </div>\r\n    </div>\r\n  </article>\r\n  \r\n  <app-comment [postDetail]=\"postDetail\" [comments]=\"comments\"></app-comment>\r\n  <hr>\r\n\r\n"
+module.exports = "  <!-- Page Header -->\n  <header class=\"masthead\" style=\"background-image: url('assets/img/post-bg.jpg')\">\n    <div class=\"overlay\"></div>\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\n          <div class=\"post-heading\">\n            <h1>{{postDetail.title}}</h1>\n            <h2 class=\"subheading\">{{postDetail?.subTitle}}</h2>\n            <span class=\"meta\">By\n              <a >{{postDetail?.author?.name}}</a>\n              on {{formatService.formatDate(postDetail?.createdAt)}}</span>\n          </div>\n        </div>\n      </div>\n    </div>\n  </header>\n\n  <div class=\"col-lg-7 col-md-10 mx-auto\">\n    <h3 class=\"title-small\">{{postDetail?.title}}</h3>\n    <small class=\"category\"><a href=\"\">{{postDetail?.category?.category}}</a></small>\n  </div>\n\n  <div class=\"col-lg-7 col-md-10 mx-auto sharing-block\">\n    <!-- Social Button HTML -->\n    <p class=\"sharing-text\">Share this to your social media:</p>\n    \n    <!-- Twitter -->\n    <a href=\"https://twitter.com/intent/tweet?text={{postDetail?.title}}&url=\" target=\"_blank\" class=\"share-btn twitter\" (click)=\"share('https://twitter.com/intent/tweet?url=')\">\n      <i class=\"fa fa-twitter\"></i>\n    </a>\n\n\n    <!-- Google Plus -->\n    <a href=\"https://plus.google.com/share?url=\" target=\"_blank\" class=\"share-btn google-plus\" (click)=\"share('https://plus.google.com/share?url=')\">\n      <i class=\"fa fa-google-plus\"></i>\n    </a>\n\n    <!-- Facebook -->\n    <a href=\"https://www.facebook.com/sharer/sharer.php?u=&t=\" title=\"Share on Facebook\"  target=\"_blank\" class=\"share-btn facebook\" (click)=\"share('https://www.facebook.com/sharer/sharer.php?u=')\">\n      <i class=\"fa fa-facebook\"></i>\n    </a>\n\n\n    <!-- LinkedIn -->\n    <a href=\"http://www.linkedin.com/shareArticle?url={{url}}&title={{postDetail.title}}&source={{url}}\" target=\"_blank\" class=\"share-btn linkedin\">\n      <i class=\"fa fa-linkedin\"></i>\n    </a>\n\n  </div>\n\n  <!-- Post Content -->\n  <article>\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-9 col-md-10 mx-auto\" id=\"display\"></div>\n      </div>\n    </div>\n  </article>\n  \n  <app-comment [postDetail]=\"postDetail\" [comments]=\"comments\"></app-comment>\n  <hr>\n\n"
 
 /***/ }),
 
@@ -1134,7 +925,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".title-small {\r\n    text-align: left;\r\n    word-wrap: break-word;\r\n}\r\n.category {\r\n    font-family: 'Courier New', Courier, monospace;\r\n}\r\n.sharing-block {\r\n    margin: 1em auto 2em;\r\n}\r\n/** Social Button CSS **/\r\n.share-btn {\r\n    display: inline-block;\r\n    color: #ffffff;\r\n    border: none;\r\n    padding: 0.5em;\r\n    width: 4em;\r\n    -webkit-box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);\r\n            box-shadow: 0 2px 0 0 rgba(0,0,0,0.2);\r\n    outline: none;\r\n    text-align: center;\r\n}\r\n.share-btn:hover {\r\n  color: #eeeeee;\r\n}\r\n.share-btn:active {\r\n  position: relative;\r\n  top: 2px;\r\n  -webkit-box-shadow: none;\r\n          box-shadow: none;\r\n  color: #e2e2e2;\r\n  outline: none;\r\n}\r\n.sharing-text {\r\n    font-size: 15px;\r\n    margin: 10px auto;\r\n}\r\n.share-btn.twitter     { background: #55acee; }\r\n.share-btn.google-plus { background: #dd4b39; }\r\n.share-btn.facebook    { background: #3B5998; }\r\n.share-btn.stumbleupon { background: #EB4823; }\r\n.share-btn.reddit      { background: #ff5700; }\r\n.share-btn.linkedin    { background: #4875B4; }\r\n.share-btn.email       { background: #444444; }", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -1147,7 +938,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/preview/preview.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <!-- Page Header -->\r\n  <header class=\"masthead\" style=\"background-image: url('assets/img/post-bg.jpg')\">\r\n    <div class=\"overlay\"></div>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <div class=\"post-heading\">\r\n            <h1>{{postDetail?.title}}</h1>\r\n            <h2 class=\"subheading\">{{postDetail?.subTitle}}</h2>\r\n            <span class=\"meta\">Posted by\r\n              <a>{{postDetail?.author?.name}}</a>\r\n              on {{formatService.formatDate(postDetail?.createdAt)}}</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </header>\r\n  \r\n  <div class=\"col-lg-7 col-md-10 mx-auto\">\r\n    <h3 class=\"title-small\">{{postDetail?.title}}</h3>\r\n    <small class=\"category\"><a href=\"\" [routerLink]=\"['/main/category/' + postDetail?.category?.ID]\" [queryParams]=\"{topic: postDetail?.category?.category}\">{{postDetail?.category?.category}}</a></small>\r\n  </div>\r\n\r\n\r\n  <div class=\"col-lg-7 col-md-10 mx-auto sharing-block\">\r\n    <!-- Social Button HTML -->\r\n    <p class=\"sharing-text\">Share this to your social media:</p>\r\n    \r\n    <!-- Twitter -->\r\n    <a href=\"\" target=\"_blank\" class=\"share-btn twitter\" >\r\n      <i class=\"fa fa-twitter\"></i>\r\n    </a>\r\n\r\n\r\n    <!-- Google Plus -->\r\n    <a href=\"\" target=\"_blank\" class=\"share-btn google-plus\">\r\n      <i class=\"fa fa-google-plus\"></i>\r\n    </a>\r\n\r\n    <!-- Facebook -->\r\n    <a href=\"\" title=\"Share on Facebook\"  target=\"_blank\" class=\"share-btn facebook\" >\r\n      <i class=\"fa fa-facebook\"></i>\r\n    </a>\r\n\r\n\r\n    <!-- LinkedIn -->\r\n    <a href=\"\" target=\"_blank\" class=\"share-btn linkedin\">\r\n      <i class=\"fa fa-linkedin\"></i>\r\n    </a>\r\n\r\n  </div>\r\n\r\n\r\n  <!-- Post Content -->\r\n  <article>\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\" id=\"display\"></div>\r\n      </div>\r\n    </div>\r\n    \r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n          <button class=\"btn btn-primary\" [routerLink]='[\"/main/edit-post/\" + id]'>Back</button>\r\n          <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"post()\">Submit</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    \r\n  </article>\r\n\r\n  <hr>\r\n\r\n"
+module.exports = "  <!-- Page Header -->\n  <header class=\"masthead\" style=\"background-image: url('assets/img/post-bg.jpg')\">\n    <div class=\"overlay\"></div>\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-8 col-md-10 mx-auto\">\n          <div class=\"post-heading\">\n            <h1>{{postDetail?.title}}</h1>\n            <h2 class=\"subheading\">{{postDetail?.subTitle}}</h2>\n            <span class=\"meta\">Posted by\n              <a>{{postDetail?.author?.name}}</a>\n              on {{formatService.formatDate(postDetail?.createdAt)}}</span>\n          </div>\n        </div>\n      </div>\n    </div>\n  </header>\n\n  <!-- Post Content -->\n  <article>\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-8 col-md-10 mx-auto\" id=\"display\"></div>\n      </div>\n    </div>\n    <button class=\"btn btn-primary\" routerLink=\"/main/edit-post/0\">back</button>\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"post()\">Post</button>\n  </article>\n\n  <hr>\n\n"
 
 /***/ }),
 
@@ -1192,15 +983,10 @@ var PreviewComponent = /** @class */ (function () {
         this.postDetail = {};
     }
     PreviewComponent.prototype.ngOnInit = function () {
-        this.id = this.route.snapshot.paramMap.get('id');
-        this.postDetail = this.storageService.get('preview' + this.id);
+        this.postDetail = this.storageService.get('preview');
         if (this.postDetail)
             $('#display').html(this.postDetail.content);
-        console.log("preview: ", 'preview' + this.id);
-        $(".share-btn").click(function (e) {
-            e.preventDefault();
-            return false;
-        });
+        console.log("preview: ", this.postDetail);
     };
     PreviewComponent.prototype.post = function () {
         var _this = this;
@@ -1230,7 +1016,7 @@ var PreviewComponent = /** @class */ (function () {
         var _this = this;
         console.log("preview: ", this.postDetail);
         this.dialog.showSuccess().subscribe(function (data) {
-            _this.storageService.set('preview' + _this.id, null);
+            _this.storageService.set('preview', null);
             _this.router.navigate(['/main/post/' + _this.postDetail.ID]);
         });
     };
@@ -1263,7 +1049,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".title {\r\n    margin-top: 10px;\r\n}\r\n.header {\r\n    font-weight: 100;\r\n    font-size: 25px;\r\n}\r\ninput#saveForm:disabled,input#saveForm:hover:disabled {\r\n    letter-spacing: 0px;\r\n    opacity: 0.5;\r\n  }\r\n.input-label {\r\n      font-size: 17px;\r\n  }\r\n@media screen and (max-width: 990px) {\r\n    \r\n}\r\n@media screen and (max-width: 768px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 480px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 414px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 384px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}", ""]);
+exports.push([module.i, ".title {\n    margin-top: 10px;\n}\n.header {\n    font-weight: 100;\n    font-size: 25px;\n}\ninput#saveForm:disabled,input#saveForm:hover:disabled {\n    letter-spacing: 0px;\n    opacity: 0.5;\n  }\n@media screen and (max-width: 990px) {\n    \n}\n@media screen and (max-width: 768px) {\n    .header {\n        font-size: 20px;\n    }\n}\n@media screen and (max-width: 480px) {\n    .header {\n        font-size: 20px;\n    }\n}\n@media screen and (max-width: 414px) {\n    .header {\n        font-size: 20px;\n    }\n}\n@media screen and (max-width: 384px) {\n    .header {\n        font-size: 20px;\n    }\n}", ""]);
 
 // exports
 
@@ -1276,7 +1062,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/change-pass/change-pass.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col col-lg-8 col-md-8\">\r\n  <div class=\"title\">\r\n    <h3 class=\"header\">Change Password</h3>\r\n  </div>\r\n  <!--\r\n  <table class=\"table table-user-information\">\r\n    <tbody>\r\n      <tr class=\"form-group\">\r\n        <td><label for=\"oldpassword\">Password</label></td>\r\n        \r\n       \r\n        <td><input [(ngModel)]=\"password\" class=\"form-control\" name=\"password\" id=\"password\" type=\"Password\" #Password=\"ngModel\" required minlength=\"6\">\r\n        \r\n        \r\n      </td>\r\n      </tr>\r\n      \r\n      <tr class=\"form-group\">\r\n        <td>New Password</td>\r\n        <td><input class=\"form-control\" [(ngModel)]=\"pass\" name=\"newpass\" type=\"password\" required minlength=\"6\">\r\n          <div class=\"alert-danger\">*aaaaa</div>\r\n        </td>\r\n      </tr>\r\n      <tr class=\"form-group\">\r\n        <td>Confirm Password</td>\r\n        <td><input class=\"form-control\" [(ngModel)]=\"cfPass\" name=\"cfnewpass\" type=\"password\" required minlength=\"6\"></td>\r\n      </tr>\r\n      <tr>\r\n        <td></td>\r\n        <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n-->\r\n<form #changPasswordForm=\"ngForm\">\r\n  <div class=\"form-group\">\r\n    <label class=\"input-label\" for=\"oldpassword\">Password</label>\r\n    <input [(ngModel)]=\"oldPass\" class=\"form-control\" name=\"oldPassword\" id=\"oldPassword\" type=\"Password\" #oldPassword=\"ngModel\" required minlength=\"6\">\r\n  </div>\r\n\r\n  <div class=\"form-group\">\r\n    <label class=\"input-label\" for=\"newPass\">New Password</label>\r\n    <input class=\"form-control\" [(ngModel)]=\"pass\"  name=\"password\" id=\"password\" type=\"Password\" #Password=\"ngModel\" required minlength=\"6\">\r\n  </div>\r\n\r\n  <div *ngIf=\"Password.invalid && (Password.dirty || Password.touched)\" class=\"alert alert-danger validation-err\" >\r\n    <div *ngIf=\"Password.errors.required\">\r\n        * Password is required.\r\n    </div>\r\n    \r\n    <div *ngIf=\"Password.errors.minlength\">\r\n        Password must be at least 6 characters long.\r\n    </div>\r\n</div>\r\n  \r\n  <div class=\"form-group\">\r\n    <label class=\"input-label\" for=\"cfnewpass\">Confirm Password</label>\r\n    <input class=\"form-control\" [(ngModel)]=\"confirmPass\" name=\"confirmPassword\" id=\"repassword\" type=\"Password\" appMatchingValidator=\"password\" #confirmPassword=\"ngModel\" required >\r\n  </div>\r\n\r\n\r\n  <div *ngIf=\"confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)\" class=\"alert alert-danger\" >\r\n     <div *ngIf=\"confirmPassword.errors?.mismatch\">\r\n        Passwords do not match\r\n      </div>\r\n  </div>\r\n  \r\n  <button [disabled]=\"changPasswordForm.invalid\" id=\"saveForm\" class=\"btn btn-primary\" (click)=\"submit(); changPasswordForm.reset(); \">submit</button>\r\n</form>\r\n</div>"
+module.exports = "<div class=\"col col-lg-8 col-md-8\">\n  <div class=\"title\">\n    <h3 class=\"header\">Change Password</h3>\n  </div>\n  <!--\n  <table class=\"table table-user-information\">\n    <tbody>\n      <tr class=\"form-group\">\n        <td><label for=\"oldpassword\">Password</label></td>\n        \n       \n        <td><input [(ngModel)]=\"password\" class=\"form-control\" name=\"password\" id=\"password\" type=\"Password\" #Password=\"ngModel\" required minlength=\"6\">\n        \n        \n      </td>\n      </tr>\n      \n      <tr class=\"form-group\">\n        <td>New Password</td>\n        <td><input class=\"form-control\" [(ngModel)]=\"pass\" name=\"newpass\" type=\"password\" required minlength=\"6\">\n          <div class=\"alert-danger\">*aaaaa</div>\n        </td>\n      </tr>\n      <tr class=\"form-group\">\n        <td>Confirm Password</td>\n        <td><input class=\"form-control\" [(ngModel)]=\"cfPass\" name=\"cfnewpass\" type=\"password\" required minlength=\"6\"></td>\n      </tr>\n      <tr>\n        <td></td>\n        <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\n      </tr>\n    </tbody>\n  </table>\n-->\n<form #changPasswordForm=\"ngForm\">\n  <div class=\"form-group\">\n    <label for=\"oldpassword\">Password</label>\n    <input [(ngModel)]=\"oldPass\" class=\"form-control\" name=\"oldPassword\" id=\"oldPassword\" type=\"Password\" #oldPassword=\"ngModel\" required minlength=\"6\">\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"newPass\">New Password</label>\n    <input class=\"form-control\" [(ngModel)]=\"pass\"  name=\"password\" id=\"password\" type=\"Password\" #Password=\"ngModel\" required minlength=\"6\">\n  </div>\n\n  <div *ngIf=\"Password.invalid && (Password.dirty || Password.touched)\" class=\"alert alert-danger validation-err\" >\n    <div *ngIf=\"Password.errors.required\">\n        * Password is required.\n    </div>\n    \n    <div *ngIf=\"Password.errors.minlength\">\n        Password must be at least 6 characters long.\n    </div>\n</div>\n  \n  <div class=\"form-group\">\n    <label for=\"cfnewpass\">Confirm Password</label>\n    <input class=\"form-control\" [(ngModel)]=\"confirmPass\" name=\"confirmPassword\" id=\"repassword\" type=\"Password\" appMatchingValidator=\"password\" #confirmPassword=\"ngModel\" required >\n  </div>\n\n\n  <div *ngIf=\"confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)\" class=\"alert alert-danger\" >\n     <div *ngIf=\"confirmPassword.errors?.mismatch\">\n        Passwords do not match\n      </div>\n  </div>\n  \n  <button [disabled]=\"changPasswordForm.invalid\" id=\"saveForm\" class=\"btn btn-primary\" (click)=\"submit(); changPasswordForm.reset(); \">submit</button>\n</form>\n</div>"
 
 /***/ }),
 
@@ -1341,7 +1127,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "input {\r\n    width: 100%\r\n}\r\n.title {\r\n    margin-top: 10px;\r\n}\r\n.header {\r\n    font-weight: 100;\r\n    font-size: 25px;\r\n}\r\n@media screen and (max-width: 990px) {\r\n    \r\n}\r\n@media screen and (max-width: 768px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 480px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 414px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}\r\n@media screen and (max-width: 384px) {\r\n    .header {\r\n        font-size: 20px;\r\n    }\r\n}", ""]);
+exports.push([module.i, "input {\n    width: 100%\n}\n.title {\n    margin-top: 10px;\n}\n.header {\n    font-weight: 100;\n    font-size: 25px;\n}\n@media screen and (max-width: 990px) {\n    \n}\n@media screen and (max-width: 768px) {\n    .header {\n        font-size: 20px;\n    }\n}\n@media screen and (max-width: 480px) {\n    .header {\n        font-size: 20px;\n    }\n}\n@media screen and (max-width: 414px) {\n    .header {\n        font-size: 20px;\n    }\n}\n@media screen and (max-width: 384px) {\n    .header {\n        font-size: 20px;\n    }\n}", ""]);
 
 // exports
 
@@ -1354,7 +1140,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/info/info.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col col-lg-8 col-md-8\">\r\n    <table class=\"table table-user-information\">\r\n      <tbody>\r\n        <tr>\r\n          <td>Name</td>\r\n          <td *ngIf=\"!isEdit\">{{user?.name}}</td>\r\n          <td *ngIf=\"isEdit\"><input class=\"form-control\" [(ngModel)]=\"name\" type=\"text\"></td>\r\n        </tr>\r\n        <tr>\r\n          <td>Email</td>\r\n          <td *ngIf=\"!isEdit\">{{user?.email}}</td>\r\n          <td *ngIf=\"isEdit\"><input class=\"form-control\" [(ngModel)]=\"email\" type=\"text\"></td>\r\n        </tr>\r\n        <tr *ngIf=\"isEdit\">\r\n          <td><button class=\"btn btn-danger\" (click)=\"isEdit=false\">cancel</button></td>\r\n          <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\r\n        </tr>\r\n        <tr *ngIf=\"!isEdit\">\r\n          <td></td>\r\n          <td><button class=\"btn btn-primary\" *ngIf=\"isUser\" (click)=\"isEdit=true\">change</button></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n</div>\r\n"
+module.exports = "<div class=\"col col-lg-8 col-md-8\">\n    <table class=\"table table-user-information\">\n      <tbody>\n        <tr>\n          <td>Name</td>\n          <td *ngIf=\"!isEdit\">{{user?.name}}</td>\n          <td *ngIf=\"isEdit\"><input class=\"form-control\" [(ngModel)]=\"name\" type=\"text\"></td>\n        </tr>\n        <tr>\n          <td>Email</td>\n          <td *ngIf=\"!isEdit\">{{user?.email}}</td>\n          <td *ngIf=\"isEdit\"><input class=\"form-control\" [(ngModel)]=\"email\" type=\"text\"></td>\n        </tr>\n        <tr *ngIf=\"isEdit\">\n          <td><button class=\"btn btn-danger\" (click)=\"isEdit=false\">cancel</button></td>\n          <td><button class=\"btn btn-primary\" (click)=\"submit()\">submit</button></td>\n        </tr>\n        <tr *ngIf=\"!isEdit\">\n          <td></td>\n          <td><button class=\"btn btn-primary\" (click)=\"isEdit=true\">change</button></td>\n        </tr>\n      </tbody>\n    </table>\n</div>\n"
 
 /***/ }),
 
@@ -1410,10 +1196,6 @@ var InfoComponent = /** @class */ (function () {
         __metadata("design:type", Object)
     ], InfoComponent.prototype, "user", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
-        __metadata("design:type", Object)
-    ], InfoComponent.prototype, "isUser", void 0);
-    __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
         __metadata("design:type", Object)
     ], InfoComponent.prototype, "changeF", void 0);
@@ -1453,7 +1235,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/my-posts/my-posts.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n\r\n      <app-sub-post *ngFor=\"let post of postList\" [post]=\"post\" (delete)=\"delete($event)\"></app-sub-post>\r\n      <!-- Pager -->\r\n      <div class=\"clearfix\">\r\n        <a class=\"btn btn-primary float-left\" *ngIf=\"page!=1\" (click)=\"newerPost()\">&larr; Newer Posts</a>\r\n        <a class=\"btn btn-primary float-right\" *ngIf=\"postList.length == 10\" (click)=\"olderPost()\">Older Posts &rarr;</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<hr>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\n\n      <app-sub-post *ngFor=\"let post of postList\" [post]=\"post\" (delete)=\"delete($event)\"></app-sub-post>\n      <!-- Pager -->\n      <div class=\"clearfix\">\n        <a class=\"btn btn-primary float-left\" *ngIf=\"page!=1\" (click)=\"newerPost()\">&larr; Newer Posts</a>\n        <a class=\"btn btn-primary float-right\" *ngIf=\"postList.length == 10\" (click)=\"olderPost()\">Older Posts &rarr;</a>\n      </div>\n    </div>\n  </div>\n</div>\n\n<hr>"
 
 /***/ }),
 
@@ -1503,12 +1285,14 @@ var MyPostsComponent = /** @class */ (function () {
         this.postList.forEach(function (element) {
             element.author = tem;
         });
+        console.log("post: ", this.postList);
     };
     MyPostsComponent.prototype.getPostList = function () {
         var _this = this;
         this.params.page = this.page;
         this.postService.list(this.params.page).subscribe(function (data) {
             _this.postList = data;
+            console.log(" data: ", data);
             _this.loadingService.hide();
         }, function (error) {
             _this.loadingService.hide();
@@ -1524,14 +1308,16 @@ var MyPostsComponent = /** @class */ (function () {
         this.loadingService.show();
         this.getPostList();
     };
-    MyPostsComponent.prototype.delete = function (post) {
+    MyPostsComponent.prototype.delete = function (data) {
         var _this = this;
+        console.log("delete: ", data);
         this.loadingService.show();
-        this.postService.delete(post.ID).subscribe(function (data) {
+        this.postService.delete(data.ID).subscribe(function (data) {
             _this.dialogService.showSuccess("delete successfull!");
-            _this.postList.splice(_this.postList.indexOf(post), 1);
+            _this.postList.splice(_this.postList.indexOf(data), 1);
             _this.loadingService.hide();
         }, function (error) {
+            console.log("failed!");
             _this.loadingService.hide();
             _this.dialogService.showError("failed to delete this post");
         });
@@ -1540,10 +1326,6 @@ var MyPostsComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Object)
     ], MyPostsComponent.prototype, "user", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
-        __metadata("design:type", Object)
-    ], MyPostsComponent.prototype, "isUser", void 0);
     MyPostsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-my-posts',
@@ -1571,7 +1353,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "a.list-group-item {\r\n    background-color: #dadfe8\r\n}\r\n\r\na.list-group-item:hover {\r\n    background-color: #bccae2\r\n}", ""]);
+exports.push([module.i, "a.list-group-item {\n    background-color: #dadfe8\n}\n\na.list-group-item:hover {\n    background-color: #bccae2\n}", ""]);
 
 // exports
 
@@ -1584,7 +1366,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/my-posts/sub-post/sub-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"post-preview\">\r\n  \r\n  <div *ngIf=\"isUser\" style=\"position: absolute; right: 0px;\" class=\"dropdown\">\r\n   <a data-toggle=\"dropdown\" style=\"cursor: pointer\"><i class=\"material-icons\">more_horiz</i></a>\r\n    \r\n    <ul class=\"dropdown-menu\" style=\"padding: 0;\">\r\n      <li><a class=\"list-group-item\" [routerLink]=\"['/main/edit-post/' + post.ID]\">edit</a></li>\r\n      <li><a class=\"list-group-item\" (click)=\"deletePost()\">delete</a></li>\r\n    </ul>\r\n  </div>\r\n  <a [routerLink]=\"['/main/post/' + post.ID]\">\r\n    <h2 class=\"post-title\">\r\n      {{post?.title}}\r\n    </h2>\r\n    <h3 class=\"post-subtitle\">\r\n      {{post?.subtitle}}\r\n    </h3>\r\n  </a>\r\n  <p class=\"post-meta\">Posted by\r\n    <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\r\n</div>\r\n<hr>"
+module.exports = "<div class=\"post-preview\">\n  \n  <div  style=\"position: absolute; right: 0px;\" class=\"dropdown\">\n   <a data-toggle=\"dropdown\"><i class=\"material-icons\">more_horiz</i></a>\n    \n    <ul class=\"dropdown-menu\" style=\"padding: 0;\">\n      <li><a class=\"list-group-item\" [routerLink]=\"['/main/edit-post/' + post.ID]\">edit</a></li>\n      <li><a class=\"list-group-item\" (click)=\"deletePost()\">delete</a></li>\n    </ul>\n  </div>\n  <a [routerLink]=\"['/main/post/' + post.ID]\">\n    <h2 class=\"post-title\">\n      {{post?.title}}\n    </h2>\n    <h3 class=\"post-subtitle\">\n      {{post?.subtitle}}\n    </h3>\n  </a>\n  <p class=\"post-meta\">Posted by\n    <a>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\n</div>\n<hr>"
 
 /***/ }),
 
@@ -1647,7 +1429,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, " .card {\r\n    margin-top: 0;\r\n    padding: 0;\r\n    background-color: rgba(214, 224, 226, 0.2);\r\n    -moz-border-top-left-radius:5px;\r\n    border-top-left-radius:5px;\r\n    -moz-border-top-right-radius:5px;\r\n    border-top-right-radius:5px;\r\n    -webkit-box-sizing: border-box;\r\n    box-sizing: border-box;\r\n}\r\n.card.hovercard {\r\n    position: relative;\r\n    padding-top: 0;\r\n    overflow: hidden;\r\n    text-align: center;\r\n    background-color: #fff;\r\n    background-color: rgba(255, 255, 255, 1);\r\n}\r\n.card.hovercard .card-background {\r\n    height: 300px;\r\n}\r\n.card-background img {\r\n    -webkit-filter: blur(25px);\r\n    -moz-filter: blur(25px);\r\n    -o-filter: blur(25px);\r\n    -ms-filter: blur(25px);\r\n    filter: blur(25px);\r\n    margin-left: -100px;\r\n    margin-top: -200px;\r\n    min-width: 130%;\r\n}\r\n.card.hovercard .useravatar {\r\n    position: absolute;\r\n    top: 15px;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n.card.hovercard .useravatar img {\r\n    /* width: 100px;\r\n    height: 100px; */\r\n    width: 180px;\r\n    height: 180px;\r\n    border-radius: 50%;\r\n    border: 5px solid rgba(255, 255, 255, 0.5);\r\n    -webkit-transform: translateX(0%) translateY(30%);\r\n            transform: translateX(0%) translateY(30%);\r\n}\r\n.card.hovercard .card-info {\r\n    position: absolute;\r\n    bottom: 14px;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n.card.hovercard .card-info .card-title {\r\n    padding:0 5px;\r\n    font-size: 20px;\r\n    line-height: 1;\r\n    color: #262626;\r\n    background-color: rgba(255, 255, 255, 0.1);\r\n    border-radius: 4px;\r\n}\r\n.card.hovercard .card-info {\r\n    overflow: hidden;\r\n    font-size: 12px;\r\n    line-height: 20px;\r\n    color: #737373;\r\n    text-overflow: ellipsis;\r\n}\r\n.card.hovercard .bottom {\r\n    padding: 0 20px;\r\n    margin-bottom: 17px;\r\n}\r\n.btn-pref .btn {\r\n    -webkit-border-radius:0 !important;\r\n}\r\n.btn {\r\n    padding: 15px 19px;\r\n    letter-spacing: 0;\r\n}\r\n.image-upload {\r\n    position: absolute;\r\n    max-width: 180px;\r\n    height: 180px;\r\n    border: 5px solid rgba(255, 255, 255, 0.5);\r\n    -webkit-transform: translateX(64%) translateY(38%);\r\n    transform: translateX(-100%) translateY(30%);\r\n    opacity: 0;\r\n    z-index: 2;\r\n    border-radius: 0;\r\n}\r\n#nav-navi {\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-direction: column;\r\n            flex-direction: column;\r\n}\r\n/* @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:700'); */\r\n.nav-tab {\r\n    font-family: 'Libre Franklin', sans-serif;\r\n    /* font-weight: 500; */\r\n    /* padding: 20px; */\r\n}\r\n.body-container {\r\n    margin-top: 20px;\r\n}\r\n@media screen and (max-width: 768px) {\r\n    #nav-navi {\r\n        display: -webkit-box;\r\n        display: -ms-flexbox;\r\n        display: flex;\r\n        -webkit-box-orient: vertical;\r\n        -webkit-box-direction: normal;\r\n            -ms-flex-direction: column;\r\n                flex-direction: column;\r\n    }\r\n    .nav-tab {\r\n        font-size: 20px;\r\n    }\r\n    #main {\r\n        font-size: 20px;\r\n    }\r\n    .body-container {\r\n        margin-top: 0px;\r\n    }\r\n}\r\n@media screen and (max-width: 480px) {\r\n    .nav-tab{\r\n        font-size: 20px;\r\n    }\r\n    #main {\r\n        font-size: 20px;\r\n    }\r\n    #nav-navi {\r\n        display: -webkit-box;\r\n        display: -ms-flexbox;\r\n        display: flex;\r\n        -webkit-box-orient: horizontal;\r\n        -webkit-box-direction: normal;\r\n            -ms-flex-direction: row;\r\n                flex-direction: row;\r\n    }\r\n    .body-container {\r\n        margin-top: 0px;\r\n    }\r\n}\r\n@media screen and (max-width: 414px) {\r\n    .nav-tab{\r\n        font-size: 20px;\r\n    }\r\n    #main {\r\n        font-size: 20px;\r\n    }\r\n    #nav-navi {\r\n        display: -webkit-box;\r\n        display: -ms-flexbox;\r\n        display: flex;\r\n        -webkit-box-orient: horizontal;\r\n        -webkit-box-direction: normal;\r\n            -ms-flex-direction: row;\r\n                flex-direction: row;\r\n    }\r\n    .body-container {\r\n        margin-top: 0px;\r\n    }\r\n}\r\n@media screen and (max-width: 384px) {\r\n    .nav-tab{\r\n        font-size: 13px;\r\n    }\r\n    #main {\r\n        font-size: 13px;\r\n    }\r\n    #nav-navi {\r\n        display: -webkit-box;\r\n        display: -ms-flexbox;\r\n        display: flex;\r\n        -webkit-box-orient: horizontal;\r\n        -webkit-box-direction: normal;\r\n            -ms-flex-direction: row;\r\n                flex-direction: row;\r\n    }\r\n    .body-container {\r\n        margin-top: 0px;\r\n    }\r\n}\r\n.wrapper {\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: (1fr)[12];\r\n        grid-template-columns: repeat(12, 1fr);\r\n    /* grid-template-rows: 40px 100px 40px; \r\n     */\r\n     -ms-grid-rows: auto;\r\n         grid-template-rows: auto;\r\n}\r\n.header{\r\n    grid-column: span 12;\r\n}\r\n.menu {\r\n    grid-column: span 2;\r\n}\r\n.content {\r\n    grid-column: span 10;\r\n}\r\n@media screen and (max-width: 767px) {\r\n    .menu{\r\n        grid-row: span 1;\r\n        grid-column: span 12;\r\n    }\r\n    .content {\r\n        grid-column: span 12;\r\n    }\r\n}\r\n", ""]);
+exports.push([module.i, " .card {\n    margin-top: 0;\n    padding: 0;\n    background-color: rgba(214, 224, 226, 0.2);\n    -moz-border-top-left-radius:5px;\n    border-top-left-radius:5px;\n    -moz-border-top-right-radius:5px;\n    border-top-right-radius:5px;\n    -webkit-box-sizing: border-box;\n    box-sizing: border-box;\n}\n.card.hovercard {\n    position: relative;\n    padding-top: 0;\n    overflow: hidden;\n    text-align: center;\n    background-color: #fff;\n    background-color: rgba(255, 255, 255, 1);\n}\n.card.hovercard .card-background {\n    height: 300px;\n}\n.card-background img {\n    -webkit-filter: blur(25px);\n    -moz-filter: blur(25px);\n    -o-filter: blur(25px);\n    -ms-filter: blur(25px);\n    filter: blur(25px);\n    margin-left: -100px;\n    margin-top: -200px;\n    min-width: 130%;\n}\n.card.hovercard .useravatar {\n    position: absolute;\n    top: 15px;\n    left: 0;\n    right: 0;\n}\n.card.hovercard .useravatar img {\n    /* width: 100px;\n    height: 100px; */\n    width: 180px;\n    height: 180px;\n    border-radius: 50%;\n    border: 5px solid rgba(255, 255, 255, 0.5);\n    -webkit-transform: translateX(0%) translateY(30%);\n            transform: translateX(0%) translateY(30%);\n}\n.card.hovercard .card-info {\n    position: absolute;\n    bottom: 14px;\n    left: 0;\n    right: 0;\n}\n.card.hovercard .card-info .card-title {\n    padding:0 5px;\n    font-size: 20px;\n    line-height: 1;\n    color: #262626;\n    background-color: rgba(255, 255, 255, 0.1);\n    border-radius: 4px;\n}\n.card.hovercard .card-info {\n    overflow: hidden;\n    font-size: 12px;\n    line-height: 20px;\n    color: #737373;\n    text-overflow: ellipsis;\n}\n.card.hovercard .bottom {\n    padding: 0 20px;\n    margin-bottom: 17px;\n}\n.btn-pref .btn {\n    -webkit-border-radius:0 !important;\n}\n.btn {\n    padding: 15px 19px;\n    letter-spacing: 0;\n}\n.image-upload {\n    position: absolute;\n    max-width: 180px;\n    height: 180px;\n    border: 5px solid rgba(255, 255, 255, 0.5);\n    -webkit-transform: translateX(64%) translateY(38%);\n    transform: translateX(-100%) translateY(30%);\n    opacity: 0;\n    z-index: 2;\n    border-radius: 0;\n}\n#nav-navi {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n/* @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:700'); */\n.nav-tab {\n    font-family: 'Libre Franklin', sans-serif;\n    /* font-weight: 500; */\n    /* padding: 20px; */\n}\n.body-container {\n    margin-top: 20px;\n}\n@media screen and (max-width: 768px) {\n    #nav-navi {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: column;\n                flex-direction: column;\n    }\n    .nav-tab {\n        font-size: 20px;\n    }\n    #main {\n        font-size: 20px;\n    }\n    .body-container {\n        margin-top: 0px;\n    }\n}\n@media screen and (max-width: 480px) {\n    .nav-tab{\n        font-size: 20px;\n    }\n    #main {\n        font-size: 20px;\n    }\n    #nav-navi {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-orient: horizontal;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: row;\n                flex-direction: row;\n    }\n    .body-container {\n        margin-top: 0px;\n    }\n}\n@media screen and (max-width: 414px) {\n    .nav-tab{\n        font-size: 20px;\n    }\n    #main {\n        font-size: 20px;\n    }\n    #nav-navi {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-orient: horizontal;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: row;\n                flex-direction: row;\n    }\n    .body-container {\n        margin-top: 0px;\n    }\n}\n@media screen and (max-width: 384px) {\n    .nav-tab{\n        font-size: 13px;\n    }\n    #main {\n        font-size: 13px;\n    }\n    #nav-navi {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-orient: horizontal;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: row;\n                flex-direction: row;\n    }\n    .body-container {\n        margin-top: 0px;\n    }\n}\n.wrapper {\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: (1fr)[12];\n        grid-template-columns: repeat(12, 1fr);\n    /* grid-template-rows: 40px 100px 40px; \n     */\n     -ms-grid-rows: auto;\n         grid-template-rows: auto;\n}\n.header{\n    grid-column: span 12;\n}\n.menu {\n    grid-column: span 2;\n}\n.content {\n    grid-column: span 10;\n}\n@media screen and (max-width: 767px) {\n    .menu{\n        grid-row: span 1;\n        grid-column: span 12;\n    }\n    .content {\n        grid-column: span 12;\n    }\n}\n", ""]);
 
 // exports
 
@@ -1660,7 +1442,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-lg-12 col-sm-12\" style=\"padding: 0!important\">\r\n  <div class=\"card hovercard\">\r\n    <div class=\"card-background\">\r\n      <img class=\"card-bkimg\" alt=\"\" [src]=\"user.profilePicture\">\r\n      <!-- http://lorempixel.com/850/280/people/9/ -->\r\n    </div>\r\n    <div class=\"useravatar\">\r\n      <img alt=\"\" [src]=\"user.profilePicture\">\r\n      <input type=\"file\" *ngIf=\"isUser\" (change)=\"onFileChange($event)\" name=\"update\" class=\"image-upload\" #fileInput accept=\"image/*\" />\r\n    </div>\r\n    \r\n    <div class=\"card-info\"> <span class=\"card-title\">{{user?.name}}</span>\r\n\r\n    </div>\r\n  </div>\r\n  <div class=\"container\">\r\n</div>\r\n</div>\r\n\r\n<div class=\"container wrapper\" >\r\n  <div class=\"menu\">\r\n      <ul id=\"nav-navi\" class=\"nav nav-tabs tabs-left\">\r\n          <li class=\"nav-item\"  [ngClass]=\"type == 1? 'btn-primary': 'btn-default'\" (click)=\"type = 1\" >\r\n            <a class=\"nav-link nav-tab\">Profile</a>\r\n          </li>\r\n          <li class=\"nav-item\"  [ngClass]=\"type == 2? 'btn-primary': 'btn-default'\" (click)=\"type = 2\">\r\n            <a class=\"nav-link nav-tab\">Posts</a>\r\n          </li>\r\n          <li class=\"nav-item\" *ngIf=\"isUser\" [ngClass]=\"type == 3? 'btn-primary': 'btn-default'\" (click)=\"type = 3\">\r\n            <a class=\"nav-link nav-tab\">Password</a>\r\n          </li>\r\n        </ul>\r\n  </div>\r\n  <div class=\"content\">\r\n      <app-info *ngIf=\"type==1\" [user]=\"user\" [isUser]=\"isUser\" (changeF)=\"post()\"></app-info>\r\n      <app-my-posts  *ngIf=\"type==2\" [user]=\"user\" [isUser]=\"isUser\"></app-my-posts>\r\n      <app-change-pass *ngIf=\"type==3\" [user]=\"user\" (changeF)=\"post()\"></app-change-pass>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"col-lg-12 col-sm-12\" style=\"padding: 0!important\">\n  <div class=\"card hovercard\">\n    <div class=\"card-background\">\n      <img class=\"card-bkimg\" alt=\"\" [src]=\"user.profilePicture\">\n      <!-- http://lorempixel.com/850/280/people/9/ -->\n    </div>\n    <div class=\"useravatar\">\n      <img alt=\"\" [src]=\"user.profilePicture\">\n      <input type=\"file\" (change)=\"onFileChange($event)\" name=\"update\" class=\"image-upload\" #fileInput accept=\"image/*\" />\n    </div>\n    \n    <div class=\"card-info\"> <span class=\"card-title\">{{user?.name}}</span>\n\n    </div>\n  </div>\n  <div class=\"container\">\n</div>\n</div>\n\n\n<!-- <div class=\"container body-container\"> -->\n    <!-- <div class=\"row\"> -->\n    <!-- <div class=\"col col-lg-2 col-md-3 col-navi\"> -->\n      <!-- <ul id=\"nav-navi\" class=\"nav nav-tabs nav-justified\">\n        <li class=\"nav-item\"  [ngClass]=\"type == 1? 'btn-primary': 'btn-default'\" (click)=\"type = 1\" >\n          <a class=\"nav-link nav-tab\">My Profile</a>\n        </li>\n        <li class=\"nav-item\"  [ngClass]=\"type == 2? 'btn-primary': 'btn-default'\" (click)=\"type = 2\">\n          <a class=\"nav-link nav-tab\">My Posts</a>\n        </li>\n        <li class=\"nav-item\"  [ngClass]=\"type == 3? 'btn-primary': 'btn-default'\" (click)=\"type = 3\">\n          <a class=\"nav-link nav-tab\">Password</a>\n        </li>\n      </ul> -->\n    <!-- </div> -->\n\n    <!-- <div class=\"col col-lg-1\" ></div> -->\n    <!-- <main id=\"main\" class=\"col col-lg-8\"> -->\n      <!-- <app-info *ngIf=\"type==1\" [user]=\"user\" (changeF)=\"post()\"></app-info>\n      <app-my-posts  *ngIf=\"type==2\" [user]=\"user\"></app-my-posts>\n      <app-change-pass  *ngIf=\"type==3\" [user]=\"user\" (changeF)=\"post()\"></app-change-pass> -->\n    <!-- </main> -->\n  <!-- </div> -->\n<!-- </div> -->\n\n<div class=\"container wrapper\">\n  <div class=\"menu\">\n      <ul id=\"nav-navi\" class=\"nav nav-tabs tabs-left\">\n          <li class=\"nav-item\"  [ngClass]=\"type == 1? 'btn-primary': 'btn-default'\" (click)=\"type = 1\" >\n            <a class=\"nav-link nav-tab\">Profile</a>\n          </li>\n          <li class=\"nav-item\"  [ngClass]=\"type == 2? 'btn-primary': 'btn-default'\" (click)=\"type = 2\">\n            <a class=\"nav-link nav-tab\">Posts</a>\n          </li>\n          <li class=\"nav-item\"  [ngClass]=\"type == 3? 'btn-primary': 'btn-default'\" (click)=\"type = 3\">\n            <a class=\"nav-link nav-tab\">Password</a>\n          </li>\n        </ul>\n  </div>\n  <div class=\"content\">\n      <app-info *ngIf=\"type==1\" [user]=\"user\" (changeF)=\"post()\"></app-info>\n      <app-my-posts  *ngIf=\"type==2\" [user]=\"user\"></app-my-posts>\n      <app-change-pass  *ngIf=\"type==3\" [user]=\"user\" (changeF)=\"post()\"></app-change-pass>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -1670,13 +1452,12 @@ module.exports = "<div class=\"col-lg-12 col-sm-12\" style=\"padding: 0!importan
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_dialog_dialog_service__ = __webpack_require__("../../../../../src/app/core/dialog/dialog.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_api_login_service__ = __webpack_require__("../../../../../src/app/core/api/login.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_api_user_service__ = __webpack_require__("../../../../../src/app/core/api/user.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_util_storage_service__ = __webpack_require__("../../../../../src/app/core/util/storage.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__core_api_image_service__ = __webpack_require__("../../../../../src/app/core/api/image.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_dialog_dialog_service__ = __webpack_require__("../../../../../src/app/core/dialog/dialog.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_api_login_service__ = __webpack_require__("../../../../../src/app/core/api/login.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_api_user_service__ = __webpack_require__("../../../../../src/app/core/api/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_util_storage_service__ = __webpack_require__("../../../../../src/app/core/util/storage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_api_image_service__ = __webpack_require__("../../../../../src/app/core/api/image.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1693,42 +1474,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(loading, dialog, loginService, userService, storageService, imageService, route) {
+    function ProfileComponent(loading, dialog, loginService, userService, storageService, imageService) {
         this.loading = loading;
         this.dialog = dialog;
         this.loginService = loginService;
         this.userService = userService;
         this.storageService = storageService;
         this.imageService = imageService;
-        this.route = route;
         this.user = {};
-        this.isUser = false;
     }
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.user.profilePicture = 'assets/img/avatar.png';
-        this.route.params // verify user
-            .subscribe(function (params) {
-            if (!params.id) {
-                _this.isUser = true;
-                _this.pageUserId = _this.storageService.get('id');
-            }
-            else {
-                if (params.id == _this.storageService.get('id')) {
-                    _this.isUser = true;
-                    _this.pageUserId = _this.storageService.get('id');
-                }
-                else {
-                    _this.isUser = false;
-                    _this.pageUserId = params.id;
-                }
-            }
-        });
+        var id = this.storageService.get('id');
         this.loading.show();
         this.loginService.refreshKey().subscribe(function (data) {
-            _this.userService.get(_this.pageUserId).subscribe(function (data) {
+            _this.userService.get(id).subscribe(function (data) {
                 _this.user = data.data;
                 _this.type = 1;
                 _this.loading.hide();
@@ -1772,132 +1534,14 @@ var ProfileComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/main/profile/profile.component.html"),
             styles: [__webpack_require__("../../../../../src/app/main/profile/profile.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__core_util_loading_service__["a" /* LoadingService */],
-            __WEBPACK_IMPORTED_MODULE_3__core_dialog_dialog_service__["a" /* DialogService */],
-            __WEBPACK_IMPORTED_MODULE_4__core_api_login_service__["a" /* LoginService */],
-            __WEBPACK_IMPORTED_MODULE_5__core_api_user_service__["a" /* UserService */],
-            __WEBPACK_IMPORTED_MODULE_6__core_util_storage_service__["a" /* StorageService */],
-            __WEBPACK_IMPORTED_MODULE_7__core_api_image_service__["a" /* ImageService */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__core_util_loading_service__["a" /* LoadingService */],
+            __WEBPACK_IMPORTED_MODULE_2__core_dialog_dialog_service__["a" /* DialogService */],
+            __WEBPACK_IMPORTED_MODULE_3__core_api_login_service__["a" /* LoginService */],
+            __WEBPACK_IMPORTED_MODULE_4__core_api_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_5__core_util_storage_service__["a" /* StorageService */],
+            __WEBPACK_IMPORTED_MODULE_6__core_api_image_service__["a" /* ImageService */]])
     ], ProfileComponent);
     return ProfileComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/main/search/search.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".message {\r\n    font-family: 'Roboto', sans-serif;\r\n    font-weight: 300;\r\n}", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/main/search/search.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<!-- Page Header -->\r\n<header class=\"masthead\" style=\"background-image: url('assets/img/home-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"site-heading\">\r\n          <h1>Clean Blog</h1>\r\n          <span class=\"subheading\">A Blog Theme by Start Bootstrap</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<!-- Main Content -->\r\n<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n      <h2 class=\"message\" *ngIf=\"numberResults\">Matching results for \"{{query}}\"</h2>\r\n      <h2 class=\"message\" *ngIf=\"!numberResults\">Ooops, There is no matching results for \"{{query}}\"</h2>\r\n      <app-bref-post *ngFor=\"let post of postList\" [post]=\"post\" [routerLink]=\"['/main/post/' + post.ID]\"></app-bref-post>\r\n      <!-- Pager -->\r\n      <div class=\"clearfix\">\r\n        <a class=\"btn btn-primary float-left\" [routerLink]=\"['/main/search']\" [queryParams]=\"{page: page - 1}\" queryParamsHandling=\"merge\"\r\n          *ngIf=\"page!=1\">&larr; Newer Posts</a>\r\n        <a class=\"btn btn-primary float-right\" [routerLink]=\"['/main/search']\" [queryParams]=\"{page: page - -1}\" queryParamsHandling=\"merge\"\r\n          *ngIf=\"postList.length == 10\">Older Posts &rarr;</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<hr>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/main/search/search.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_filter__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/filter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__ = __webpack_require__("../../../../../src/app/core/util/loading.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_api_post_service__ = __webpack_require__("../../../../../src/app/core/api/post.service.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var SearchComponent = /** @class */ (function () {
-    function SearchComponent(loadingService, postService, route, router) {
-        this.loadingService = loadingService;
-        this.postService = postService;
-        this.route = route;
-        this.router = router;
-        this.postList = [];
-    }
-    SearchComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.loadingService.show();
-        this.route.queryParams
-            .subscribe(function (params) {
-            _this.page = params.page ? params.page : 1;
-            _this.query = params.query ? params.query : "";
-            _this.getPostList();
-            _this.query = _this.query.trim();
-            if (!_this.query.length)
-                _this.router.navigate(["/"]);
-        });
-    };
-    SearchComponent.prototype.getPostList = function () {
-        var _this = this;
-        var param = {
-            string: this.escape(this.query),
-            page: this.page,
-        };
-        this.postService.search(param).subscribe(function (data) {
-            _this.postList = data;
-            _this.numberResults = _this.postList.length;
-            _this.loadingService.hide();
-        }, function (error) {
-            _this.loadingService.hide();
-        });
-    };
-    SearchComponent.prototype.escapeHtml = function (input) {
-        return input
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;")
-            .replace(/./g, "&period;")
-            .replace(/,/g, "&comma;");
-    };
-    SearchComponent.prototype.escape = function (input) {
-        var str = encodeURIComponent(input);
-        return str
-            .replace("%20", " ");
-    };
-    SearchComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-search',
-            template: __webpack_require__("../../../../../src/app/main/search/search.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/main/search/search.component.css")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__core_util_loading_service__["a" /* LoadingService */],
-            __WEBPACK_IMPORTED_MODULE_4__core_api_post_service__["a" /* PostService */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
-    ], SearchComponent);
-    return SearchComponent;
 }());
 
 
@@ -2109,7 +1753,6 @@ var validEvents = [
     'onPaste',
     'onPostProcess',
     'onPostRender',
-    'onPreInit',
     'onPreProcess',
     'onProgressState',
     'onRedo',
@@ -2135,11 +1778,16 @@ var validEvents = [
  * LICENSE file in the root directory of this source tree.
  *
  */
-var bindHandlers = function (ctx, editor) {
+var bindHandlers = function (ctx, editor, initEvent) {
     validEvents.forEach(function (eventName) {
         var /** @type {?} */ eventEmitter = ctx[eventName];
         if (eventEmitter.observers.length > 0) {
-            editor.on(eventName.substring(2), ctx.ngZone.run(function () { return function (event) { return eventEmitter.emit({ event: event, editor: editor }); }; }));
+            if (eventName === 'onInit') {
+                ctx.ngZone.run(function () { return eventEmitter.emit({ event: initEvent, editor: editor }); });
+            }
+            else {
+                editor.on(eventName.substring(2), ctx.ngZone.run(function () { return function (event) { return eventEmitter.emit({ event: event, editor: editor }); }; }));
+            }
         }
     });
 };
@@ -2328,8 +1976,8 @@ var EditorComponent = (function (_super) {
         var _this = this;
         var /** @type {?} */ finalInit = Object.assign({}, this.init, { selector: "#" + this.id, inline: this.inline, plugins: mergePlugins(this.init && this.init["plugins"], this.plugins), toolbar: this.toolbar || (this.init && this.init["toolbar"]), setup: function (editor) {
                 _this.editor = editor;
-                editor.on('init', function () {
-                    _this.initEditor(editor);
+                editor.on('init', function (e) {
+                    _this.initEditor(e, editor);
                 });
                 if (_this.init && typeof _this.init["setup"] === 'function') {
                     _this.init["setup"](editor);
@@ -2343,10 +1991,11 @@ var EditorComponent = (function (_super) {
         });
     };
     /**
+     * @param {?} initEvent
      * @param {?} editor
      * @return {?}
      */
-    EditorComponent.prototype.initEditor = function (editor) {
+    EditorComponent.prototype.initEditor = function (initEvent, editor) {
         var _this = this;
         if (typeof this.initialValue === 'string') {
             this.ngZone.run(function () { return editor.setContent(_this.initialValue); });
@@ -2357,7 +2006,7 @@ var EditorComponent = (function (_super) {
             return format === 'html' && content && _this.ngZone.run(function () { return _this.onChangeCallback(content); });
         });
         editor.on('change keyup', function () { return _this.ngZone.run(function () { return _this.onChangeCallback(editor.getContent()); }); });
-        bindHandlers(this, editor);
+        bindHandlers(this, editor, initEvent);
     };
     return EditorComponent;
 }(Events));
