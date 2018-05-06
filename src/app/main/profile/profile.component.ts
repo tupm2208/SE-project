@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute, Router  } from '@angular/router';
 import { LoadingService } from '../../core/util/loading.service';
 import { DialogService } from '../../core/dialog/dialog.service';
 import { LoginService } from '../../core/api/login.service';
@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
 
   private type: Number;
   private user: any = {};
+  private isUser: Boolean = false;
+  private pageUserId: Number;
 
   constructor(
     private loading: LoadingService,
@@ -25,20 +27,36 @@ export class ProfileComponent implements OnInit {
     private loginService: LoginService,
     private userService: UserService,
     private storageService: StorageService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
 
     this.user.profilePicture = 'assets/img/avatar.png';
 
-    let id = this.storageService.get('id');
-
+    this.route.params // verify user
+      .subscribe( params => {
+        if(!params.id) { // no params id, enter user profile
+          this.isUser = true;
+          this.pageUserId = this.storageService.get('id');
+        } 
+        else {
+          if(params.id == this.storageService.get('id'))  {
+            this.isUser = true;
+            this.pageUserId = this.storageService.get('id');
+          }
+          else { // user as guest to other's profile
+            this.isUser = false;
+            this.pageUserId = params.id
+          }
+        }
+      })
 
     this.loading.show();
     this.loginService.refreshKey().subscribe( data => {
 
-      this.userService.get(id).subscribe( data => {
+      this.userService.get(this.pageUserId).subscribe( data => {
 
         this.user = data.data
 
@@ -46,7 +64,7 @@ export class ProfileComponent implements OnInit {
         this.loading.hide();
       })
     }, error => {
-
+      
       this.loading.hide();
     })
   }

@@ -16,7 +16,10 @@ export class BrefPostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    $("#category-tag").click((e)=>{
+    $(".category-tag").click((e)=>{
+      e.stopPropagation();
+    })
+    $(".authorname-tag").click( e => {
       e.stopPropagation();
     })
   }
