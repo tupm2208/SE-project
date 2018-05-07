@@ -27,7 +27,7 @@
           <a class="nav-link" *ngIf="isLog" routerLink="main/profile">Profile</a>
         </li>
         <li class="nav-item" *ngIf="isLog">
-          <a class="nav-link" routerLink="login" (click)="storageService.set('token',null)">Logout</a>
+          <a class="nav-link" routerLink="login" (click)="logout()">Logout</a>
         </li>
         <li class="nav-item" *ngIf="!isLog">
           <a class="nav-link" routerLink="login">Login</a>

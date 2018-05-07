@@ -54,19 +54,15 @@ export class ProfileComponent implements OnInit {
       })
 
     this.loading.show();
-    this.loginService.refreshKey().subscribe( data => {
-
       this.userService.get(this.pageUserId).subscribe( data => {
-
+        
         this.user = data.data
 
         this.type = 1;
         this.loading.hide();
+      }, err => {
+          this.dialog.showError();
       })
-    }, error => {
-      
-      this.loading.hide();
-    })
   }
 
   post() {

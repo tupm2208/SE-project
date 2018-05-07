@@ -45,6 +45,15 @@ export class AppComponent {
     
   }
 
+  // remove all data in session storage when loging out
+  logout() {
+    this.storageService.removeItem("token");
+    this.storageService.removeItem("id");
+    this.storageService.removeItem("profilePicture");
+    this.storageService.removeItem("username");
+    this.storageService.removeItem("password");
+  }
+
   keyDownFunction(event) {
     if(event.keyCode == 13) { // press enter to submit
       this.search();
