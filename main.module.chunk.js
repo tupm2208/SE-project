@@ -1727,14 +1727,12 @@ var ProfileComponent = /** @class */ (function () {
             }
         });
         this.loading.show();
-        this.loginService.refreshKey().subscribe(function (data) {
-            _this.userService.get(_this.pageUserId).subscribe(function (data) {
-                _this.user = data.data;
-                _this.type = 1;
-                _this.loading.hide();
-            });
-        }, function (error) {
+        this.userService.get(this.pageUserId).subscribe(function (data) {
+            _this.user = data.data;
+            _this.type = 1;
             _this.loading.hide();
+        }, function (err) {
+            _this.dialog.showError();
         });
     };
     ProfileComponent.prototype.post = function () {
