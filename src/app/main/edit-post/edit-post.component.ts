@@ -10,6 +10,7 @@ import { DialogService } from '../../core/dialog/dialog.service';
 import { LoginService } from '../../core/api/login.service';
 import { StorageService } from '../../core/util/storage.service';
 
+
 declare let tinymce: any;
 declare let $: any;
 
@@ -93,6 +94,8 @@ export class EditPostComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+
+    $('#summernote').summernote();
 
     this.loading.show();
 
