@@ -27,6 +27,8 @@ export class EditPostComponent implements OnInit {
   private categoryList: Array<any> = [];
   private id: any;
 
+  // TinyMce configuration
+
   private init = {
     selector: 'textarea',
     height: 500,
