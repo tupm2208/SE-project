@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { FormatService } from '../../../../core/util/format.service';
 import { StorageService } from '../../../../core/util/storage.service';
 import { CommentService } from '../../../../core/api/comment.service';
@@ -13,7 +13,7 @@ declare var $:any;
 })
 export class CommentDetailComponent implements OnInit {
   @Input() comment: any;
-  
+  @Output() emitDelete: EventEmitter<any> = new EventEmitter();
 
   private isCommentator: Boolean = false; // if the current user is the commentator
   private isEdit = false; // open and close the comment edit input
@@ -38,7 +38,8 @@ export class CommentDetailComponent implements OnInit {
 
   // send comment to comment component
   delete() {
-    return this.commmentComponent.setSelectedComment(this.comment);
+    // return this.commmentComponent.setSelectedComment(this.comment);
+    this.emitDelete.emit(this.comment);
   }
   
   // edit comment

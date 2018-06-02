@@ -3,7 +3,7 @@
       <img src="{{comment?.commentator.profilePicture}}" class="avatar" alt="">
       
     </div>
-  <div  class="comment-block" (mouseenter)="showDropdownButton()" (mouseleave)="hideDropdownButton()">
+  <div class="comment-block" (click)="showDropdownButton()" (mouseenter)="showDropdownButton()" (mouseleave)="hideDropdownButton()">
     <section class="comment-header">
         <a class="comment-author" [routerLink]='["/main/profile/",comment?.authorID]'> {{comment?.commentator.name}}</a>
         <span class="dropdown dropdown-arrow" *ngIf="isCommentator" attr.id="comment-block{{comment.ID}}">
@@ -11,7 +11,7 @@
           </button>
           <div class="dropdown-menu">
             <a class="dropdown-item" (click)="isEdit = true">Edit</a>
-            <a class="dropdown-item" data-toggle="modal" id="deleteButton" data-target="#exampleModal" (click)="delete()" >Delete</a>
+            <a class="dropdown-item" data-toggle="modal" id="deleteButton" data-target="#deleteModal" (click)="delete()">Delete</a>
           </div>
         </span>
         <small class="comment-date pull-right">{{formatService.formatDateTime(comment.createdAt)}}</small>	
