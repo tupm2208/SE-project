@@ -41,7 +41,7 @@ export class LoginService {
         this.dialogService.showError("Your Session work is expired! goto login!").subscribe( data => {
 
           this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url }});
-          console.log("current route: ", this.router.url);
+          
         })
         observer.error();
         observer.complete();
