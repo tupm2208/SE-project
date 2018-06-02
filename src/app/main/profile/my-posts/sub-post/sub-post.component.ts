@@ -11,6 +11,7 @@ export class SubPostComponent implements OnInit {
 
   @Input() post: any;
   @Output() delete: any = new EventEmitter();
+  @Input() isUser: any;
   
   constructor(
     private formatService: FormatService
