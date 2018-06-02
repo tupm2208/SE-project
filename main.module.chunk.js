@@ -146,7 +146,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/edit-post/edit-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header *ngIf=\"display\" class=\"masthead\" style=\"background-image: url('assets/img/about-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"page-heading\">\r\n          <!-- <h1>About Me</h1>  -->\r\n            <div class=\"form-group\">\r\n            <label for=\"sel1\">Select category:</label>\r\n            <select class=\"form-control\" id=\"sel1\" [(ngModel)]=\"registData.categoryID\">\r\n              <option *ngFor=\"let item of categoryList\" [value]=\"item.ID\">{{item.category}}</option>\r\n            </select>\r\n          </div>\r\n          <input type=\"text\" [(ngModel)]=\"registData.title\" style=\"font-size: 3em; width: 100%\" placeholder=\"Enter Title\">\r\n          <span class=\"subheading\">{{registData.title}}.</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<div class=\"container\">\r\n  <div id=\"display\" style=\"position: absolute;\r\n    display: block;\r\n    height: 10px!important;\r\n    overflow: overlay;\">\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"display\" class=\"container\">\r\n    <editor [(ngModel)]=\"dataModel\" (ngModelChange)=\"change()\" [init]=\"init\" apiKey=\"npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7\"></editor>  \r\n    <button class=\"btn btn-primary pull-left\" [routerLink]=\"['/main/post/'+id]\" >Cancel</button>\r\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"preview()\">Preview</button>\r\n</div>"
+module.exports = "<header *ngIf=\"display\" class=\"masthead\" style=\"background-image: url('assets/img/about-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"page-heading\">\r\n          <!-- <h1>About Me</h1>  -->\r\n            <div class=\"form-group\">\r\n            <label for=\"sel1\">Select category:</label>\r\n            <select class=\"form-control\" id=\"sel1\" [(ngModel)]=\"registData.categoryID\">\r\n              <option *ngFor=\"let item of categoryList\" [value]=\"item.ID\">{{item.category}}</option>\r\n            </select>\r\n          </div>\r\n          <input type=\"text\" [(ngModel)]=\"registData.title\" style=\"font-size: 3em; width: 100%\" placeholder=\"Enter Title\">\r\n          <span class=\"subheading\">{{registData.title}}.</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<div class=\"container\">\r\n    <!-- <editor [(ngModel)]=\"dataModel\" (ngModelChange)=\"change()\" [init]=\"init\" apiKey=\"npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7\"></editor>   -->\r\n    <textarea id=\"summernote\" name=\"description\" class=\"form-control\" rows=\"3\"></textarea>\r\n    <button class=\"btn btn-primary pull-left\" [routerLink]=\"[id? '/main/post/'+id: '/main/home']\" >Cancel</button>\r\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"preview()\">Preview</button>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -233,50 +233,6 @@ var EditPostComponent = /** @class */ (function () {
         this.display = false;
         this.registData = {};
         this.categoryList = [];
-        this.init = {
-            selector: 'textarea',
-            height: 500,
-            theme: 'modern',
-            plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'nonbreaking save table contextmenu directionality',
-                'emoticons template paste textcolor colorpicker textpattern imagetools',
-                'image code',
-            ],
-            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-            toolbar2: 'print preview media | forecolor backcolor emoticons',
-            image_advtab: true,
-            // enable title field in the Image dialog
-            image_title: true,
-            // enable automatic uploads of images represented by blob or data URIs
-            automatic_uploads: true,
-            plugin_preview_width: 650,
-            // add custom filepicker only to Image dialog
-            file_picker_types: 'image',
-            file_picker_callback: function (cb, value, meta) {
-                var input = document.createElement('input');
-                input.setAttribute('type', 'file');
-                input.setAttribute('accept', 'image/*');
-                console.log("this: ", this);
-                input.onchange = function (e) {
-                    console.log("this.file: ", cb, value, meta);
-                    var file = e.target.files[0];
-                    var reader = new FileReader();
-                    reader.onload = function () {
-                        var id = 'blobid' + (new Date()).getTime();
-                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                        var base64 = reader.result.split(',')[1];
-                        var blobInfo = blobCache.create(id, file, base64);
-                        blobCache.add(blobInfo);
-                        // call the callback and populate the Title field with the file name
-                        cb(blobInfo.blobUri(), { title: file.name });
-                    };
-                    reader.readAsDataURL(file);
-                };
-                input.click();
-            }
-        };
     }
     EditPostComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -285,6 +241,7 @@ var EditPostComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        $('#summernote').summernote();
                         this.loading.show();
                         return [4 /*yield*/, this.loginService.refreshKey().toPromise().then(function (data) {
                                 // this.loading.hide();
@@ -305,12 +262,11 @@ var EditPostComponent = /** @class */ (function () {
                         else {
                             data = this.storageService.get('preview' + this.id);
                             console.log("preview Data: ", data);
-                            setTimeout(function () {
-                                $("#display").html(_this.dataModel);
-                            }, 50);
                             if (data) {
                                 this.registData = data;
                                 this.dataModel = this.registData.content;
+                                $('#summernote').summernote('code', '<p>' + this.dataModel + '</p>');
+                                console.log("init summernote");
                             }
                             this.loading.hide();
                         }
@@ -330,19 +286,13 @@ var EditPostComponent = /** @class */ (function () {
             _this.registData = data.data;
             _this.dataModel = _this.registData.content;
             var data1 = _this.storageService.get('preview' + _this.id);
-            console.log("preview Data: ", data1);
-            setTimeout(function () {
-                $("#display").html(_this.dataModel);
-            }, 50);
             if (data1) {
                 _this.registData = data1;
                 _this.dataModel = _this.registData.content;
             }
+            $('#summernote').summernote('code', _this.dataModel);
             _this.loading.hide();
         });
-    };
-    EditPostComponent.prototype.change = function () {
-        $("#display").html(this.dataModel);
     };
     EditPostComponent.prototype.post = function () {
         var _this = this;
@@ -358,6 +308,7 @@ var EditPostComponent = /** @class */ (function () {
             imgList.toArray().forEach(function (element) {
                 if (element.src.indexOf('data') == 0) {
                     count++;
+                    console.log("image: ", count);
                     var params = {
                         imageURI: element.src
                     };
@@ -377,44 +328,12 @@ var EditPostComponent = /** @class */ (function () {
             }
         });
     };
-    EditPostComponent.prototype.regist = function () {
-        var _this = this;
-        this.post().subscribe(function (data) {
-            _this.registData.content = $('#display').html();
-            if (_this.registData.ID) {
-                _this.postService.edit(_this.registData).subscribe(function (data) {
-                    _this.loading.hide();
-                    console.log("regist post: ", data);
-                    _this.success();
-                }, function (error) {
-                    _this.loading.hide();
-                    _this.dialog.showError("Something goes wrong! Try again!");
-                });
-                return;
-            }
-            _this.postService.post(_this.registData).subscribe(function (data) {
-                _this.loading.hide();
-                _this.registData = data.data;
-                console.log("regist post: ", data);
-                _this.success();
-            }, function (error) {
-                _this.loading.hide();
-                _this.dialog.showError("Something goes wrong! Try again!");
-            });
-        });
-    };
-    EditPostComponent.prototype.success = function () {
-        var _this = this;
-        this.dialog.showSuccess().subscribe(function (data) {
-            _this.router.navigate(['/main/post/' + _this.registData.ID]);
-        });
-    };
     EditPostComponent.prototype.checkValid = function () {
         if (!this.registData.title) {
             this.dialog.showError("Empty title!");
             return false;
         }
-        if (!this.dataModel) {
+        if (!$('#summernote').val()) {
             this.dialog.showError("Empty content!");
             return false;
         }
@@ -423,11 +342,12 @@ var EditPostComponent = /** @class */ (function () {
     EditPostComponent.prototype.preview = function () {
         var _this = this;
         this.post().subscribe(function (data) {
-            _this.registData.content = $('#display').html();
+            _this.registData.content = $('#summernote').summernote('code');
             _this.storageService.set('preview' + _this.id, _this.registData);
             console.log("pre: ", _this.storageService.get('preview' + _this.id));
             _this.loading.hide();
             _this.router.navigate(['main/preview/' + _this.id]);
+            console.log("after upload image: ", _this.registData.content);
         }, function (error) {
             _this.loading.hide();
         });
@@ -1453,7 +1373,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/profile/my-posts/my-posts.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n\r\n      <app-sub-post *ngFor=\"let post of postList\" [post]=\"post\" (delete)=\"delete($event)\"></app-sub-post>\r\n      <!-- Pager -->\r\n      <div class=\"clearfix\">\r\n        <a class=\"btn btn-primary float-left\" *ngIf=\"page!=1\" (click)=\"newerPost()\">&larr; Newer Posts</a>\r\n        <a class=\"btn btn-primary float-right\" *ngIf=\"postList.length == 10\" (click)=\"olderPost()\">Older Posts &rarr;</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<hr>"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n\r\n      <app-sub-post *ngFor=\"let post of postList\" [post]=\"post\" [isUser]=\"isUser\" (delete)=\"delete($event)\"></app-sub-post>\r\n      <!-- Pager -->\r\n      <div class=\"clearfix\">\r\n        <a class=\"btn btn-primary float-left\" *ngIf=\"page!=1\" (click)=\"newerPost()\">&larr; Newer Posts</a>\r\n        <a class=\"btn btn-primary float-right\" *ngIf=\"postList.length == 10\" (click)=\"olderPost()\">Older Posts &rarr;</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<hr>"
 
 /***/ }),
 
@@ -1624,6 +1544,10 @@ var SubPostComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
         __metadata("design:type", Object)
     ], SubPostComponent.prototype, "delete", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", Object)
+    ], SubPostComponent.prototype, "isUser", void 0);
     SubPostComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-sub-post',
