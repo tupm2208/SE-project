@@ -12,7 +12,7 @@ export class LoadingService {
                                                         left: 0;
                                                         text-align: center;
                                                         right: 0;
-                                                        background-color: beige;
+                                                        background-color: #eaefef;
                                                         opacity: 0.91;"> 
                     <img class="jpg-image" style="position: relative; top: calc(50% - 30px); " width=100 height=100 src="https://media.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif" />
                 </div>`
