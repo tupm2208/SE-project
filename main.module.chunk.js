@@ -146,7 +146,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/edit-post/edit-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header *ngIf=\"display\" class=\"masthead\" style=\"background-image: url('assets/img/about-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"page-heading\">\r\n          <!-- <h1>About Me</h1>  -->\r\n            <div class=\"form-group\">\r\n            <label for=\"sel1\">Select category:</label>\r\n            <select class=\"form-control\" id=\"sel1\" [(ngModel)]=\"registData.categoryID\">\r\n              <option *ngFor=\"let item of categoryList\" [value]=\"item.ID\">{{item.category}}</option>\r\n            </select>\r\n          </div>\r\n          <input type=\"text\" [(ngModel)]=\"registData.title\" style=\"font-size: 3em; width: 100%\" placeholder=\"Enter Title\">\r\n          <span class=\"subheading\">{{registData.title}}.</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<div class=\"container\">\r\n    <!-- <editor [(ngModel)]=\"dataModel\" (ngModelChange)=\"change()\" [init]=\"init\" apiKey=\"npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7\"></editor>   -->\r\n    <textarea id=\"summernote\" name=\"description\" class=\"form-control\" rows=\"3\"></textarea>\r\n    <button class=\"btn btn-primary pull-left\" [routerLink]=\"[id? '/main/post/'+id: '/main/home']\" >Cancel</button>\r\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"preview()\">Preview</button>\r\n</div>\r\n\r\n"
+module.exports = "<header *ngIf=\"display\" class=\"masthead\" style=\"background-image: url('assets/img/about-bg.jpg')\">\r\n  <div class=\"overlay\"></div>\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-8 col-md-10 mx-auto\">\r\n        <div class=\"page-heading\">\r\n          <!-- <h1>About Me</h1>  -->\r\n            <div class=\"form-group\">\r\n            <label for=\"sel1\">Select category:</label>\r\n            <select class=\"form-control\" id=\"sel1\" [(ngModel)]=\"registData.categoryID\">\r\n              <option *ngFor=\"let item of categoryList\" [value]=\"item.ID\">{{item.category}}</option>\r\n            </select>\r\n          </div>\r\n          <input type=\"text\" [(ngModel)]=\"registData.title\" style=\"font-size: 3em; width: 100%\" placeholder=\"Enter Title\">\r\n          <span class=\"subheading\">{{registData.title}}.</span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n\r\n<div class=\"container\">\r\n  <div id=\"display\" style=\"position: absolute;\r\n    display: block;\r\n    height: 10px!important;\r\n    overflow: overlay;\">\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container\">\r\n    <!-- <editor [(ngModel)]=\"dataModel\" (ngModelChange)=\"change()\" [init]=\"init\" apiKey=\"npgwie7b48m3u6qrpvlyc5j4zhhliyxf2be8sm6maperqiu7\"></editor>   -->\r\n    <textarea id=\"summernote\" class=\"form-control\" rows=\"3\"></textarea>\r\n    <button class=\"btn btn-primary pull-left\" [routerLink]=\"['/main/post/'+id]\" >Cancel</button>\r\n    <button style=\"float:right\" class=\"btn btn-primary\" (click)=\"preview()\">Preview</button>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -233,6 +233,51 @@ var EditPostComponent = /** @class */ (function () {
         this.display = false;
         this.registData = {};
         this.categoryList = [];
+        // TinyMce configuration
+        this.init = {
+            selector: 'textarea',
+            height: 500,
+            theme: 'modern',
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools',
+                'image code',
+            ],
+            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar2: 'print preview media | forecolor backcolor emoticons',
+            image_advtab: true,
+            // enable title field in the Image dialog
+            image_title: true,
+            // enable automatic uploads of images represented by blob or data URIs
+            automatic_uploads: true,
+            plugin_preview_width: 650,
+            // add custom filepicker only to Image dialog
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+                console.log("this: ", this);
+                input.onchange = function (e) {
+                    console.log("this.file: ", cb, value, meta);
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+                        // call the callback and populate the Title field with the file name
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
+                };
+                input.click();
+            }
+        };
     }
     EditPostComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -262,11 +307,12 @@ var EditPostComponent = /** @class */ (function () {
                         else {
                             data = this.storageService.get('preview' + this.id);
                             console.log("preview Data: ", data);
+                            setTimeout(function () {
+                                $("#display").html(_this.dataModel);
+                            }, 50);
                             if (data) {
                                 this.registData = data;
                                 this.dataModel = this.registData.content;
-                                $('#summernote').summernote('code', '<p>' + this.dataModel + '</p>');
-                                console.log("init summernote");
                             }
                             this.loading.hide();
                         }
@@ -286,13 +332,19 @@ var EditPostComponent = /** @class */ (function () {
             _this.registData = data.data;
             _this.dataModel = _this.registData.content;
             var data1 = _this.storageService.get('preview' + _this.id);
+            console.log("preview Data: ", data1);
+            setTimeout(function () {
+                $("#display").html(_this.dataModel);
+            }, 50);
             if (data1) {
                 _this.registData = data1;
                 _this.dataModel = _this.registData.content;
             }
-            $('#summernote').summernote('code', _this.dataModel);
             _this.loading.hide();
         });
+    };
+    EditPostComponent.prototype.change = function () {
+        $("#display").html(this.dataModel);
     };
     EditPostComponent.prototype.post = function () {
         var _this = this;
@@ -308,7 +360,6 @@ var EditPostComponent = /** @class */ (function () {
             imgList.toArray().forEach(function (element) {
                 if (element.src.indexOf('data') == 0) {
                     count++;
-                    console.log("image: ", count);
                     var params = {
                         imageURI: element.src
                     };
@@ -328,12 +379,44 @@ var EditPostComponent = /** @class */ (function () {
             }
         });
     };
+    EditPostComponent.prototype.regist = function () {
+        var _this = this;
+        this.post().subscribe(function (data) {
+            _this.registData.content = $('#display').html();
+            if (_this.registData.ID) {
+                _this.postService.edit(_this.registData).subscribe(function (data) {
+                    _this.loading.hide();
+                    console.log("regist post: ", data);
+                    _this.success();
+                }, function (error) {
+                    _this.loading.hide();
+                    _this.dialog.showError("Something goes wrong! Try again!");
+                });
+                return;
+            }
+            _this.postService.post(_this.registData).subscribe(function (data) {
+                _this.loading.hide();
+                _this.registData = data.data;
+                console.log("regist post: ", data);
+                _this.success();
+            }, function (error) {
+                _this.loading.hide();
+                _this.dialog.showError("Something goes wrong! Try again!");
+            });
+        });
+    };
+    EditPostComponent.prototype.success = function () {
+        var _this = this;
+        this.dialog.showSuccess().subscribe(function (data) {
+            _this.router.navigate(['/main/post/' + _this.registData.ID]);
+        });
+    };
     EditPostComponent.prototype.checkValid = function () {
         if (!this.registData.title) {
             this.dialog.showError("Empty title!");
             return false;
         }
-        if (!$('#summernote').val()) {
+        if (!this.dataModel) {
             this.dialog.showError("Empty content!");
             return false;
         }
@@ -342,12 +425,11 @@ var EditPostComponent = /** @class */ (function () {
     EditPostComponent.prototype.preview = function () {
         var _this = this;
         this.post().subscribe(function (data) {
-            _this.registData.content = $('#summernote').summernote('code');
+            _this.registData.content = $('#display').html();
             _this.storageService.set('preview' + _this.id, _this.registData);
             console.log("pre: ", _this.storageService.get('preview' + _this.id));
             _this.loading.hide();
             _this.router.navigate(['main/preview/' + _this.id]);
-            console.log("after upload image: ", _this.registData.content);
         }, function (error) {
             _this.loading.hide();
         });
@@ -396,7 +478,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/home/bref-post/bref-post.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"post-preview\">\r\n  <a>\r\n    <h2 class=\"post-title\">\r\n      {{post?.title}}\r\n    </h2>\r\n    <h3 class=\"post-subtitle\">\r\n      {{post?.subtitle}}\r\n    </h3>\r\n  </a>\r\n  <p class=\"post-meta\">Posted by\r\n    <a class=\"authorname-tag\" [routerLink]='[\"/main/profile/\",post?.authorID]'>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\r\n    <small class=\"category-tag\"><a href=\"\" [routerLink]='[\"/main/category/\",post?.category?.ID]' [queryParams]=\"{topic: post?.category?.category}\">{{post?.category?.category}}</a></small>\r\n</div>\r\n<hr>"
+module.exports = "<div class=\"post-preview\">\r\n  <a>\r\n    <h2 class=\"post-title\">\r\n      {{post?.title}}\r\n    </h2>\r\n    <h5 class=\"post-subtitle\">\r\n      {{post?.subtitle}}&hellip;\r\n    </h5>\r\n  </a>\r\n  <p class=\"post-meta\">Posted by\r\n    <a class=\"authorname-tag\" [routerLink]='[\"/main/profile/\",post?.authorID]'>{{post?.author?.name}}</a> on {{formatService.formatDate(post?.createdAt)}}</p>\r\n    <small class=\"category-tag\"><a href=\"\" [routerLink]='[\"/main/category/\",post?.category?.ID]' [queryParams]=\"{topic: post?.category?.category}\">{{post?.category?.category}}</a></small>\r\n</div>\r\n<hr>"
 
 /***/ }),
 
@@ -429,6 +511,7 @@ var BrefPostComponent = /** @class */ (function () {
         $(".authorname-tag").click(function (e) {
             e.stopPropagation();
         });
+        this.post.subtitle = this.post.subtitle.split(' ').slice(0, 40).join(' ');
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
@@ -704,7 +787,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/post/comment/comment-detail/comment-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"comment-wrap\">\r\n    <div class=\"photo\">\r\n      <img src=\"{{comment?.commentator.profilePicture}}\" class=\"avatar\" alt=\"\">\r\n      \r\n    </div>\r\n  <div  class=\"comment-block\" (mouseenter)=\"showDropdownButton()\" (mouseleave)=\"hideDropdownButton()\">\r\n    <section class=\"comment-header\">\r\n        <a class=\"comment-author\" [routerLink]='[\"/main/profile/\",comment?.authorID]'> {{comment?.commentator.name}}</a>\r\n        <span class=\"dropdown dropdown-arrow\" *ngIf=\"isCommentator\" attr.id=\"comment-block{{comment.ID}}\">\r\n          <button type=\"button\" class=\"dropdown-toggle dropdown-button\" data-toggle=\"dropdown\"> \r\n          </button>\r\n          <div class=\"dropdown-menu\">\r\n            <a class=\"dropdown-item\" (click)=\"isEdit = true\">Edit</a>\r\n            <a class=\"dropdown-item\" data-toggle=\"modal\" id=\"deleteButton\" data-target=\"#exampleModal\" (click)=\"delete()\" >Delete</a>\r\n          </div>\r\n        </span>\r\n        <small class=\"comment-date pull-right\">{{formatService.formatDateTime(comment.createdAt)}}</small>\t\r\n    \r\n      </section>\r\n\r\n    <p class=\"comment-text\" *ngIf=\"!isEdit\">{{comment?.content}}</p>\r\n    <div class=\"edit-block\" *ngIf=\"isEdit\">\r\n      <form action=\"\" (keydown)=\"keyDownFunction($event)\" >\r\n          <input type=\"text\"  [(ngModel)]=\"editContent\" name=\"editcontent\" class=\"form-control\" value={{comment?.content}} (focusout)=\"cancelEdit()\">\r\n      </form>\r\n      <!-- attr.id=\"input{{comment.ID}}\" -->\r\n\r\n      <small>Press Esc to <a href=\"\" (click)=\"cancelEdit()\">cancel</a> </small>\r\n    </div>\r\n    \r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"comment-wrap\">\r\n    <div class=\"photo\">\r\n      <img src=\"{{comment?.commentator.profilePicture}}\" class=\"avatar\" alt=\"\">\r\n      \r\n    </div>\r\n  <div class=\"comment-block\" (click)=\"showDropdownButton()\" (mouseenter)=\"showDropdownButton()\" (mouseleave)=\"hideDropdownButton()\">\r\n    <section class=\"comment-header\">\r\n        <a class=\"comment-author\" [routerLink]='[\"/main/profile/\",comment?.authorID]'> {{comment?.commentator.name}}</a>\r\n        <span class=\"dropdown dropdown-arrow\" *ngIf=\"isCommentator\" attr.id=\"comment-block{{comment.ID}}\">\r\n          <button type=\"button\" class=\"dropdown-toggle dropdown-button\" data-toggle=\"dropdown\"> \r\n          </button>\r\n          <div class=\"dropdown-menu\">\r\n            <a class=\"dropdown-item\" (click)=\"isEdit = true\">Edit</a>\r\n            <a class=\"dropdown-item\" data-toggle=\"modal\" id=\"deleteButton\" data-target=\"#deleteModal\" (click)=\"delete()\">Delete</a>\r\n          </div>\r\n        </span>\r\n        <small class=\"comment-date pull-right\">{{formatService.formatDateTime(comment.createdAt)}}</small>\t\r\n    \r\n      </section>\r\n\r\n    <p class=\"comment-text\" *ngIf=\"!isEdit\">{{comment?.content}}</p>\r\n    <div class=\"edit-block\" *ngIf=\"isEdit\">\r\n      <form action=\"\" (keydown)=\"keyDownFunction($event)\" >\r\n          <input type=\"text\"  [(ngModel)]=\"editContent\" name=\"editcontent\" class=\"form-control\" value={{comment?.content}} (focusout)=\"cancelEdit()\">\r\n      </form>\r\n      <!-- attr.id=\"input{{comment.ID}}\" -->\r\n\r\n      <small>Press Esc to <a href=\"\" (click)=\"cancelEdit()\">cancel</a> </small>\r\n    </div>\r\n    \r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -738,6 +821,7 @@ var CommentDetailComponent = /** @class */ (function () {
         this.storageService = storageService;
         this.commmentComponent = commmentComponent;
         this.commentService = commentService;
+        this.emitDelete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.isCommentator = false; // if the current user is the commentator
         this.isEdit = false; // open and close the comment edit input
     }
@@ -750,7 +834,8 @@ var CommentDetailComponent = /** @class */ (function () {
     };
     // send comment to comment component
     CommentDetailComponent.prototype.delete = function () {
-        return this.commmentComponent.setSelectedComment(this.comment);
+        // return this.commmentComponent.setSelectedComment(this.comment);
+        this.emitDelete.emit(this.comment);
     };
     // edit comment
     CommentDetailComponent.prototype.edit = function () {
@@ -800,6 +885,10 @@ var CommentDetailComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", Object)
     ], CommentDetailComponent.prototype, "comment", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */])
+    ], CommentDetailComponent.prototype, "emitDelete", void 0);
     CommentDetailComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-comment-detail',
@@ -839,7 +928,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/main/post/comment/comment.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-9 col-md-10 mx-auto\">\r\n\r\n\r\n<div class=\"comments\" >\r\n\t\t<div class=\"comment-wrap\">\r\n\t\t\t\t<div class=\"comment-block\">\r\n\t\t\t\t\t\t<form action=\"\" #commentForm=\"ngForm\" >\r\n\t\t\t\t\t\t\t\t<textarea name=\"comment-box\" id=\"comment-box\" [(ngModel)]=\"content\" cols=\"30\" rows=\"3\" [attr.placeholder]=\"isLogin ? 'Add comment...'  : 'Sign in to comment'\" [disabled]=\"!isLogin\"></textarea>\r\n\t\t\t\t\t\t</form>\r\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary pull-right\" style=\"padding: 10px; font-size: 0.7em;\" (click)=\"submit(); commentForm.reset();\" [disabled]=\"!isLogin\">Submit</button>\r\n\t\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"comment-details\" *ngFor=\"let comment of comments\">\r\n        <app-comment-detail [comment]=\"comment\"></app-comment-detail>\r\n\t\t</div>\r\n\t\t   <!-- Modal -->\r\n\t\t   <div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalCenterTitle\" aria-hidden=\"true\">\r\n                <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n                  <div class=\"modal-content\">\r\n                    <div class=\"modal-header\">\r\n                      <h6 class=\"modal-title\" id=\"exampleModalLongTitle\">Delete</h6>\r\n                      <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                        <span aria-hidden=\"true\">&times;</span>\r\n                      </button>\r\n                    </div>\r\n                    <div class=\"modal-body modal-content\">\r\n                      Are you sure you want to delete this comment?\r\n                    </div>\r\n                    <div class=\"modal-footer\">\r\n                      <button type=\"button\" class=\"btn btn-secondary modal-button\" data-dismiss=\"modal\">Close</button>\r\n                      <button type=\"button\" id=\"confirmButton\" class=\"btn btn-primary modal-button\" (click)=\"delete()\" data-dismiss=\"modal\">Delete</button>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n</div>\r\n\r\n</div>\r\n\r\n</div>\r\n\r\n</div>"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-9 col-md-10 mx-auto\">\r\n\r\n\r\n<div class=\"comments\" >\r\n\t\t<div class=\"comment-wrap\">\r\n\t\t\t\t<div class=\"comment-block\">\r\n\t\t\t\t\t\t<form action=\"\" #commentForm=\"ngForm\" >\r\n\t\t\t\t\t\t\t\t<textarea name=\"comment-box\" id=\"comment-box\" [(ngModel)]=\"content\" cols=\"30\" rows=\"3\" [attr.placeholder]=\"isLogin ? 'Add comment...'  : 'Sign in to comment'\" [disabled]=\"!isLogin\"></textarea>\r\n\t\t\t\t\t\t</form>\r\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary pull-right\" style=\"padding: 10px; font-size: 0.7em;\" (click)=\"submit(); commentForm.reset();\" [disabled]=\"!isLogin\">Submit</button>\r\n\t\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"comment-details\" *ngFor=\"let comment of comments\">\r\n        <app-comment-detail [comment]=\"comment\" (emitDelete)=\"setSelectedComment(comment)\"></app-comment-detail>\r\n\t\t</div>\r\n\t\t   <!-- Modal -->\r\n\t\t   <div class=\"modal fade\" id=\"deleteModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteModalCenterTitle\" aria-hidden=\"true\">\r\n          \r\n                <div class=\"modal-dialog\" role=\"document\">\r\n                  <div class=\"modal-content\">\r\n                    <div class=\"modal-header\">\r\n                      <h6 class=\"modal-title\" id=\"deleteModalLongTitle\">Delete</h6>\r\n                      <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                        <span aria-hidden=\"true\">&times;</span>\r\n                      </button>\r\n                    </div>\r\n                    <div class=\"modal-body modal-content\" style=\"font-size: 17px;\">\r\n                      Are you sure you want to delete this comment?\r\n                    </div>\r\n                    <div class=\"modal-footer\">\r\n                      <button type=\"button\" class=\"btn btn-secondary modal-button\" data-dismiss=\"modal\">Close</button>\r\n                      <button type=\"button\" id=\"confirmButton\" class=\"btn btn-primary modal-button\" (click)=\"delete()\" data-dismiss=\"modal\">Delete</button>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n</div>\r\n\r\n</div>\r\n\r\n</div>\r\n\r\n</div>"
 
 /***/ }),
 
