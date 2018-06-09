@@ -429,7 +429,7 @@ var BrefPostComponent = /** @class */ (function () {
         $(".authorname-tag").click(function (e) {
             e.stopPropagation();
         });
-        this.post.subtitle = this.post.subtitle.split(' ').slice(0, 40).join(' ');
+        this.post.subtitle = this.post.subtitle ? this.post.subtitle.split(' ').slice(0, 40).join(' ') : "";
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
