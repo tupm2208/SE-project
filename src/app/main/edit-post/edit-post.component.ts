@@ -28,61 +28,6 @@ export class EditPostComponent implements OnInit {
   private categoryList: Array<any> = [];
   private id: any;
 
-  // TinyMce configuration
-
-  private init = {
-    selector: 'textarea',
-    height: 500,
-    theme: 'modern',
-    plugins: [
-      'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-      'searchreplace wordcount visualblocks visualchars code fullscreen',
-      'nonbreaking save table contextmenu directionality',
-      'emoticons template paste textcolor colorpicker textpattern imagetools',
-      'image code',
-    ],
-    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-    toolbar2: 'print preview media | forecolor backcolor emoticons',
-    image_advtab: true,
-    // enable title field in the Image dialog
-    image_title: true,
-    // enable automatic uploads of images represented by blob or data URIs
-    automatic_uploads: true,
-    plugin_preview_width: 650,
-    // add custom filepicker only to Image dialog
-    file_picker_types: 'image',
-    file_picker_callback: function (cb, value, meta) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-
-        console.log("this: ", this);
-        interface HTMLInputEvent extends Event {
-            target: HTMLInputElement & EventTarget;
-        }
-        input.onchange =  function(e?: HTMLInputEvent) {
-
-            console.log("this.file: ", cb, value, meta);
-            var file = e.target.files[0];
-            var reader = new FileReader();
-
-            reader.onload = function () {
-                var id = 'blobid' + (new Date()).getTime();
-                var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                var base64 = reader.result.split(',')[1];
-                var blobInfo = blobCache.create(id, file, base64);
-                blobCache.add(blobInfo);
-
-                // call the callback and populate the Title field with the file name
-                cb(blobInfo.blobUri(), { title: file.name });
-            };
-            reader.readAsDataURL(file);
-        };
-
-        input.click();
-    }
-  }
-
   constructor(
     private categoryService: CategoryService,
     private postService: PostService,
@@ -96,7 +41,6 @@ export class EditPostComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-
     $('#summernote').summernote();
 
     this.loading.show();
@@ -127,15 +71,16 @@ export class EditPostComponent implements OnInit {
 
       console.log("preview Data: ", data);
 
-      setTimeout( () => {
-        $("#display").html(this.dataModel);
-      }, 50);
+     
 
       if(data) {
 
         this.registData = data;
 
         this.dataModel = this.registData.content;
+
+        $('#summernote').summernote('code','<p>' + this.dataModel + '</p>');
+        console.log("init summernote");
       }
 
       this.loading.hide();
@@ -159,26 +104,21 @@ export class EditPostComponent implements OnInit {
 
       let data1 = this.storageService.get('preview' + this.id);
 
-      console.log("preview Data: ", data1);
-
-      setTimeout( () => {
-        $("#display").html(this.dataModel);
-      }, 50);
-
       if(data1) {
 
         this.registData = data1;
 
         this.dataModel = this.registData.content;
+
+        
       }
+
+      $('#summernote').summernote('code', this.dataModel );
+
       this.loading.hide();
     })
   }
 
-  change() {
-
-     $("#display").html(this.dataModel);
-  }
 
   post(): Observable<any> {
 
@@ -203,6 +143,8 @@ export class EditPostComponent implements OnInit {
         if (element.src.indexOf('data') == 0) {
 
           count++;
+
+          console.log("image: ", count);
 
           let params: any = {
             imageURI: element.src
@@ -233,52 +175,6 @@ export class EditPostComponent implements OnInit {
     
   }
 
-  regist() {
-
-    this.post().subscribe(data => {
-
-      this.registData.content = $('#display').html();
-
-      if (this.registData.ID) {
-
-        this.postService.edit(this.registData).subscribe(data => {
-
-          this.loading.hide();
-
-          console.log("regist post: ", data);
-          this.success();
-        }, error => {
-
-          this.loading.hide();
-          this.dialog.showError("Something goes wrong! Try again!");
-        })
-
-        return;
-      }
-
-      this.postService.post(this.registData).subscribe(data => {
-
-        this.loading.hide();
-
-        this.registData = data.data;
-        console.log("regist post: ", data);
-
-        this.success();
-      }, error => {
-
-        this.loading.hide();
-        this.dialog.showError("Something goes wrong! Try again!");
-      })
-    })
-  }
-
-  success() {
-
-    this.dialog.showSuccess().subscribe( data => {
-
-      this.router.navigate(['/main/post/'+ this.registData.ID])
-    })
-  }
 
   checkValid() {
 
@@ -288,7 +184,7 @@ export class EditPostComponent implements OnInit {
       return false;
     }
 
-    if(!this.dataModel) {
+    if(!$('#summernote').val()) {
 
       this.dialog.showError("Empty content!");
       return false;
@@ -299,9 +195,10 @@ export class EditPostComponent implements OnInit {
 
   preview() {
 
+    
     this.post().subscribe( data => {
 
-      this.registData.content = $('#display').html();
+      this.registData.content = $('#summernote').summernote('code');
 
       this.storageService.set('preview' + this.id, this.registData);
       console.log("pre: ", this.storageService.get('preview'+this.id));
@@ -309,6 +206,8 @@ export class EditPostComponent implements OnInit {
       this.loading.hide();
 
       this.router.navigate(['main/preview/'+ this.id]);
+
+      console.log("after upload image: ", this.registData.content);
     }, error => {
 
       this.loading.hide();
