@@ -22,7 +22,7 @@ export class BrefPostComponent implements OnInit {
     $(".authorname-tag").click( e => {
       e.stopPropagation();
     })
-    this.post.subtitle = this.post.subtitle.split(' ').slice(0,40).join(' ');
+    this.post.subtitle = this.post.subtitle? this.post.subtitle.split(' ').slice(0,40).join(' '): "";
   }
 
 }
