@@ -27,6 +27,11 @@ export class AppComponent {
   }
 
   ngOnInit() {
+
+    $(window).click( () => {
+      this.searchContent = "";
+      $("#navbarResponsive").removeClass("show");
+    })
     
     $(window).click( () => {
       this.searchContent = "";
@@ -52,6 +57,8 @@ export class AppComponent {
     this.storageService.removeItem("profilePicture");
     this.storageService.removeItem("username");
     this.storageService.removeItem("password");
+
+    this.hideMenu();
   }
 
   keyDownFunction(event) {
@@ -59,5 +66,10 @@ export class AppComponent {
       this.search();
     }
     if(event.keyCode == 27) this.searchContent=""; // press esc to exit edit mode
+  }
+
+  hideMenu() {
+
+    $("#navbarResponsive").removeClass("show");
   }
 }

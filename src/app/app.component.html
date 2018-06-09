@@ -21,19 +21,19 @@
           <a class="nav-link" routerLink="main/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="main/edit-post/0">Create Your Post</a>
+          <a class="nav-link" routerLink="main/edit-post/0" (click)="hideMenu()">Create Your Post</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" *ngIf="isLog" routerLink="main/profile">Profile</a>
+          <a class="nav-link" *ngIf="isLog" routerLink="main/profile" (click)="hideMenu()">Profile</a>
         </li>
         <li class="nav-item" *ngIf="isLog">
           <a class="nav-link" routerLink="login" (click)="logout()">Logout</a>
         </li>
         <li class="nav-item" *ngIf="!isLog">
-          <a class="nav-link" routerLink="login">Login</a>
+          <a class="nav-link" routerLink="login" (click)="hideMenu()">Login</a>
         </li>
         <li class="nav-item" *ngIf="!isLog">
-            <a class="nav-link" routerLink="login/register">Sign up</a>
+            <a class="nav-link" routerLink="login/register" (click)="hideMenu()">Sign up</a>
         </li>  
       </ul>
     </div>
