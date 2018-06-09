@@ -36,8 +36,12 @@ export class PreviewComponent implements OnInit {
 
     this.postDetail = this.storageService.get('preview' + this.id);
 
-    if(this.postDetail) $('#display').html(this.postDetail.content);
-
+    if(this.postDetail) {
+      $('#display').html(this.postDetail.content);
+      this.postDetail.subtitle = this.getSubtitle();
+      
+      console.log("postDetail: ",this.postDetail)
+    }
     console.log("preview: ", 'preview'+this.id);
 
     $(".share-btn").click((e) => {
@@ -92,4 +96,21 @@ export class PreviewComponent implements OnInit {
       this.router.navigate(['/main/post/'+ this.postDetail.ID])
     })
   }
+
+  getSubtitle() {
+    let str;
+    str = $('#display').find('p').filter( function(){
+      return ( $.trim($(this).text()).length ); 
+    }).first().html()
+    return this.strip_html_tags(str);
+  }
+
+  strip_html_tags(str) {
+    if ((str===null) || (str===''))
+        return "";
+    else
+    str = str.toString();
+    return str.replace(/<[^>]*>/g, '');
+  }
+
 }
