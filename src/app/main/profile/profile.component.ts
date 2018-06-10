@@ -71,7 +71,7 @@ export class ProfileComponent implements OnInit {
 
     this.userService.update(this.user).subscribe( data => {
 
-      this.dialog.showSuccess("Change ok!");
+      this.dialog.showSuccess("Your personal information has been modified successfully!");
       this.loading.hide();
     }, error => {
       this.dialog.showError('Failed to change!');

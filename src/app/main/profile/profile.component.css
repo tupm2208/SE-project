@@ -101,7 +101,7 @@
     display: flex;
     flex-direction: column;
 }
-/* @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:700'); */
+
 .nav-tab {
     font-family: 'Libre Franklin', sans-serif;
     /* font-weight: 500; */
@@ -114,7 +114,7 @@
 @media screen and (max-width: 768px) {
     #nav-navi {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
     }
     .nav-tab {
         font-size: 20px;
