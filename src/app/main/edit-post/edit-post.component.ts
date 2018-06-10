@@ -79,7 +79,7 @@ export class EditPostComponent implements OnInit {
 
         this.dataModel = this.registData.content;
 
-        $('#summernote').summernote('code','<p>' + this.dataModel + '</p>');
+        $('#summernote').summernote('code',this.dataModel);
         console.log("init summernote");
       }
 
@@ -199,7 +199,7 @@ export class EditPostComponent implements OnInit {
     this.post().subscribe( data => {
 
       this.registData.content = $('#summernote').summernote('code');
-
+      
       this.storageService.set('preview' + this.id, this.registData);
       console.log("pre: ", this.storageService.get('preview'+this.id));
 
