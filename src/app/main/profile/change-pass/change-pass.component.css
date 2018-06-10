@@ -5,11 +5,12 @@
     font-weight: 100;
     font-size: 25px;
 }
-input#saveForm:disabled,input#saveForm:hover:disabled {
+input#saveForm:disabled,input#saveForm:disabled:hover {
     letter-spacing: 0px;
     opacity: 0.5;
+    background-color: #007bff !important;
   }
-  .input-label {
+.input-label {
       font-size: 17px;
   }
 @media screen and (max-width: 990px) {

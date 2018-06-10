@@ -89,7 +89,7 @@ export class PreviewComponent implements OnInit {
   success() {
 
     console.log("preview: ", this.postDetail);
-    this.dialog.showSuccess().subscribe( data => {
+    this.dialog.showSuccess("Your new post has been created").subscribe( data => {
 
       this.storageService.set('preview' + this.id, null);
 

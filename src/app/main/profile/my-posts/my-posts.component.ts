@@ -83,12 +83,12 @@ export class MyPostsComponent implements OnInit {
 
     this.postService.delete(post.ID).subscribe( data => {
 
-      this.dialogService.showSuccess("delete successfull!");
+      this.dialogService.showSuccess("Your post has been deleted");
       this.postList.splice(this.postList.indexOf(post),1);
       this.loadingService.hide();
     }, error => {
       this.loadingService.hide();
-      this.dialogService.showError("failed to delete this post");
+      this.dialogService.showError("Failed to delete this post");
     })
     
   }
