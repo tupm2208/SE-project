@@ -1370,13 +1370,13 @@ var StorageService = /** @class */ (function () {
     function StorageService() {
     }
     StorageService.prototype.set = function (key, value) {
-        sessionStorage.setItem(key, JSON.stringify(value));
+        localStorage.setItem(key, JSON.stringify(value));
     };
     StorageService.prototype.get = function (key) {
-        return JSON.parse(sessionStorage.getItem(key));
+        return JSON.parse(localStorage.getItem(key));
     };
     StorageService.prototype.removeItem = function (key) {
-        delete sessionStorage[key];
+        delete localStorage[key];
     };
     StorageService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
